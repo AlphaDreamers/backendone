@@ -1,0 +1,63 @@
+
+POST http://localhost:8085/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Swan Htet Aung",
+  "email": "swanhtet102002@gmail.com",
+  "country": "USA",
+  "biometric_hash": "123456dfafsdiiiads789abcdef",
+  "password": "securepassword123",
+  "timestamp": 1679987456
+}
+
+
+###
+POST http://localhost:8085/api/auth/verify
+Content-Type: application/json
+
+{
+  "email": "swanhtet102002@gmail.com",
+  "code": "932482"
+}
+
+
+const demoAddress = "7dCZzk2XdsGSsXtnwtRjZXXXzR4B4DQ6cWzZeML9SSto"
+###
+POST  http://localhost:8085/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "swanhtet102002@gmail.com",
+  "password": "securepassword123"
+}
+
+####
+#thService git:(main) ✗ docker exec -it vault \
+#vault login \
+#-address="http://127.0.0.1:8200" \
+#-method=token \
+#token="KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M="
+#
+###
+POST  http://localhost:8085/api/auth/wallet
+Content-Type: application/json
+
+{
+  "userid": "user_123458888",
+  "phrase": [
+    "Hello, world!",
+    "Go is awesome!",
+    "Docker makes deployment easy."
+  ]
+}
+
+
+####
+#POST http://localhost:8085/api/auth/me
+
+
+###
+GET http://localhost:8085/api/auth/refresh
+Content-Type: application/json
+Cookie: refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlN3YW4iLCJleHAiOjE3NDY3NDcxMzMsImlhdCI6MTc0NDE1NTEzMywiaXNzIjoiQXV0aFNlcnZpY2UiLCJ0eXBlIjoicmVmcmVzaCIsInVzZXJfaWQiOiJzd2FuaHRldDEwMjAwMkBnbWFpbC5jb20ifQ.4eZxzg_sHNfPZpeFc_xMpQHUfcq06UWZOb4WWwM1R-s

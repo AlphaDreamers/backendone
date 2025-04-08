@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AppBackendServices.iml" filepath="$PROJECT_DIR$/AppBackendServices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlockChainNodes.iml" filepath="$PROJECT_DIR$/BlockChainNodes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FrontendUI.iml" filepath="$PROJECT_DIR$/FrontendUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UniBackend.iml" filepath="$PROJECT_DIR$/UniBackend.iml" />
+    </modules>
+  </component>
+</project>

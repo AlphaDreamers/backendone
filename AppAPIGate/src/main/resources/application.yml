@@ -1,0 +1,78 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: false
+      discovery:
+        enabled: true
+        prefer-ip-address: true
+        ip-address: 192.168.0.101
+        service-name: ${spring.application.name}
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        health-check-timeout: 10s
+
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: "http://localhost:3000"
+            allowed-methods:
+              - OPTIONS
+              - POST
+              - GET
+              - PUT
+              - DELETE
+            allowed-headers:
+              - Content-Type
+              - Authorization
+              - Accept
+              - Origin
+              - X-Requested-With
+            allow-credentials: true
+            exposed-headers:
+              - Content-Type
+              - Authorization
+
+      routes:
+        - id: authentication
+          uri: lb://auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - name: RewritePath
+              args:
+                  regexp: /api/auth/(?<segment>.*)
+                  replacement: /$\{segment}
+        - id: service
+          uri: lb://service
+          predicates:
+            - Path=/api/services/**
+          filters:
+            - name: AuthenticationFilter
+
+
+      httpclient:
+        pool:
+          max-connections: 500
+          max-idle-time: 30000ms
+        response-timeout: 10000ms
+
+server:
+  port: 8085
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+jwt:
+  secret: KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M
