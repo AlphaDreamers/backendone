@@ -3,7 +3,7 @@ spring:
     name: api-gateway
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
       config:
         enabled: false

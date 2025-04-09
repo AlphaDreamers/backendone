@@ -1,0 +1,85 @@
+
+services:
+  auth-service:
+    image: auth-service:latest
+    restart: always
+    ports:
+      - "9008:9008"
+    depends_on:
+      - redis
+      - rabbitmq
+      - postgres
+      - consul
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/authdb?sslmode=disable
+
+  email-service:
+    image: email-service:latest
+    restart: always
+    ports:
+      - "8080"
+    depends_on:
+      - redis
+      - rabbitmq
+      - consul
+
+  appgate:
+    image: appgate:latest
+    restart: always
+    ports:
+      - "8085:8085"
+    depends_on:
+      - redis
+      - rabbitmq
+      - consul
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:management
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=authdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  vault:
+    image: hashicorp/vault:latest
+    restart: always
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M=
+      - VAULT_ADDR=http://0.0.0.0:8200
+    ports:
+      - "8200:8200"
+    command: server -dev
+
+  consul:
+    image: hashicorp/consul:latest
+    restart: always
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    command: "agent -dev -client=0.0.0.0"
+
+volumes:
+  postgres_data:

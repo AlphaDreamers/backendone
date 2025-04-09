@@ -7,7 +7,7 @@ import (
 
 func (i *Impl) SendEmail(userName, email, code string) {
 	i.logger.Infof("Sending email to %s", email)
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	if err != nil {
 		i.logger.Errorf("Failed to connect to RabbitMQ")
 	}

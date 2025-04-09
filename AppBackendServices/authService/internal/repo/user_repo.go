@@ -3,7 +3,7 @@ package repo
 import (
 	"errors"
 	"fmt"
-	"github.com/SwanHtetAungPhyo/common/models"
+	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
 	db "github.com/SwanHtetAungPhyo/database"
 	"github.com/sirupsen/logrus"

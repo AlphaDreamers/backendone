@@ -4,5 +4,4 @@ use (
 	./authService
 	./common
 	./db
-	email-service
 )

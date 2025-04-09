@@ -3,7 +3,7 @@ package cmd
 import (
 	"context"
 	"github.com/SwanHtetAungPhyo/auth/cmd/middleware"
-	"github.com/SwanHtetAungPhyo/common/models"
+	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	db "github.com/SwanHtetAungPhyo/database"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"os"

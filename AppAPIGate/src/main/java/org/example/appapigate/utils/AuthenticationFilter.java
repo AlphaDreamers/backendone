@@ -20,7 +20,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private final RouteValidator validator;
     private final JwtUtil jwtUtil;
 
-    @Autowired
     public AuthenticationFilter(RouteValidator validator, JwtUtil jwtUtil) {
         super(Config.class);
         this.validator = validator;

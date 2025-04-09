@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/go-mail/mail v2.3.1+incompatible
-	github.com/goccy/go-json v0.10.4
+	github.com/goccy/go-json v0.10.5
 	github.com/hashicorp/consul/api v1.32.0
 	github.com/joho/godotenv v1.5.1
 	github.com/streadway/amqp v1.1.0

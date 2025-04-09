@@ -1,5 +1,6 @@
 
-POST http://localhost:8085/api/auth/register
+POST http://localhost:8085
+    /api/auth/register
 Content-Type: application/json
 
 {

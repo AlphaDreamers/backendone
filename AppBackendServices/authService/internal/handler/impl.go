@@ -3,7 +3,7 @@ package handler
 import (
 	"context"
 	"fmt"
-	"github.com/SwanHtetAungPhyo/common/models"
+	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	issuer "github.com/SwanHtetAungPhyo/common/pkg/jwt"
 	"github.com/SwanHtetAungPhyo/common/pkg/utils"
 	"github.com/gofiber/fiber/v2"

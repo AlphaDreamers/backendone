@@ -2,8 +2,8 @@ package services
 
 import (
 	"errors"
+	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	"github.com/SwanHtetAungPhyo/auth/internal/repo"
-	"github.com/SwanHtetAungPhyo/common/models"
 	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
