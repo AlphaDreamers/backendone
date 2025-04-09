@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-func (i *Impl) InteractionWithVault(userId string, phrase []string) error {
+func (i *Impl) InteractionWithVault(userId string, phrase string) error {
 	config := api.DefaultConfig()
 	config.Address = viper.GetString("vault-address")
 	client, err := api.NewClient(config)

@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "fullname": "Swan Htet Aung",
-  "email": "swanhtet102002@gmail.com",
+  "email": "swanhtetaungp@gmail.com",
   "country": "USA",
   "biometric_hash": "123456dfafsdiiiads789abcdef",
   "password": "securepassword123",
@@ -17,18 +17,18 @@ POST http://localhost:8085/api/auth/verify
 Content-Type: application/json
 
 {
-  "email": "swanhtet102002@gmail.com",
-  "code": "932482"
+  "email": "swanhtetaungp@gmail.com",
+  "code": "257865"
 }
 
 
-const demoAddress = "7dCZzk2XdsGSsXtnwtRjZXXXzR4B4DQ6cWzZeML9SSto"
+
 ###
 POST  http://localhost:8085/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "swanhtet102002@gmail.com",
+  "email": "swanhtetaungp@gmail.com",
   "password": "securepassword123"
 }
 
@@ -38,25 +38,21 @@ Content-Type: application/json
 #-address="http://127.0.0.1:8200" \
 #-method=token \
 #token="KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M="
-#
+#const demoAddress = "7dCZzk2XdsGSsXtnwtRjZXXXzR4B4DQ6cWzZeML9SSto"
 ###
 POST  http://localhost:8085/api/auth/wallet
 Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN3YW5odGV0YXVuZ3BAZ21haWwuY29tIiwiZW1haWwiOiJTd2FuIiwiaXNzIjoiQXV0aFNlcnZpY2UiLCJleHAiOjE3NDQyMDg2MDcsImlhdCI6MTc0NDIwODQ4N30.ahkntLc6otfzIZHvLQ74jQKSvdzMTiTvzKuJKCVN6d4
 
 {
-  "userid": "user_123458888",
-  "phrase": [
-    "Hello, world!",
-    "Go is awesome!",
-    "Docker makes deployment easy."
-  ]
+  "userid": "swanhtetaungp@gmail.com",
+  "phrase": "fdajfl;adsjfl;adsd"
 }
 
 
 ####
-#POST http://localhost:8085/api/auth/me
-
-
+POST http://localhost:8085/api/auth/me?email=swanhtetaungp@gmail.com
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN3YW5odGV0YXVuZ3BAZ21haWwuY29tIiwiZW1haWwiOiJTd2FuIiwiaXNzIjoiQXV0aFNlcnZpY2UiLCJleHAiOjE3NDQyMDg2MDcsImlhdCI6MTc0NDIwODQ4N30.ahkntLc6otfzIZHvLQ74jQKSvdzMTiTvzKuJKCVN6d4
 ###
 GET http://localhost:8085/api/auth/refresh
 Content-Type: application/json

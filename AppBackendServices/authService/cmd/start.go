@@ -3,6 +3,8 @@ package cmd
 import (
 	"context"
 	"github.com/SwanHtetAungPhyo/auth/cmd/middleware"
+	"github.com/SwanHtetAungPhyo/common/models"
+	db "github.com/SwanHtetAungPhyo/database"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"os"
 	"os/signal"
@@ -29,6 +31,10 @@ func Start(port string) {
 	signal.Notify(osChannel, syscall.SIGABRT, os.Interrupt)
 	<-osChannel
 
+	err := db.GetDB().Migrator().DropTable(&models.UserInDB{}, &models.UserBiometric{})
+	if err != nil {
+		startlog.Warn(err.Error())
+	}
 	if err := app.ShutdownWithContext(context.Background()); err != nil {
 		startlog.Fatal("failed to shutdown")
 	}
@@ -48,7 +54,7 @@ func routeSetUp(app *fiber.App) {
 	app.Post("/login", handlers.Login)
 	app.Post("/register", handlers.Register)
 	app.Get("/refresh", handlers.Refresh)
-	app.Post("/me", handlers.Me, middleware.JwtMiddleware())
+	app.Post("/me", middleware.JwtMiddleware(), handlers.Me)
 	app.Post("/verify", handlers.Verify)
 	app.Post("/wallet", handlers.StoreInVault, middleware.JwtMiddleware())
 	app.Get("/health", func(c *fiber.Ctx) error {

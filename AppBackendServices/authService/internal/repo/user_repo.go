@@ -60,23 +60,23 @@ func (i *Impl) Login(req *models.LoginRequest) (*models.UserInDB, error) {
 }
 
 func (i *Impl) UpdateUserStatus(email string) error {
-	var user models.UserInDB
+	result := i.db.Model(&models.UserInDB{}).
+		Where("email = ?", email).
+		Update("verified", true)
 
-	err := i.db.First(&user, "email = ?", email).Error
-	if err != nil {
-		i.log.Error(err.Error())
-		return fmt.Errorf("user not found")
-	}
-
-	err = i.db.Model(&user).Update("verified", true).Error
-	if err != nil {
-		i.log.Error(err.Error())
+	if result.Error != nil {
+		i.log.Errorf("Update failed for email %s: %v", email, result.Error)
 		return fmt.Errorf("failed to update user status")
 	}
 
+	if result.RowsAffected == 0 {
+		i.log.Warnf("No user found with email %s", email)
+		return fmt.Errorf("user not found")
+	}
+
+	i.log.Infof("Successfully updated verification status for %s", email)
 	return nil
 }
-
 func (i *Impl) GetByEmail(email string) (*models.UserInDB, error) {
 	var user models.UserInDB
 	if err := i.db.First(&user, "email = ?", email).Error; err != nil {
@@ -84,4 +84,23 @@ func (i *Impl) GetByEmail(email string) (*models.UserInDB, error) {
 		return nil, fmt.Errorf("user not found")
 	}
 	return &user, nil
+}
+
+func (i *Impl) UpdateWalletStatus(email string) error {
+	result := i.db.Model(&models.UserInDB{}).
+		Where("email = ?", email).
+		Update("wallet_created", true)
+
+	if result.Error != nil {
+		i.log.Errorf("Update failed for email %s: %v", email, result.Error)
+		return fmt.Errorf("failed to update user status")
+	}
+
+	if result.RowsAffected == 0 {
+		i.log.Warnf("No user found with email %s", email)
+		return fmt.Errorf("user not found")
+	}
+
+	i.log.Infof("Successfully updated verification status for %s", email)
+	return nil
 }

@@ -29,7 +29,7 @@ func main() {
 	config.RedisConfigInit()
 	db.InitDB(dns)
 	database := db.GetDB()
-	err = database.AutoMigrate(&models.UserBiometric{}, &models.UserInDB{})
+	err = database.AutoMigrate(&models.UserInDB{}, &models.UserBiometric{})
 	if err != nil {
 		logutil.GetLogger().Fatal(err.Error())
 		return

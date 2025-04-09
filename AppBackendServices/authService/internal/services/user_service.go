@@ -37,6 +37,9 @@ func (i *Impl) Login(req *models.LoginRequest) error {
 	if fromDB == nil || err != nil {
 		return errors.New("Login error: " + err.Error())
 	}
+	if fromDB.Verified == false {
+		return errors.New("login error: " + "User email is not verified" + "you need to verify first")
+	}
 	err = i.ComparePassword(req.Password, []byte(fromDB.Password))
 	if err != nil {
 		return errors.New("invalid password")
@@ -86,10 +89,17 @@ func (i *Impl) Convertor(req *models.UserRegisterRequest) *models.UserInDB {
 }
 
 func (i *Impl) GetUserByEmail(email string) (*models.UserInDB, error) {
-
 	byEmail, err := i.repo.GetByEmail(email)
 	if err != nil {
 		return nil, err
 	}
 	return byEmail, nil
+}
+
+func (i *Impl) UpdateWalletStatus(userid string) error {
+	err := i.repo.UpdateWalletStatus(userid)
+	if err != nil {
+		return err
+	}
+	return nil
 }

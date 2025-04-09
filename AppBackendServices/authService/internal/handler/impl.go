@@ -74,11 +74,19 @@ func (i *Impl) Register(c *fiber.Ctx) error {
 }
 
 func (i *Impl) Me(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"email": "swanhtetam@gmail.com",
-		"id":    "SwanHtetam",
-	})
-
+	data, err := i.service.GetUserByEmail(c.Query("email"))
+	if err != nil {
+		return utils.ErrorResponse(c, fiber.StatusInternalServerError, err.Error(), nil)
+	}
+	resp := map[string]interface{}{
+		"email":             data.Email,
+		"userName":          data.FullName,
+		"verified":          data.Verified,
+		"createdAt":         data.CreatedAt,
+		"walletCreated":     data.WalletCreated,
+		"walletCreatedTime": data.WalletCreatedAt,
+	}
+	return utils.SuccessResponse(c, fiber.StatusOK, "success", resp)
 }
 
 func (i *Impl) Refresh(c *fiber.Ctx) error {
@@ -104,7 +112,6 @@ func (i *Impl) Refresh(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid token claims"})
 	}
 
-	// Check the user_id and other claims
 	userID, ok := claims["user_id"].(string)
 	if !ok {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid user_id"})
@@ -174,14 +181,18 @@ func (i *Impl) SendCode(c *fiber.Ctx) error {
 
 func (i *Impl) StoreInVault(c *fiber.Ctx) error {
 	type Meneoinc struct {
-		Userid  string   `json:"userid"`
-		Phrases []string `json:"phrase"`
+		Userid  string `json:"userid"`
+		Phrases string `json:"phrase"`
 	}
 	var payload Meneoinc
 	if err := c.BodyParser(&payload); err != nil {
 		return utils.ErrorResponse(c, fiber.StatusBadRequest, err.Error(), nil)
 	}
 	err := i.service.InteractionWithVault(payload.Userid, payload.Phrases)
+	if err != nil {
+		return utils.ErrorResponse(c, fiber.StatusInternalServerError, err.Error(), nil)
+	}
+	err = i.service.UpdateWalletStatus(payload.Userid)
 	if err != nil {
 		return utils.ErrorResponse(c, fiber.StatusInternalServerError, err.Error(), nil)
 	}
