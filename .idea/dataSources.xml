@@ -16,7 +16,7 @@
     <data-source source="LOCAL" name="@localhost" uuid="cda4847a-e647-4abd-9867-4d17de3de898">
       <driver-ref>cassandra</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.ing.data.cassandra.jdbc.CassandraDriver</jdbc-driver>
+      <jdbc-driver>com.dbschema.CassandraJdbcDriver</jdbc-driver>
       <jdbc-url>jdbc:cassandra://localhost:9042</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
