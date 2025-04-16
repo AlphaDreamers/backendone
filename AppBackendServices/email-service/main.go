@@ -63,7 +63,7 @@ func SendWelcomeEmail(recipient string, data EmailContent) error {
 
 func consume() {
 
-	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 
 	log.Printf("Connecting to RabbitMQ")
 	if err != nil {
@@ -143,7 +143,7 @@ func main() {
 
 func ConsulRegister() {
 	config := api.DefaultConfig()
-	config.Address = "http://consul:8500"
+	config.Address = "http://localhost:8500"
 	client, err := api.NewClient(config)
 	if err != nil {
 		log.Fatal(err)
@@ -156,7 +156,7 @@ func ConsulRegister() {
 		Port:    8080,
 		Tags:    []string{"email"},
 		Check: &api.AgentServiceCheck{
-			HTTP:     "http://emai-service:9008/health",
+			HTTP:     "http://localhost:8080/health",
 			Interval: "10s",
 			Timeout:  "5s",
 		},

@@ -1,0 +1,22 @@
+port: 9008
+#dns: "host=postgres user=postgres password=postgres dbname=authdb port=5432 sslmode=disable TimeZone=UTC"
+dns: "host=localhost dbname=mydb port=5432 sslmode=disable TimeZone=UTC"
+jwt_secret: KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M=
+vault-root-token: KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M=
+vault-address: http://127.0.0.1:8200
+vault-secret-path: "auth-service-wallet"
+ca-path: "/Users/swanhtet1aungphyo/IdeaProjects/UniBackend/AppBackendServices/cert/ca.crt"
+services-grpc-info:
+  auth:
+    host: localhost
+    port: "50052"
+
+consul:
+  address: "http://localhost:8500"
+  service_id: "authentication"
+  service_name: "auth"
+  service_address: "localhost"
+  service_port: 9008
+  health_check_url: "http://localhost:9008/health"
+  health_check_interval: "10s"
+  health_check_timeout: "5s"

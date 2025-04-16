@@ -1,7 +1,9 @@
 
 services:
   auth-service:
-    image: auth-service:latest
+    build:
+      context: ./AppBackendServices
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "9008:9008"
@@ -14,7 +16,9 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/authdb?sslmode=disable
 
   email-service:
-    image: email-service:latest
+    build:
+      context: ./AppBackendServices/email-service
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "8080"

@@ -1,0 +1,58 @@
+openapi: 3.1.0
+info:
+  title: DashBoard
+  description:
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /api/service  Get  all services 
+  {
+    services: [
+      {
+
+      },
+    ]
+  }
+  /api/dashborad/{userId}/service Get all user service GET
+  Authorization:
+  Response {
+  service
+  }
+
+  /api/dashboard/{userId}/service Create a new user  POST
+    Authorization:
+  Request Body 
+  {
+      serivce struct
+    }
+    
+  
+    
+  /api/dashboard/{userId}/service/{serviceId} Update the services by the user with service ID  PATCH
+    Authorization:
+  /api/dashboard/{userId}/service/{serviceId} Delete the services by service Id  DELETE
+    Authorization:
+
+
+
+  /api/dashboard/{userId}/orders Get all user Orders History
+  Authorization:
+
+  /api/dashboard/{userId}/tx Get all Transaction
+    Authorization:
+
+  /api/dashboard/{userId}/tx/fiat GET
+    Authorization:
+  /api/dashboard/{userId}/tx/crypto GET
+    Authorization:
+  /api/dashboard/{userId}/chat/ GET
+  Authorizaiton:
+
+  /api/dashboard/gethelp/
+
+  /api/services/{category} GET 
+
+
+
+

@@ -15,18 +15,21 @@ import (
 func main() {
 	logutil.InitLog("Auth_service")
 
-	err := loadConfig()
+	err := config.LoadConfig()
 	if err != nil {
 		logutil.GetLogger().Fatal(err.Error())
 		return
 	}
 
-	port := viper.GetString("port")
-	dns := viper.GetString("dns")
+	cfg := config.GetConfig()
 
 	registerToConsul()
 
 	config.RedisConfigInit()
+	dns := fmt.Sprintf(
+		"postgres://%s:%d/%s?sslmode=%s&timezone=%s",
+		cfg.Database.Host, cfg.Database.Port, cfg.Database.DBName, cfg.Database.SSLMode, cfg.Database.TimeZone,
+	)
 	db.InitDB(dns)
 	database := db.GetDB()
 	err = database.AutoMigrate(&models.UserInDB{}, &models.UserBiometric{})
@@ -34,7 +37,7 @@ func main() {
 		logutil.GetLogger().Fatal(err.Error())
 		return
 	}
-	cmd.Start(port)
+	cmd.Start(cfg.Server.Port, database)
 }
 
 func registerToConsul() {
@@ -59,36 +62,11 @@ func registerToConsul() {
 		},
 	}
 
-	// Register the service
+	// Register the serxxvice
 	err = client.Agent().ServiceRegister(serviceRegistration)
 	if err != nil {
 		log.Fatalf("Failed to register service with Consul: %v", err)
 	}
 
 	fmt.Println("Service 'authentication' registered with Consul successfully!")
-}
-func loadConfig() error {
-	viper.SetConfigFile("config.yaml")
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		return fmt.Errorf("Error reading config file, %s", err)
-	}
-
-	// Optionally, set defaults
-	viper.SetDefault("port", "9008")
-	viper.SetDefault("dns", "postgres://localhost:5432/mydb?sslmode=disable")
-	viper.SetDefault("jwt_secret", "KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M=")
-
-	// Consul defaults
-	viper.SetDefault("consul.address", "http://127.0.0.1:8500")
-	viper.SetDefault("consul.service_id", "authentication")
-	viper.SetDefault("consul.service_name", "auth")
-	viper.SetDefault("consul.service_address", "localhost")
-	viper.SetDefault("consul.service_port", 9008)
-	viper.SetDefault("consul.health_check_url", "http://localhost:9008/health")
-	viper.SetDefault("consul.health_check_interval", "10s")
-	viper.SetDefault("consul.health_check_timeout", "5s")
-
-	return nil
 }

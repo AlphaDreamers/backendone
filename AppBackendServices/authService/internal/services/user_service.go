@@ -1,7 +1,9 @@
 package services
 
 import (
+	"context"
 	"errors"
+
 	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	"github.com/SwanHtetAungPhyo/auth/internal/repo"
 	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
@@ -18,6 +20,9 @@ type (
 		ComparePassword(plainPassword string, hashedPassword []byte) error
 		Convertor(req *models.UserRegisterRequest) *models.UserInDB
 		UpdateStatus(email string) error
+		GetUserByEmail(email string) (*models.UserInDB, error)
+		UpdatePassword(email string, newPassword string) error
+		ForgotPassSetAndUpdate(background context.Context, request models.ForgotPasswordRequest) error
 	}
 	Impl struct {
 		log  *logrus.Logger
@@ -98,6 +103,30 @@ func (i *Impl) GetUserByEmail(email string) (*models.UserInDB, error) {
 
 func (i *Impl) UpdateWalletStatus(userid string) error {
 	err := i.repo.UpdateWalletStatus(userid)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *Impl) UpdatePassword(email string, newPassword string) error {
+	hashedPassword := i.PasswordHash(newPassword)
+	if hashedPassword == nil {
+		return errors.New("failed to hash password")
+	}
+
+	err := i.repo.UpdatePassword(email, string(hashedPassword))
+	if err != nil {
+		i.log.Error(err.Error())
+		return err
+	}
+
+	i.log.Info("Password updated successfully")
+	return nil
+}
+
+func (i *Impl) ForgotPassSetAndUpdate(request models.ForgotPasswordRequest) error {
+	err := i.repo.UpdatePassword(request.Email, request.NewPassword)
 	if err != nil {
 		return err
 	}

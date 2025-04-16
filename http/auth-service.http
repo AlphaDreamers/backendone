@@ -1,0 +1,17 @@
+POST http://localhost:8085/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "John Doe",
+  "email": "swanhtetaungp@gmail.com",
+  "country": "USA",
+  "biometric_hash": "123456dfafsdiiiads789abcdef",
+  "password": "securepassword123",
+}
+
+### Repsonse with
+Status: 201
+
+{
+    "message": "User Regisration for platform Successful"
+}

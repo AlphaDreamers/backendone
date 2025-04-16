@@ -1,759 +1,619 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { Connection, PublicKey, LAMPORTS_PER_SOL, clusterApiUrl, Keypair, SystemProgram, Transaction } from "@solana/web3.js"
 import { ethers } from "ethers"
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { QRCodeSVG } from "qrcode.react"
+import {
+  ArrowUpRight,
+  ArrowDownLeft,
+  Copy,
+  Check,
+  RefreshCw,
+  Wallet,
+  Shield,
+  Sparkles,
+  ExternalLink,
+} from "lucide-react"
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
 import {
-  CopyIcon,
-  CheckIcon,
-  ShieldIcon,
-  ServerIcon,
-  KeyIcon,
-  EyeIcon,
-  EyeOffIcon,
-  AlertTriangleIcon,
-  ArrowRightIcon,
-  LockIcon,
-  AlertCircle,
-} from "lucide-react"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useRouter } from "next/navigation"
-import { Keypair } from "@solana/web3.js"
-import * as bip39 from "bip39"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { getUserProfile, getToken, getUserEmailFromToken } from "@/app/lib/auth-utils"
 
-export default function Wallet() {
+export default function WalletPage() {
   const router = useRouter()
-  const [mnemonic, setMnemonic] = useState<string>("")
-  const [privateKey, setPrivateKey] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const [confirmPassword, setConfirmPassword] = useState<string>("")
-  const [generatedMnemonic, setGeneratedMnemonic] = useState<string>("")
-  const [showMnemonic, setShowMnemonic] = useState<boolean>(false)
-  const [mnemonicOption, setMnemonicOption] = useState<string>("self")
+  const [solanaBalance, setSolanaBalance] = useState<number>(0)
+  const [ethereumBalance, setEthereumBalance] = useState<string>("0")
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [solanaWalletAddress, setSolanaWalletAddress] = useState<string>("")
+  const [ethereumWalletAddress, setEthereumWalletAddress] = useState<string>("")
   const [copied, setCopied] = useState<boolean>(false)
-  const [isCreating, setIsCreating] = useState<boolean>(false)
-  const [isStoring, setIsStoring] = useState<boolean>(false)
-  const [passwordStrength, setPasswordStrength] = useState<number>(0)
-  const [activeTab, setActiveTab] = useState<string>("create")
-  const [ethereumWallet, setEthereumWallet] = useState<ethers.Wallet | null>(null)
-  const [solanaWallet, setSolanaWallet] = useState<{ publicKey: string; secretKey: Uint8Array } | null>(null)
-  const [walletDetails, setWalletDetails] = useState<{ ethereum: string; solana: string } | null>(null)
+  const [recipientAddress, setRecipientAddress] = useState<string>("")
+  const [amount, setAmount] = useState<string>("")
+  const [activeWallet, setActiveWallet] = useState<"solana" | "ethereum">("solana")
+  const [userProfile, setUserProfile] = useState<any>(null)
+  const [profileError, setProfileError] = useState<string>("")
+  const [walletError, setWalletError] = useState<string>("")
 
-  const handleMnemonicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMnemonic(e.target.value)
-  }
+  useEffect(() => {
+    // Fetch user profile data
+    const fetchUserProfile = async () => {
+      try {
+        // Debug: Log all localStorage contents
+        console.log("All localStorage contents:", Object.keys(localStorage).map(key => ({
+          key,
+          value: localStorage.getItem(key)
+        })));
+        
+        // Always check localStorage first for wallet addresses
+        const storedSolanaWallet = localStorage.getItem("solanaWallet");
+        const storedEthereumWallet = localStorage.getItem("ethereumWallet");
+        
+        console.log("Raw localStorage values:", {
+          solanaWallet: storedSolanaWallet,
+          ethereumWallet: storedEthereumWallet
+        });
+        
+        if (storedSolanaWallet) {
+          console.log("Using Solana wallet from localStorage:", storedSolanaWallet);
+          setSolanaWalletAddress(storedSolanaWallet);
+          fetchSolanaBalance(storedSolanaWallet);
+        } else {
+          console.log("No Solana wallet found in localStorage");
+        }
+        
+        if (storedEthereumWallet) {
+          console.log("Using Ethereum wallet from localStorage:", storedEthereumWallet);
+          setEthereumWalletAddress(storedEthereumWallet);
+          fetchEthereumBalance(storedEthereumWallet);
+        } else {
+          console.log("No Ethereum wallet found in localStorage");
+        }
+        
+        const token = getToken();
+        if (!token) {
+          router.push('/login');
+          return;
+        }
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-    calculatePasswordStrength(e.target.value)
-  }
+        const email = getUserEmailFromToken(token);
+        if (!email) {
+          setProfileError("Could not retrieve user email from token");
+          return;
+        }
 
-  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value)
-  }
+        console.log("Fetching user profile for email:", email);
+        const response = await getUserProfile(email, token);
+        console.log("User profile response:", response);
+        
+        if (response.success && response.data) {
+          console.log("Setting user profile data:", response.data);
+          setUserProfile(response.data);
+          
+          // Only set wallet addresses from user profile if they're not already set from localStorage
+          if (response.data.solana_address && !storedSolanaWallet) {
+            setSolanaWalletAddress(response.data.solana_address);
+            fetchSolanaBalance(response.data.solana_address);
+          }
+          
+          if (response.data.ethereum_address && !storedEthereumWallet) {
+            setEthereumWalletAddress(response.data.ethereum_address);
+            fetchEthereumBalance(response.data.ethereum_address);
+          }
+        } else {
+          setProfileError(response.message || "Failed to fetch user profile");
+        }
+      } catch (error) {
+        setProfileError("An error occurred while fetching user profile");
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const calculatePasswordStrength = (password: string) => {
-    let strength = 0
+    fetchUserProfile();
+  }, [router]);
 
-    if (password.length >= 8) strength += 20
-    if (password.length >= 12) strength += 10
-    if (/[A-Z]/.test(password)) strength += 20
-    if (/[a-z]/.test(password)) strength += 10
-    if (/[0-9]/.test(password)) strength += 20
-    if (/[^A-Za-z0-9]/.test(password)) strength += 20
-
-    setPasswordStrength(strength)
-  }
-
-  const getPasswordStrengthLabel = () => {
-    if (passwordStrength < 40) return { label: "Weak", color: "bg-red-500" }
-    if (passwordStrength < 70) return { label: "Medium", color: "bg-yellow-500" }
-    return { label: "Strong", color: "bg-green-500" }
-  }
-
-  const generatePrivateKey = () => {
+  const fetchSolanaBalance = async (address: string) => {
     try {
-      // Import Ethereum wallet
-      const ethWallet = ethers.Wallet.fromPhrase(mnemonic)
-      setPrivateKey(ethWallet.privateKey)
+      const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+      const publicKey = new PublicKey(address);
+      const balance = await connection.getBalance(publicKey);
+      setSolanaBalance(balance / LAMPORTS_PER_SOL);
+    } catch (error) {
+      console.error("Error fetching Solana balance:", error);
+      setSolanaBalance(0);
+    }
+  };
 
-      // Import Solana wallet using the same mnemonic
-      const importSolanaWallet = async () => {
+  const fetchEthereumBalance = async (address: string) => {
+    try {
+      // Use a more reliable public Ethereum endpoint for Sepolia testnet
+      const provider = new ethers.JsonRpcProvider("https://eth-sepolia.public.blastapi.io");
+      
+      // Add retry logic
+      let retries = 3;
+      let lastError;
+      
+      while (retries > 0) {
         try {
-          const seed = await bip39.mnemonicToSeed(mnemonic)
-          const seedBuffer = Buffer.from(seed).slice(0, 32)
-          const solKeypair = Keypair.fromSeed(seedBuffer)
-
-          setWalletDetails({
-            ethereum: ethWallet.address,
-            solana: solKeypair.publicKey.toString(),
-          })
+          const balance = await provider.getBalance(address);
+          setEthereumBalance(ethers.formatEther(balance));
+          return;
         } catch (error) {
-          console.error("Error importing Solana wallet:", error)
+          lastError = error;
+          retries--;
+          if (retries > 0) {
+            // Wait for 1 second before retrying
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          }
         }
       }
-
-      importSolanaWallet()
+      
+      throw lastError;
     } catch (error) {
-      console.error("Invalid mnemonic")
-      setPrivateKey("Invalid mnemonic")
+      console.error("Error fetching Ethereum balance:", error);
+      setEthereumBalance("0");
+      setWalletError("Failed to fetch Ethereum balance. Please try again later.");
     }
-  }
+  };
 
-  const createAccount = async () => {
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters long")
-      return
+  const refreshBalance = () => {
+    if (activeWallet === "solana" && solanaWalletAddress) {
+      fetchSolanaBalance(solanaWalletAddress);
+    } else if (activeWallet === "ethereum" && ethereumWalletAddress) {
+      fetchEthereumBalance(ethereumWalletAddress);
     }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match")
-      return
-    }
-
-    setIsCreating(true)
-
-    try {
-      // Create Ethereum wallet
-      const ethWallet = ethers.Wallet.createRandom()
-      setGeneratedMnemonic(ethWallet.mnemonic?.phrase || "")
-      setEthereumWallet(new ethers.Wallet(ethWallet.privateKey))
-
-      const seed = await bip39.mnemonicToSeed(ethWallet.mnemonic?.phrase || "")
-      const seedBuffer = Buffer.from(seed).slice(0, 32)
-      const solKeypair = Keypair.fromSeed(seedBuffer)
-      setSolanaWallet({
-        publicKey: solKeypair.publicKey.toString(),
-        secretKey: solKeypair.secretKey,
-      })
-
-      // Set wallet details for display
-      setWalletDetails({
-        ethereum: ethWallet.address,
-        solana: solKeypair.publicKey.toString(),
-      })
-
-      setShowMnemonic(true)
-
-      // Simulate encryption delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // In a real app, you'd encrypt the wallet with the password
-      // const encryptedWallet = await wallet.encrypt(password);
-      // localStorage.setItem("wallet", JSON.stringify(encryptedWallet));
-    } catch (error) {
-      console.error("Error creating account:", error)
-      alert("Failed to create wallet. Please try again.")
-    } finally {
-      setIsCreating(false)
-    }
-  }
+  };
 
   const copyToClipboard = () => {
-    if (generatedMnemonic) {
-      navigator.clipboard.writeText(generatedMnemonic)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+    const address = activeWallet === "solana" ? solanaWalletAddress : ethereumWalletAddress;
+    navigator.clipboard.writeText(address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const formatAddress = (address: string) => {
+    if (!address) return "";
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
+
+  const handleSend = async () => {
+    if (!recipientAddress || !amount || Number.parseFloat(amount) <= 0) {
+      alert("Please enter a valid recipient address and amount");
+      return;
     }
-  }
 
-  // Update the handleMnemonicOptionChange function to navigate to the dashboard
-  const handleMnemonicOptionChange = async () => {
-    if (!generatedMnemonic) return
-
-    setIsStoring(true)
-
-    try {
-      if (mnemonicOption === "rely") {
-        // Make the API call to store the mnemonic with the service
-        const response = await fetch("http://localhost:8085/api/auth/wallet", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ mnemonic: generatedMnemonic }),
-        })
-
-        if (response.ok) {
-          // Store wallet data in localStorage for the dashboard to use
-          if (solanaWallet) {
-            localStorage.setItem(
-              "solanaWallet",
-              JSON.stringify({
-                publicKey: solanaWallet.publicKey,
-                // Note: In a real app, you would encrypt the private key
-                // We're just storing the public key for demo purposes
-              }),
-            )
-          }
-          router.push("/dashboard")
-        } else {
-          alert("Failed to store recovery phrase.")
+    if (activeWallet === "solana") {
+      try {
+        // Get the private key from localStorage
+        const storedPrivateKey = localStorage.getItem("solanaPrivateKey");
+        if (!storedPrivateKey) {
+          alert("Solana wallet private key not found. Please create a wallet in the key session.");
+          return;
         }
-      } else {
-        // If self-custody, just proceed
-        // Store wallet data in localStorage for the dashboard to use
-        if (solanaWallet) {
-          localStorage.setItem(
-            "solanaWallet",
-            JSON.stringify({
-              publicKey: solanaWallet.publicKey,
-              // Note: In a real app, you would encrypt the private key
-              // We're just storing the public key for demo purposes
-            }),
-          )
-        }
-        router.push("/dashboard")
+
+        // Convert the stored private key string back to Uint8Array
+        const privateKeyBytes = new Uint8Array(JSON.parse(storedPrivateKey));
+        
+        // Create a connection to the Solana devnet
+        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        
+        // Create a keypair from the private key
+        const fromKeypair = Keypair.fromSecretKey(privateKeyBytes);
+        
+        // Create a public key from the recipient address
+        const toPublicKey = new PublicKey(recipientAddress);
+        
+        // Convert amount to lamports (1 SOL = 1,000,000,000 lamports)
+        const lamports = Number.parseFloat(amount) * LAMPORTS_PER_SOL;
+        
+        // Create a transaction
+        const transaction = new Transaction().add(
+          SystemProgram.transfer({
+            fromPubkey: fromKeypair.publicKey,
+            toPubkey: toPublicKey,
+            lamports: lamports,
+          })
+        );
+        
+        // Get the latest blockhash
+        const { blockhash } = await connection.getLatestBlockhash();
+        transaction.recentBlockhash = blockhash;
+        transaction.feePayer = fromKeypair.publicKey;
+        
+        // Sign the transaction
+        transaction.sign(fromKeypair);
+        
+        // Send the transaction
+        const signature = await connection.sendRawTransaction(transaction.serialize());
+        
+        // Confirm the transaction
+        await connection.confirmTransaction(signature);
+        
+        // Clear the form
+        setRecipientAddress("");
+        setAmount("");
+        
+        // Refresh the balance
+        fetchSolanaBalance(solanaWalletAddress);
+        
+        alert(`Transaction sent successfully! Signature: ${signature}`);
+      } catch (error: any) {
+        console.error("Error sending Solana transaction:", error);
+        alert(`Failed to send transaction: ${error.message || 'Unknown error'}`);
       }
-    } catch (error) {
-      console.error("Error storing recovery phrase:", error)
-      alert("Failed to store recovery phrase.")
-    } finally {
-      setIsStoring(false)
+    } else if (activeWallet === "ethereum") {
+      try {
+        // Get the private key from localStorage
+        const storedPrivateKey = localStorage.getItem("ethereumPrivateKey");
+        if (!storedPrivateKey) {
+          alert("Ethereum wallet private key not found. Please create a wallet in the key session.");
+          return;
+        }
+        
+        // Create a provider for the Ethereum devnet (Sepolia testnet)
+        const provider = new ethers.JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/demo");
+        
+        // Create a wallet from the private key
+        const wallet = new ethers.Wallet(storedPrivateKey, provider);
+        
+        // Convert amount to wei (1 ETH = 1,000,000,000,000,000,000 wei)
+        const weiAmount = ethers.parseEther(amount);
+        
+        // Create a transaction
+        const tx = {
+          to: recipientAddress,
+          value: weiAmount,
+        };
+        
+        // Send the transaction
+        const transaction = await wallet.sendTransaction(tx);
+        
+        // Wait for the transaction to be mined
+        const receipt = await transaction.wait();
+        
+        // Clear the form
+        setRecipientAddress("");
+        setAmount("");
+        
+        // Refresh the balance
+        fetchEthereumBalance(ethereumWalletAddress);
+        
+        alert(`Transaction sent successfully! Hash: ${receipt?.hash || 'Unknown hash'}`);
+      } catch (error: any) {
+        console.error("Error sending Ethereum transaction:", error);
+        alert(`Failed to send transaction: ${error.message || 'Unknown error'}`);
+      }
     }
-  }
+  };
+
+  const handleCreateWallet = async () => {
+    // Redirect to the key page to create a wallet
+    router.push('/key');
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white p-4 flex flex-col items-center justify-center">
-      <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-white">Wallet Setup</h1>
-          <p className="mt-2 text-sm text-gray-400">Create or import your Ethereum wallet</p>
-        </div>
-
-        <Card className="border-0 bg-gray-800/50 backdrop-blur-sm shadow-2xl">
-          <CardHeader>
-            <Tabs defaultValue="create" value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-gray-700/50">
-                <TabsTrigger value="create" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
-                  Create New
-                </TabsTrigger>
-                <TabsTrigger value="import" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
-                  Import Existing
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="create" className="space-y-6 mt-4">
-                {!showMnemonic ? (
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="password" className="text-gray-300 flex items-center gap-2">
-                        <LockIcon className="h-4 w-4 text-blue-400" />
-                        Wallet Password
-                      </Label>
-                      <Input
-                        id="password"
-                        type="password"
-                        placeholder="Enter secure password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100">
+      <div className="container mx-auto p-4 md:p-6">
+        <h1 className="text-3xl font-bold mb-6">My Wallets</h1>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Wallet card */}
+          <Card className="border border-gray-700 bg-gray-800 shadow-lg rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-3"></div>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl flex justify-between items-center text-gray-100">
+                <div className="flex items-center gap-2">
+                  <span>{activeWallet === "solana" ? "Solana Wallet" : "Ethereum Wallet"}</span>
+                  <Badge variant="outline" className="bg-blue-900/30 text-blue-300 border-blue-700 font-normal">
+                    Devnet
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setActiveWallet("solana")}
+                    className={`text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded-full ${activeWallet === "solana" ? "bg-gray-700 text-blue-400" : ""}`}
+                    disabled={!solanaWalletAddress}
+                  >
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
-
-                      {password && (
-                        <div className="space-y-1 mt-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-xs text-gray-400">Password strength</span>
-                            <span
-                              className={`text-xs ${
-                                passwordStrength < 40
-                                  ? "text-red-400"
-                                  : passwordStrength < 70
-                                    ? "text-yellow-400"
-                                    : "text-green-400"
-                              }`}
-                            >
-                              {getPasswordStrengthLabel().label}
-                            </span>
-                          </div>
-                          <Progress
-                            value={passwordStrength}
-                            className="h-1 bg-gray-700"
-                            indicatorClassName={getPasswordStrengthLabel().color}
-                          />
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword" className="text-gray-300">
-                        Confirm Password
-                      </Label>
-                      <Input
-                        id="confirmPassword"
-                        type="password"
-                        placeholder="Confirm your password"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                      <path
+                        d="M7.5 12.5L10.5 15.5L16.5 9.5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
-                      {password && confirmPassword && password !== confirmPassword && (
-                        <p className="text-xs text-red-400 mt-1">Passwords do not match</p>
-                      )}
-                    </div>
-
-                    <Button
-                      onClick={createAccount}
-                      className="w-full bg-blue-600 hover:bg-blue-500 text-white transition-colors"
-                      disabled={isCreating || !password || password !== confirmPassword || passwordStrength < 40}
-                    >
-                      {isCreating ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <svg
-                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Creating Wallets...
-                        </span>
-                      ) : (
-                        <span className="flex items-center justify-center gap-2">
-                          <KeyIcon className="h-4 w-4" />
-                          Create Wallets
-                        </span>
-                      )}
-                    </Button>
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setActiveWallet("ethereum")}
+                    className={`text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded-full ${activeWallet === "ethereum" ? "bg-gray-700 text-blue-400" : ""}`}
+                    disabled={!ethereumWalletAddress}
+                  >
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 6V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M8 10L12 6L16 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M8 14L12 18L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={refreshBalance}
+                    className="text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded-full"
+                    disabled={isLoading}
+                  >
+                    <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
+                  </Button>
+                </div>
+              </CardTitle>
+              {solanaWalletAddress || ethereumWalletAddress ? (
+                <CardDescription className="flex items-center gap-2 text-gray-400">
+                  <span>{formatAddress(activeWallet === "solana" ? solanaWalletAddress : ethereumWalletAddress)}</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={copyToClipboard}
+                    className="h-6 w-6 p-0 text-gray-500 hover:text-blue-400 hover:bg-gray-700 rounded-full"
+                  >
+                    {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
+                  </Button>
+                </CardDescription>
+              ) : (
+                <CardDescription className="text-yellow-400">
+                  <div className="flex items-center gap-2">
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>No wallet found. Please create a wallet in the key session.</span>
                   </div>
-                ) : (
-                  <div className="space-y-6">
-                    <Alert className="bg-yellow-500/20 border-yellow-600/50 text-yellow-200">
-                      <AlertTriangleIcon className="h-4 w-4" />
-                      <AlertTitle className="text-yellow-200 font-medium">Important Security Notice</AlertTitle>
-                      <AlertDescription className="text-yellow-200/80">
-                        Your recovery phrase is the only way to restore your wallet. Write it down and keep it in a
-                        secure location.
-                      </AlertDescription>
-                    </Alert>
+                </CardDescription>
+              )}
+            </CardHeader>
+            <CardContent>
+              {solanaWalletAddress || ethereumWalletAddress ? (
+                <>
+                  <div className="flex flex-col items-center justify-center py-6">
+                    <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                      {isLoading ? (
+                        <div className="h-10 w-24 bg-gray-700 animate-pulse rounded"></div>
+                      ) : (
+                        `${activeWallet === "solana" ? solanaBalance.toFixed(4) : ethereumBalance} ${activeWallet === "solana" ? "SOL" : "ETH"}`
+                      )}
+                    </div>
+                    <div className="text-gray-400 text-sm">
+                      {isLoading ? (
+                        <div className="h-4 w-16 bg-gray-700 animate-pulse rounded"></div>
+                      ) : (
+                        `≈ ${(activeWallet === "solana" ? solanaBalance * 150 : parseFloat(ethereumBalance) * 3000).toFixed(2)} USD`
+                      )}
+                    </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <Label className="text-gray-300 flex items-center gap-2">
-                          <ShieldIcon className="h-4 w-4 text-blue-400" />
-                          Recovery Phrase
-                        </Label>
-                        <div className="flex gap-2">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setShowMnemonic(!showMnemonic)}
-                            className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-gray-700/50"
-                          >
-                            {showMnemonic ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
-                            <span className="sr-only">{showMnemonic ? "Hide" : "Show"} recovery phrase</span>
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={copyToClipboard}
-                            className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-gray-700/50"
-                          >
-                            {copied ? (
-                              <CheckIcon className="h-4 w-4 text-green-400" />
-                            ) : (
-                              <CopyIcon className="h-4 w-4" />
-                            )}
-                            <span className="sr-only">Copy recovery phrase</span>
-                          </Button>
+                  <div className="flex gap-4 mt-4">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg transition-all duration-200 rounded-full">
+                          <ArrowUpRight className="mr-2 h-4 w-4" />
+                          Send
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="bg-gray-800 text-gray-100 border-gray-700 rounded-xl">
+                        <DialogHeader>
+                          <DialogTitle>Send {activeWallet === "solana" ? "SOL" : "ETH"}</DialogTitle>
+                          <DialogDescription className="text-gray-400">
+                            Send {activeWallet === "solana" ? "SOL" : "ETH"} to another wallet address.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-4 py-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="recipient" className="text-gray-300">Recipient Address</Label>
+                            <Input
+                              id="recipient"
+                              value={recipientAddress}
+                              onChange={(e) => setRecipientAddress(e.target.value)}
+                              placeholder={`Enter ${activeWallet === "solana" ? "Solana" : "Ethereum"} address`}
+                              className="bg-gray-700 border-gray-600 text-gray-100 focus:border-blue-500 focus:ring-blue-500"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="amount" className="text-gray-300">Amount ({activeWallet === "solana" ? "SOL" : "ETH"})</Label>
+                            <Input
+                              id="amount"
+                              type="number"
+                              value={amount}
+                              onChange={(e) => setAmount(e.target.value)}
+                              placeholder="0.00"
+                              className="bg-gray-700 border-gray-600 text-gray-100 focus:border-blue-500 focus:ring-blue-500"
+                            />
+                            <div className="text-xs text-gray-400 flex justify-between">
+                              <span>Available: {activeWallet === "solana" ? solanaBalance.toFixed(4) : ethereumBalance} {activeWallet === "solana" ? "SOL" : "ETH"}</span>
+                              <Button
+                                variant="link"
+                                className="h-auto p-0 text-blue-400"
+                                onClick={() => setAmount(activeWallet === "solana" ? solanaBalance.toString() : ethereumBalance)}
+                              >
+                                Max
+                              </Button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                        <DialogFooter>
+                          <Button
+                            onClick={handleSend}
+                            disabled={
+                              !recipientAddress ||
+                              !amount ||
+                              Number.parseFloat(amount) <= 0 ||
+                              Number.parseFloat(amount) > (activeWallet === "solana" ? solanaBalance : parseFloat(ethereumBalance))
+                            }
+                            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full"
+                          >
+                            Send {activeWallet === "solana" ? "SOL" : "ETH"}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
 
-                      <div className="relative">
-                        <div
-                          className={`p-4 bg-gray-700/50 rounded-md font-mono text-sm break-all ${showMnemonic ? "text-white" : "blur-sm select-none"}`}
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="flex-1 border-blue-700 text-blue-400 hover:bg-gray-700 hover:border-blue-600 rounded-full"
                         >
-                          {generatedMnemonic}
-                        </div>
-                        {!showMnemonic && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <Button
-                              variant="ghost"
-                              onClick={() => setShowMnemonic(true)}
-                              className="text-blue-400 hover:text-blue-300 hover:bg-gray-700/50"
-                            >
-                              <EyeIcon className="h-4 w-4 mr-2" />
-                              Click to reveal
-                            </Button>
+                          <ArrowDownLeft className="mr-2 h-4 w-4" />
+                          Receive
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="bg-gray-800 text-gray-100 border-gray-700 rounded-xl">
+                        <DialogHeader>
+                          <DialogTitle>Receive {activeWallet === "solana" ? "SOL" : "ETH"}</DialogTitle>
+                          <DialogDescription className="text-gray-400">
+                            Share your address to receive {activeWallet === "solana" ? "SOL" : "ETH"}.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex flex-col items-center justify-center py-4">
+                          <div className="bg-gray-700 p-4 rounded-lg mb-4 border border-gray-600 shadow-md">
+                            <QRCodeSVG 
+                              value={activeWallet === "solana" ? solanaWalletAddress : ethereumWalletAddress} 
+                              size={200}
+                              level="H"
+                              includeMargin={true}
+                              bgColor="#1f2937"
+                              fgColor="#ffffff"
+                            />
                           </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <Label className="text-gray-300">Storage Preference</Label>
-                      <RadioGroup value={mnemonicOption} onValueChange={setMnemonicOption} className="space-y-3">
-                        <div className="flex items-start space-x-3 space-y-0 rounded-md border border-gray-700 p-3 hover:bg-gray-700/30 transition-colors">
-                          <RadioGroupItem value="self" id="self" className="mt-1 border-gray-600 text-blue-500" />
-                          <div className="flex-1">
-                            <Label
-                              htmlFor="self"
-                              className="text-sm font-medium text-white flex items-center cursor-pointer"
-                            >
-                              <ShieldIcon className="h-4 w-4 mr-2 text-blue-400" />
-                              Self-custody
-                            </Label>
-                            <p className="text-xs text-gray-400 mt-1">
-                              I'll manage my own recovery phrase. I understand I'm fully responsible for keeping it
-                              safe.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start space-x-3 space-y-0 rounded-md border border-gray-700 p-3 hover:bg-gray-700/30 transition-colors">
-                          <RadioGroupItem value="rely" id="rely" className="mt-1 border-gray-600 text-blue-500" />
-                          <div className="flex-1">
-                            <Label
-                              htmlFor="rely"
-                              className="text-sm font-medium text-white flex items-center cursor-pointer"
-                            >
-                              <ServerIcon className="h-4 w-4 mr-2 text-green-400" />
-                              Service-managed
-                            </Label>
-                            <p className="text-xs text-gray-400 mt-1">
-                              Store my recovery phrase with the service. The phrase will be encrypted and stored
-                              securely.
-                            </p>
-                          </div>
-                        </div>
-                      </RadioGroup>
-                    </div>
-
-                    <Button
-                      className="w-full bg-blue-600 hover:bg-blue-500 text-white transition-colors"
-                      onClick={handleMnemonicOptionChange}
-                      disabled={isStoring}
-                    >
-                      {isStoring ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <svg
-                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Processing...
-                        </span>
-                      ) : (
-                        <span className="flex items-center justify-center gap-2">
-                          Continue
-                          <ArrowRightIcon className="h-4 w-4" />
-                        </span>
-                      )}
-                    </Button>
-                  </div>
-                )}
-                {walletDetails && (
-                  <div className="space-y-4 mt-4 pt-4 border-t border-gray-700">
-                    <h3 className="text-lg font-medium text-white">Your Wallet Details</h3>
-
-                    <div className="space-y-3">
-                      <div className="space-y-2">
-                        <Label className="text-gray-300 flex items-center gap-2">
-                          <svg
-                            className="h-4 w-4 text-blue-400"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M11.9975 2L18.7086 5.85V13.55L11.9975 17.4L5.29102 13.55V5.85L11.9975 2Z"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M12 22V17.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M18.7086 13.55L21.9975 15.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M5.29102 13.55L2.00195 15.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          Ethereum Address
-                        </Label>
-                        <div className="flex items-center">
-                          <div className="p-3 bg-gray-700/50 rounded-md font-mono text-sm break-all text-green-300 flex-1">
-                            {walletDetails.ethereum}
+                          <div className="w-full p-3 bg-gray-700 rounded-md font-mono text-sm break-all text-gray-300 mb-2 border border-gray-600">
+                            {activeWallet === "solana" ? solanaWalletAddress : ethereumWalletAddress}
                           </div>
                           <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                              navigator.clipboard.writeText(walletDetails.ethereum)
-                              setCopied(true)
-                              setTimeout(() => setCopied(false), 2000)
-                            }}
-                            className="ml-2 h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-gray-700/50"
+                            variant="outline"
+                            onClick={copyToClipboard}
+                            className="border-blue-700 text-blue-400 hover:bg-gray-700 hover:border-blue-600 rounded-full"
                           >
-                            {copied ? (
-                              <CheckIcon className="h-4 w-4 text-green-400" />
-                            ) : (
-                              <CopyIcon className="h-4 w-4" />
-                            )}
-                            <span className="sr-only">Copy Ethereum address</span>
+                            {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+                            Copy Address
                           </Button>
                         </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label className="text-gray-300 flex items-center gap-2">
-                          <svg
-                            className="h-4 w-4 text-purple-400"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M7.5 12.5L10.5 15.5L16.5 9.5"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          Solana Address
-                        </Label>
-                        <div className="flex items-center">
-                          <div className="p-3 bg-gray-700/50 rounded-md font-mono text-sm break-all text-purple-300 flex-1">
-                            {walletDetails.solana}
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                              navigator.clipboard.writeText(walletDetails.solana)
-                              setCopied(true)
-                              setTimeout(() => setCopied(false), 2000)
-                            }}
-                            className="ml-2 h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-gray-700/50"
-                          >
-                            {copied ? (
-                              <CheckIcon className="h-4 w-4 text-green-400" />
-                            ) : (
-                              <CopyIcon className="h-4 w-4" />
-                            )}
-                            <span className="sr-only">Copy Solana address</span>
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="import" className="space-y-6 mt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="mnemonic" className="text-gray-300 flex items-center gap-2">
-                    <ShieldIcon className="h-4 w-4 text-blue-400" />
-                    Recovery Phrase
-                  </Label>
-                  <Input
-                    id="mnemonic"
-                    value={mnemonic}
-                    onChange={handleMnemonicChange}
-                    placeholder="Enter your 12 or 24 word recovery phrase"
-                    className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                  <p className="text-xs text-gray-400">
-                    Enter your recovery phrase (12 or 24 words separated by spaces)
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-8 px-4">
+                  <div className="bg-gray-700 rounded-full p-4 mb-4">
+                    <Wallet className="h-8 w-8 text-gray-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-300 mb-2">No Wallet Found</h3>
+                  <p className="text-gray-400 text-center mb-4">
+                    You need to create a wallet in the key session to use this feature.
                   </p>
+                  {walletError && (
+                    <div className="mb-4 p-3 bg-red-900/30 border border-red-700 rounded-lg text-red-400 text-sm">
+                      {walletError}
+                    </div>
+                  )}
+                  <Button 
+                    onClick={handleCreateWallet}
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg transition-all duration-200 rounded-full"
+                  >
+                    Go to Key Session
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Blockchain Info Card */}
+          <Card className="border border-gray-700 bg-gray-800 shadow-md rounded-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-1"></div>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center gap-2 text-gray-100">
+                <Sparkles className="h-5 w-5 text-purple-400" />
+                Blockchain Technology
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-700 rounded-xl p-4 border border-gray-600 relative overflow-hidden group hover:shadow-md transition-all duration-200">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-purple-900/30 rounded-bl-full opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  <h3 className="font-medium text-purple-300 mb-1 flex items-center gap-2">
+                    <Shield className="h-4 w-4" />
+                    Swan Chain
+                  </h3>
+                  <p className="text-sm text-gray-300">
+                    Our proprietary blockchain used for secure record-keeping and data integrity.
+                  </p>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="text-purple-300 p-0 h-auto mt-2 text-xs flex items-center"
+                  >
+                    Learn more <ExternalLink className="h-3 w-3 ml-1" />
+                  </Button>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="importPassword" className="text-gray-300 flex items-center gap-2">
-                    <LockIcon className="h-4 w-4 text-blue-400" />
-                    Wallet Password
-                  </Label>
-                  <Input
-                    id="importPassword"
-                    type="password"
-                    placeholder="Create a password for your wallet"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  />
+                <div className="bg-gray-700 rounded-xl p-4 border border-gray-600 relative overflow-hidden group hover:shadow-md transition-all duration-200">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-blue-900/30 rounded-bl-full opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  <h3 className="font-medium text-blue-300 mb-1 flex items-center gap-2">
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7.5 12.5L10.5 15.5L16.5 9.5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    Solana
+                  </h3>
+                  <p className="text-sm text-gray-300">
+                    Fast, secure, and low-cost blockchain used for all payment transactions.
+                  </p>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="text-blue-300 p-0 h-auto mt-2 text-xs flex items-center"
+                  >
+                    Learn more <ExternalLink className="h-3 w-3 ml-1" />
+                  </Button>
                 </div>
-
-                <Button
-                  onClick={generatePrivateKey}
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white transition-colors"
-                  disabled={!mnemonic.trim() || !password.trim()}
-                >
-                  <KeyIcon className="h-4 w-4 mr-2" />
-                  Import Wallet
-                </Button>
-
-                {privateKey && privateKey !== "Invalid mnemonic" && (
-                  <div className="space-y-4 pt-4 border-t border-gray-700">
-                    <h3 className="text-lg font-medium text-white">Your Wallet Details</h3>
-
-                    <div className="space-y-3">
-                      <div className="space-y-2">
-                        <Label className="text-gray-300 flex items-center gap-2">
-                          <svg
-                            className="h-4 w-4 text-blue-400"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M11.9975 2L18.7086 5.85V13.55L11.9975 17.4L5.29102 13.55V5.85L11.9975 2Z"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M12 22V17.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M18.7086 13.55L21.9975 15.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M5.29102 13.55L2.00195 15.4"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          Ethereum Address
-                        </Label>
-                        <div className="p-3 bg-gray-700/50 rounded-md font-mono text-sm break-all text-green-300">
-                          {new ethers.Wallet(privateKey).address}
-                        </div>
-                      </div>
-
-                      {walletDetails && (
-                        <div className="space-y-2">
-                          <Label className="text-gray-300 flex items-center gap-2">
-                            <svg
-                              className="h-4 w-4 text-purple-400"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M7.5 12.5L10.5 15.5L16.5 9.5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                            Solana Address
-                          </Label>
-                          <div className="p-3 bg-gray-700/50 rounded-md font-mono text-sm break-all text-purple-300">
-                            {walletDetails.solana}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex justify-end mt-4">
-                      <Button
-                        onClick={() => router.push("/register")}
-                        className="bg-blue-600 hover:bg-blue-500 text-white transition-colors"
-                      >
-                        <span className="flex items-center justify-center gap-2">
-                          Continue
-                          <ArrowRightIcon className="h-4 w-4" />
-                        </span>
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {privateKey === "Invalid mnemonic" && (
-                  <Alert className="bg-red-500/20 border-red-600/50 text-red-200">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>Invalid recovery phrase. Please check and try again.</AlertDescription>
-                  </Alert>
-                )}
-              </TabsContent>
-            </Tabs>
-          </CardHeader>
-
-          <CardContent className="pt-0">{/* Card content is now handled by the TabsContent components */}</CardContent>
-        </Card>
-
-        <div className="mt-6 flex items-center justify-center">
-          <span className="inline-flex items-center text-xs text-gray-500">
-            <ShieldIcon className="h-4 w-4 mr-1" />
-            All wallet operations are performed locally in your browser
-          </span>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

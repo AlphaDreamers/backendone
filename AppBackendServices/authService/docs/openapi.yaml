@@ -1,0 +1,816 @@
+openapi: 3.0.3
+info:
+  title: Authentication Service API
+  description: |
+    API for user authentication, registration, and account management.
+    This service handles user authentication, registration, password management,
+    and biometric authentication.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:9008
+    description: Development server
+  - url: https://auth-api.example.com
+    description: Production server
+
+tags:
+  - name: Authentication
+    description: User authentication operations
+  - name: Registration
+    description: User registration operations
+  - name: Password
+    description: Password management operations
+  - name: Biometric
+    description: Biometric authentication operations
+  - name: User
+    description: User profile operations
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from login or refresh token endpoints
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        details:
+          type: object
+          description: Additional error details
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email
+        password:
+          type: string
+          format: password
+          description: User password
+        deviceId:
+          type: string
+          description: Device identifier for multi-device tracking
+
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token
+        refreshToken:
+          type: string
+          description: JWT refresh token
+        tokenType:
+          type: string
+          enum: [Bearer]
+          description: Token type
+        expiresIn:
+          type: integer
+          description: Access token expiration time in seconds
+        user:
+          $ref: '#/components/schemas/UserProfile'
+
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+        - firstName
+        - lastName
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email
+        password:
+          type: string
+          format: password
+          description: User password
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        phoneNumber:
+          type: string
+          description: User phone number
+        dateOfBirth:
+          type: string
+          format: date
+          description: User date of birth
+
+    RegisterResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: User ID
+        email:
+          type: string
+          format: email
+          description: User email
+        message:
+          type: string
+          description: Registration success message
+
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: JWT refresh token
+
+    RefreshTokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: New JWT access token
+        refreshToken:
+          type: string
+          description: New JWT refresh token
+        tokenType:
+          type: string
+          enum: [Bearer]
+          description: Token type
+        expiresIn:
+          type: integer
+          description: Access token expiration time in seconds
+
+    ForgotPasswordRequest:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email
+
+    ForgotPasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Password reset instructions message
+
+    ResetPasswordRequest:
+      type: object
+      required:
+        - token
+        - newPassword
+      properties:
+        token:
+          type: string
+          description: Password reset token
+        newPassword:
+          type: string
+          format: password
+          description: New password
+
+    ResetPasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Password reset success message
+
+    ChangePasswordRequest:
+      type: object
+      required:
+        - currentPassword
+        - newPassword
+      properties:
+        currentPassword:
+          type: string
+          format: password
+          description: Current password
+        newPassword:
+          type: string
+          format: password
+          description: New password
+
+    ChangePasswordResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Password change success message
+
+    BiometricRegisterRequest:
+      type: object
+      required:
+        - userId
+        - biometricData
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: User ID
+        biometricData:
+          type: string
+          format: base64
+          description: Base64 encoded biometric data
+        deviceId:
+          type: string
+          description: Device identifier
+
+    BiometricRegisterResponse:
+      type: object
+      properties:
+        biometricId:
+          type: string
+          format: uuid
+          description: Biometric ID
+        message:
+          type: string
+          description: Registration success message
+
+    BiometricVerifyRequest:
+      type: object
+      required:
+        - userId
+        - biometricData
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: User ID
+        biometricData:
+          type: string
+          format: base64
+          description: Base64 encoded biometric data
+        deviceId:
+          type: string
+          description: Device identifier
+
+    BiometricVerifyResponse:
+      type: object
+      properties:
+        verified:
+          type: boolean
+          description: Whether the biometric verification was successful
+        accessToken:
+          type: string
+          description: JWT access token (if verification successful)
+        refreshToken:
+          type: string
+          description: JWT refresh token (if verification successful)
+        tokenType:
+          type: string
+          enum: [Bearer]
+          description: Token type
+        expiresIn:
+          type: integer
+          description: Access token expiration time in seconds
+
+    UserProfile:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: User ID
+        email:
+          type: string
+          format: email
+          description: User email
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        phoneNumber:
+          type: string
+          description: User phone number
+        dateOfBirth:
+          type: string
+          format: date
+          description: User date of birth
+        createdAt:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Account last update timestamp
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        phoneNumber:
+          type: string
+          description: User phone number
+        dateOfBirth:
+          type: string
+          format: date
+          description: User date of birth
+
+    UpdateProfileResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserProfile'
+        message:
+          type: string
+          description: Profile update success message
+
+    LogoutRequest:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: JWT refresh token to invalidate
+
+    LogoutResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Logout success message
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      description: Authenticate a user and return JWT tokens
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/register:
+    post:
+      tags:
+        - Registration
+      summary: User registration
+      description: Register a new user
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: User already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/refresh:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token
+      description: Get a new access token using a refresh token
+      operationId: refreshToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid or expired refresh token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/forgot-password:
+    post:
+      tags:
+        - Password
+      summary: Request password reset
+      description: Send a password reset link to the user's email
+      operationId: forgotPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+      responses:
+        '200':
+          description: Password reset instructions sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForgotPasswordResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/reset-password:
+    post:
+      tags:
+        - Password
+      summary: Reset password
+      description: Reset password using a token received via email
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          description: Password reset successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetPasswordResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Invalid or expired token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/change-password:
+    post:
+      tags:
+        - Password
+      summary: Change password
+      description: Change password for authenticated user
+      operationId: changePassword
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: Password changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/biometric/register:
+    post:
+      tags:
+        - Biometric
+      summary: Register biometric data
+      description: Register biometric data for a user
+      operationId: registerBiometric
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BiometricRegisterRequest'
+      responses:
+        '201':
+          description: Biometric data registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BiometricRegisterResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/biometric/verify:
+    post:
+      tags:
+        - Biometric
+      summary: Verify biometric data
+      description: Verify biometric data and return JWT tokens if successful
+      operationId: verifyBiometric
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BiometricVerifyRequest'
+      responses:
+        '200':
+          description: Biometric verification successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BiometricVerifyResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Biometric verification failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/profile:
+    get:
+      tags:
+        - User
+      summary: Get user profile
+      description: Get the profile of the authenticated user
+      operationId: getProfile
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - User
+      summary: Update user profile
+      description: Update the profile of the authenticated user
+      operationId: updateProfile
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProfileResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: User logout
+      description: Logout a user and invalidate their refresh token
+      operationId: logout
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoutRequest'
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      description: Check if the service is healthy
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+                  version:
+                    type: string
+                    description: Service version
+                  uptime:
+                    type: number
+                    description: Service uptime in seconds 

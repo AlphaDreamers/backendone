@@ -3,6 +3,7 @@ package repo
 import (
 	"errors"
 	"fmt"
+
 	"github.com/SwanHtetAungPhyo/auth/internal/models"
 	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
 	db "github.com/SwanHtetAungPhyo/database"
@@ -77,6 +78,7 @@ func (i *Impl) UpdateUserStatus(email string) error {
 	i.log.Infof("Successfully updated verification status for %s", email)
 	return nil
 }
+
 func (i *Impl) GetByEmail(email string) (*models.UserInDB, error) {
 	var user models.UserInDB
 	if err := i.db.First(&user, "email = ?", email).Error; err != nil {
@@ -102,5 +104,16 @@ func (i *Impl) UpdateWalletStatus(email string) error {
 	}
 
 	i.log.Infof("Successfully updated verification status for %s", email)
+	return nil
+}
+
+func (i *Impl) UpdatePassword(email string, hashedPassword string) error {
+	result := i.db.Model(&models.UserInDB{}).Where("email = ?", email).Update("password", hashedPassword)
+	if result.Error != nil {
+		return result.Error
+	}
+	if result.RowsAffected == 0 {
+		return errors.New("user not found")
+	}
 	return nil
 }

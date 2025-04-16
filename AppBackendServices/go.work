@@ -4,4 +4,8 @@ use (
 	./authService
 	./common
 	./db
+	chat-service
+	wallet-connect-service
+	email-service
+
 )

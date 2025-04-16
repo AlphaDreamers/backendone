@@ -3,7 +3,7 @@ spring:
     name: api-gateway
   cloud:
     consul:
-      host: consul
+      host: localhost
       port: 8500
       config:
         enabled: false
@@ -50,14 +50,33 @@ spring:
               args:
                   regexp: /api/auth/(?<segment>.*)
                   replacement: /$\{segment}
+        - id: wallet-connect-service
+          uri: lb://wallet-connect
+          predicates:
+            -  Path=/api/wallet
+          filters:
+            - name: RewritePath
+              args:
+                regexp: /api/wallet-connect/(?<segment>.*)
+                replacement: /$\{segment}
+
         - id: service
           uri: lb://service
           predicates:
-            - Path=/api/services/**
+            - Path=/api/dashboard/**
           filters:
             - name: AuthenticationFilter
             - AddRequestHeader=X-Request-ID, app-gateway
             - RemoveResponseHeader=Vary
+        - id: service
+          uri: lb://service
+          predicates:
+            - Path=/api/dashboard/**
+          filters:
+            - name: AuthenticationFilter
+            - AddRequestHeader=X-Request-ID, app-gateway
+            - RemoveResponseHeader=Vary
+
 
 
       httpclient:

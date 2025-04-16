@@ -7,7 +7,18 @@
       </functions>
       <methods>
         <method importPath="github.com/SwanHtetAungPhyo/auth/internal/repo" receiver="*Impl" name="Login" />
+        <method importPath="github.com/SwanHtetAungPhyo/common/proto" receiver="UserServiceClient" name="CheckUserExists" />
+        <method importPath="github.com/streadway/amqp" receiver="*Channel" name="QueueDeclare" />
       </methods>
+    </inspection_tool>
+    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="customHeaders">
+        <set>
+          <option value="Browser" />
+          <option value="Os" />
+          <option value="Device-Type" />
+        </set>
+      </option>
     </inspection_tool>
   </profile>
 </component>

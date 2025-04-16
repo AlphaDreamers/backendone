@@ -5,27 +5,27 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func (i *Impl) SendEmail(userName, email, code string) {
-	i.logger.Infof("Sending email to %s", email)
-	conn, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
+func (h *AuthHandler) SendEmail(userName, email, code string) {
+	h.logger.Infof("Sending email to %s", email)
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
-		i.logger.Errorf("Failed to connect to RabbitMQ")
+		h.logger.Errorf("Failed to connect to RabbitMQ")
 	}
 	defer func(conn *amqp.Connection) {
 		err := conn.Close()
 		if err != nil {
-			i.logger.Errorf("Failed to close connection")
+			h.logger.Errorf("Failed to close connection")
 		}
 	}(conn)
 
 	ch, err := conn.Channel()
 	if err != nil {
-		i.logger.Errorf("Failed to open a channel")
+		h.logger.Errorf("Failed to open a channel")
 	}
 	defer func(ch *amqp.Channel) {
 		err := ch.Close()
 		if err != nil {
-			i.logger.Errorf("Failed to close channel")
+			h.logger.Errorf("Failed to close channel")
 		}
 	}(ch)
 
@@ -36,7 +36,7 @@ func (i *Impl) SendEmail(userName, email, code string) {
 		false,
 		nil)
 	if err != nil {
-		i.logger.Errorf("Failed to declare a queue")
+		h.logger.Errorf("Failed to declare a queue")
 	}
 
 	type send struct {
@@ -52,7 +52,7 @@ func (i *Impl) SendEmail(userName, email, code string) {
 	}
 	bodyBytes, err := json.Marshal(body)
 	if err != nil {
-		i.logger.Errorf("Failed to marshal body")
+		h.logger.Errorf("Failed to marshal body")
 	}
 	err = ch.Publish(
 		"",
@@ -65,7 +65,7 @@ func (i *Impl) SendEmail(userName, email, code string) {
 		})
 
 	if err != nil {
-		i.logger.Errorf("Failed to publish a message")
+		h.logger.Errorf("Failed to publish a message")
 	}
-	i.logger.Infof("Sent email to %s", email)
+	h.logger.Infof("Sent email to %s", email)
 }

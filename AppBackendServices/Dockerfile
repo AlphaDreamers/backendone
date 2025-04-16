@@ -10,7 +10,7 @@ COPY common /app/common
 COPY db /app/db
 COPY authService /app/authService
 
-COPY ./authService/config.yaml /app/authService/config.yaml
+COPY ./authService/internal/config/config.development.yaml /app/authService/config.yaml
 WORKDIR /app/authService
 
 

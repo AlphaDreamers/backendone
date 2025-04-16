@@ -22,7 +22,6 @@ func GetLogger() *logrus.Logger {
 	return log
 }
 
-// FunctionHook is a custom logrus hook to add function name to log entries
 type FunctionHook struct{}
 
 func (hook *FunctionHook) Levels() []logrus.Level {

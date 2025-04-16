@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "../proto";
+package user_service;
+
+
+import "google/protobuf/wrappers.proto";
+
+message UserExistsRequest {
+  string email = 1;
+  string userId = 2; 
+}
+
+message UserExistsResponse {
+  google.protobuf.BoolValue exists = 1;
+}
+
+service UserService {
+  rpc CheckUserExists(UserExistsRequest) returns (UserExistsResponse);
+}

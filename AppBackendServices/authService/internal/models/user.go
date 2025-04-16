@@ -1,9 +1,10 @@
 package models
 
 import (
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
-	"time"
 )
 
 type (
@@ -18,10 +19,6 @@ type (
 		WalletCreatedAt time.Time `gorm:"autoCreateTime" json:"wallet_created_at"`
 	}
 
-	//Country struct {
-	//	ID   uint   `gorm:"primaryKey;autoIncrement" json:"id"`
-	//	Name string `gorm:"unique;not null" json:"name" validate:"required,min=2,max=50"`
-	//}
 	UserBiometric struct {
 		ID            uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
 		UserID        uuid.UUID `gorm:"type:uuid;not null" json:"user_id"`
@@ -41,4 +38,11 @@ var userValidator = validator.New()
 
 func (u *UserInDB) Validate() error {
 	return userValidator.Struct(u)
+}
+func (*UserInDB) TableName() string {
+	return "users"
+}
+
+func (*UserBiometric) TableName() string {
+	return "user_biometrics"
 }

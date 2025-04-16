@@ -1,63 +1,98 @@
 package cmd
 
 import (
-	"context"
-	"github.com/SwanHtetAungPhyo/auth/cmd/middleware"
-	"github.com/SwanHtetAungPhyo/auth/internal/models"
-	db "github.com/SwanHtetAungPhyo/database"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"os"
-	"os/signal"
-	"syscall"
-
+	"github.com/SwanHtetAungPhyo/auth/internal/config"
 	"github.com/SwanHtetAungPhyo/auth/internal/handler"
+	"github.com/SwanHtetAungPhyo/auth/internal/services"
+	"github.com/SwanHtetAungPhyo/common/http_server"
+	middleware2 "github.com/SwanHtetAungPhyo/common/middleware"
 	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
-func Start(port string) {
-	app := fiber.New()
-	startlog := logutil.GetLogger()
+func Start(port string, database *gorm.DB) {
+	logutil.InitLog("auth")
+	log := logutil.GetLogger()
 
-	routeSetUp(app)
-	go func() {
-		startlog.Info("AuthService  is started  at the port")
-		if err := app.Listen(":" + port); err != nil {
-			startlog.Panic(err.Error())
-		}
+	redisClient := config.GetRedisClient()
+	service := services.NewServiceImpl()
 
-	}()
-	osChannel := make(chan os.Signal, 1)
-	signal.Notify(osChannel, syscall.SIGABRT, os.Interrupt)
-	<-osChannel
+	cfg := config.GetConfig()
+	handlers := handler.NewAuthHandler(*service, redisClient, cfg)
 
-	err := db.GetDB().Migrator().DropTable(&models.UserInDB{}, &models.UserBiometric{})
-	if err != nil {
-		startlog.Warn(err.Error())
-	}
-	if err := app.ShutdownWithContext(context.Background()); err != nil {
-		startlog.Fatal("failed to shutdown")
-	}
+	routeConfig := http_server.NewRoutesConfig()
+	routeConfig.AddRoute(
+		fiber.MethodPost,
+		"/register",
+		handlers.Register,
+	)
 
-}
+	routeConfig.AddRoute(
+		fiber.MethodPost,
+		"/login",
+		handlers.Login,
+	)
 
-func routeSetUp(app *fiber.App) {
-	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:8085",
-		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		AllowCredentials: true,
-		ExposeHeaders:    "Content-Type, Authorization",
-	}))
-	app.Use(middleware.LoggingMiddleware())
-	handlers := handler.NewHandler()
-	app.Post("/login", handlers.Login)
-	app.Post("/register", handlers.Register)
-	app.Get("/refresh", handlers.Refresh)
-	app.Post("/me", middleware.JwtMiddleware(), handlers.Me)
-	app.Post("/verify", handlers.Verify)
-	app.Post("/wallet", handlers.StoreInVault, middleware.JwtMiddleware())
-	app.Get("/health", func(c *fiber.Ctx) error {
-		return c.SendStatus(fiber.StatusOK)
-	})
+	routeConfig.AddRoute(
+		fiber.MethodPost,
+		"/logout",
+		handlers.Logout)
+
+	routeConfig.AddRoute(
+		fiber.MethodPost,
+		"/verify",
+		handlers.Verify,
+	)
+
+	routeConfig.AddRoute(
+		fiber.MethodGet,
+		"/me",
+		handlers.Me,
+		middleware2.JwtMiddleware(redisClient),
+		middleware2.JWTBlacklistMiddleware(redisClient),
+	)
+
+	//routeConfig.AddRoute(
+	//	fiber.MethodPost,
+	//	"/wallet",
+	//	handlers.StoreInVault,
+	//	middleware2.JwtMiddleware(),
+	//)
+
+	routeConfig.AddRoute(
+		fiber.MethodGet,
+		"/refresh",
+		handlers.RefreshToken,
+		middleware2.JWTBlacklistMiddleware(redisClient),
+	)
+
+	routeConfig.AddRoute(
+		fiber.MethodPost,
+		"/forgot-password",
+		handlers.ForgotPassword,
+	)
+
+	// Health check endpoint
+	routeConfig.AddRoute(
+		fiber.MethodGet,
+		"/health",
+		func(c *fiber.Ctx) error {
+			return c.JSON(fiber.Map{
+				"status": "ok",
+			})
+		},
+	)
+
+	commonService := http_server.NewApp(
+		log,
+		port,
+		database,
+		true,
+		routeConfig.GetRoutes(),
+		routeConfig.GetMiddlewares(),
+	)
+
+	commonService.Start()
+	defer commonService.Stop()
 }

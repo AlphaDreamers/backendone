@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { AlertCircle, LogIn, ArrowRight } from 'lucide-react'
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { setToken } from "@/app/lib/auth-utils"
 
 export default function LoginPage() {
     const router = useRouter()
@@ -37,11 +38,17 @@ export default function LoginPage() {
             if (!response.ok) {
                 throw new Error(data.message || "Login failed")
             }
-            if (!data.user_account_wallet) {
+            
+            // Store the access token in localStorage
+            if (data.data && data.data.access_token) {
+                setToken(data.data.access_token)
+            }
+            
+            if (!data.data.user_account_wallet) {
                 console.log(data)
                 router.push("/key")
             } else {
-                router.push("/register")
+                router.push("/dashboard")
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : "Something went wrong")

@@ -1,9 +1,10 @@
 package middleware
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 func LoggingMiddleware() fiber.Handler {

@@ -2,6 +2,8 @@ package config
 
 import (
 	"context"
+	"fmt"
+	"github.com/SwanHtetAungPhyo/common/pkg/logutil"
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
 )
@@ -15,6 +17,7 @@ func RedisConfigInit() {
 		DB:       0,
 	})
 	err := redisClient.Ping(context.Background()).Err()
+	logutil.GetLogger().Warn(fmt.Sprintf("Failed to load config: %v", err))
 	if err != nil {
 		logrus.Warn(err.Error())
 	}

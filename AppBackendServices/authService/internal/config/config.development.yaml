@@ -1,0 +1,43 @@
+server:
+  port: "9008"
+  read_timeout: "15s"
+  write_timeout: "15s"
+  environment: "development"
+
+grpc:
+  cert: "/Users/swanhtet1aungphyo/IdeaProjects/UniBackend/AppBackendServices/cert/auth-bundle.crt"
+
+database:
+  host: "localhost"
+  port: 5432
+  dbname: "mydb"
+  sslmode: "disable"
+  timezone: "UTC"
+
+jwt:
+  secret: "KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M="
+  access_token_ttl: "15m"
+  refresh_token_ttl: "24h"
+  signing_method: "RS256"
+  signing_key: "path/to/private.key"
+  verifying_key: "path/to/public.key"
+
+consul:
+  address: "http://localhost:8500"
+  service_id: "authentication"
+  service_name: "auth"
+  service_address: "localhost"
+  service_port: 9008
+  health_check_url: "http://localhost:9008/health"
+  health_check_interval: "10s"
+  health_check_timeout: "5s"
+
+redis:
+  address: "localhost:6379"
+  password: ""
+  db: 0
+
+vault:
+  address: "http://localhost:8200"
+  root_token: "KZc3qNSpLXzIz7h6UV7/7ZzPxqWmqEUk8X0aW3J3F8M="
+  secret_path: "auth-service-wallet" 
