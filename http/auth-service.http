@@ -1,17 +1,135 @@
-POST http://localhost:8085/api/auth/register
+### @env local
+### Register Request
+POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
-  "fullname": "John Doe",
   "email": "swanhtetaungp@gmail.com",
+  "password": "SwanHtetAung12@",
+  "fullname": "Swan Htet Aung Phyo",
   "country": "USA",
-  "biometric_hash": "123456dfafsdiiiads789abcdef",
-  "password": "securepassword123",
+  "biometric_hash": "JFKLFDSJLK"
 }
 
-### Repsonse with
-Status: 201
+> {%
+    /**
+     * @typedef {{
+     *   email: string,
+     *   full_name: string,
+     *   verification_ttl_minutes: number,  // Fixed field name
+     *   registered_at: string
+     * }} RegisterResponse
+     */
+
+    /** @type {RegisterResponse} */
+    const res = response.body.data;
+
+    if (typeof res.email !== "string") throw new Error("Missing or invalid 'email'");
+    if (typeof res.full_name !== "string") throw new Error("Missing or invalid 'fullName'");
+    if (typeof res.verification_ttl_minutes !== "number") throw new Error("Missing or invalid 'verificationTTL'");
+    if (typeof res.registered_at !== "string") throw new Error("Missing or invalid 'registeredAt'");
+
+    if (res.email !== "swanhtetaungp@gmail.com") throw new Error(`Email mismatch: got '${res.email}'`);
+    if (res.full_name !== "Swan Htet Aung Phyo") throw new Error(`FullName mismatch: got '${res.full_name}'`);
+    if (res.verification_ttl_minutes !== 10) throw new Error(`Expected TTL = 10, got '${res.verification_ttl_minutes}'`);
+%}
+### Code Verification Request
+POST {{baseUrl}}/verify
+Content-Type: application/json
 
 {
-    "message": "User Regisration for platform Successful"
+  "email": "swanhtetaungp@gmail.com",
+  "code": "217300"
 }
+
+> {%
+    /**
+     * @typedef {{
+     *    message: string,
+     * }}
+     */
+    const mustResponse = "Account is successfully verified"
+    const resp = response.body
+
+    if (resp.message != mustResponse) throw new Error("Message is malformed")
+%}
+###  Login Request
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "swanhtetaungp@gmail.com",
+  "password": "SwanHtetAung12@"
+}
+
+> {%
+
+    const resp = response.body
+
+    if (resp.data.access_token == null) throw new Error("Access token is missing")
+    if (resp.data.user_account_wallet == true) throw new Error("User Wallet should not be created without downloading the wallet")
+    if (resp.data.email != "swanhtetaungp@gmail.com") throw new Error("MissMatched Email")
+    client.global.set("current_user_email", resp.data.email)
+    client.global.set("access_token", resp.data.access_token)
+%}
+### Me EndPoint
+GET  {{baseUrl}}/me?email={{current_user_email}}
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+> {%
+    let data = response.body;
+    if (typeof data === 'string') {
+        data = JSON.parse(data);
+    }
+    if (data.data.email !== "swanhtetaungp@gmail.com") {
+        throw new Error(`Expected email to be 'swanhtetaungp@gmail.com', got '${data.email}'`);
+    }
+
+    if (data.data.user_name !== "Swan Htet Aung Phyo") {
+        throw new Error(`Expected user_name to be 'Swan Htet Aung Phyo', got '${data.user_name}'`);
+    }
+
+    if (data.data.verified !== true) {
+        throw new Error("Expected verified to be true");
+    }
+
+    if (data.data.wallet_created !== false) {
+        throw new Error("Expected wallet_created to be false");
+    }
+
+    // Optional: Check date format (rough check)
+    if (!data.data.created_at || !data.data.created_at.includes("2025-04-16")) {
+        throw new Error("Invalid or missing created_at timestamp");
+    }
+
+    if (!data.data.wallet_created_time || !data.data.wallet_created_time.includes("2025-04-16")) {
+        throw new Error("Invalid or missing wallet_created_time timestamp");
+    }
+%}
+### LogOut Request
+POST {{baseUrl}}/logout
+Authorization: {{access_token}}
+
+
+
+> {%
+    const resp = response.body;
+    if (resp.message != "Successfully logged out") throw new Error("Logout Message is Malformed")
+%}
+### Refresh Token
+GET  {{baseUrl}}/refresh
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
+Browser: Chrome
+Os: macOS
+Device-Type: desktop
+
+> {%
+    const resp = response.body;
+    const expectedMessage = "token refreshed successfully"
+    if (resp.message.toLowerCase() != expectedMessage) throw new Error("Message is not include in response")
+    if (resp.data.access_token == null) throw new Error("New Access Token must be returned from the refresh endpoint")
+
+%}
