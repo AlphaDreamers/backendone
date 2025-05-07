@@ -1,0 +1,23 @@
+# config.yaml/config.yaml.yaml
+
+server:
+  name: "asauth"
+  idle_timeout: 30        # seconds
+  read_timeout: 15        # seconds
+  write_timeout: 15       # seconds
+  shutdown_timeout: 5     # seconds
+  addr: "localhost:8004"
+  allowed:
+    origin: "http://localhost:8808"
+  jwt: "5p3+1iIUsCP8Lc6t2FG+wWHre12WSSlS8VQDuCCdhhE="
+  cert: "./certificates/cert.pem"
+  key:  "./certificates/key.pem"
+database:
+  dsn: postgres://authuser:authpass@localhost:5432/authdb?sslmode=disable
+  table_prefix: "asauth_"
+
+
+
+nats:
+  url: "nats://localhost:4222"
+  connection_name: "asauth-connection"

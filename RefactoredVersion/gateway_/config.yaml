@@ -1,0 +1,58 @@
+server:
+  port: 3000
+  read_timeout: 15
+  write_timeout: 15
+  idle_timeout: 60
+  prefork: false
+  case_sensitive: false
+
+logging:
+  format: "[${time}] ${ip} ${status} - ${method} ${path} (${latency})\n"
+  time_format: "2006-01-02 15:04:05"
+  time_zone: "UTC"
+
+services:
+  - name: "auth-service"
+    prefix: "/auth"
+    host: "localhost"
+    port: 8004
+    health_path: "/health"
+    headers:
+      X-Service-Name: "auth-service"
+      X-API-Version: "v1"
+
+  - name: "chat-service"
+    prefix: "/chat"
+    host: "localhost"
+    port: 3004
+    health_path: "/status"
+    headers:
+      X-Service-Name: "chat-service"
+      X-API-Version: "v1"
+
+  - name: "order-service"
+    prefix: "/orders"
+    host: "localhost"
+    port: 3005
+    health_path: "/health"
+    headers:
+      X-Service-Name: "order-service"
+      X-API-Version: "v1"
+
+  - name: "service-service"
+    prefix: "/service"
+    host: "localhost"
+    port: 8082
+    health_path: "/status"
+    headers:
+      X-Service-Name: "service-service"
+      X-API-Version: "v1"
+
+  - name: "wallet-service"
+    prefix: "/wallet"
+    host: "localhost"
+    port: 3007
+    health_path: "/health"
+    headers:
+      X-Service-Name: "wallet-service"
+      X-API-Version: "v1"

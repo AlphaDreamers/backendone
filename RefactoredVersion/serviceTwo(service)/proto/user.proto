@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message  ReqWithId {
+  string  userId = 1;
+}
+message  Resp {
+  string  message = 1;
+  int32  code = 2;
+}
+service  UserService {
+  rpc CheckUserExistence(ReqWithId) returns (Resp);
+}

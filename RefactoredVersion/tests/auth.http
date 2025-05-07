@@ -1,0 +1,68 @@
+GET https://127.0.0.1:8004/health
+
+
+GHl30ycL37pwyf4g35c5bKJmHpWEVR9P
+### Register Routes
+POST https://127.0.0.1:3000/auth/register
+Content-Type: application/json
+
+{
+  "full_name": "John Doe",
+  "email": "swanhtetaungp@gmail.com",
+  "password": "SecurePass123",
+  "bio_metric_hash": "abc123def456ghi7"
+}
+
+### VerifyEmail
+POST https://localhost:3000/auth/verify-email
+Content-Type: application/json
+
+{
+  "token": "779138",
+  "email": "swanhtetaungp@gmail.com"
+}
+####
+POST https://localhost:3000/service/9d3b1f39-3af0-44c8-930f-1317442ccc09
+Content-Type: application/json
+
+{
+  "srv_name": "Service for content writing",
+  "srv_type": "B2B",
+  "desc": "content writing for the all of the IT services",
+  "fee": 100.0,
+  "photo": "CKKKKKKKKFDKJL:SJF:LJDS:LF"
+}
+### LOGIN
+POST https://localhost:3000/auth/login
+X-DeviceId: OLwpyfRHiKu35YTj4eS4lR3lvg8aAuLE
+Content-Type: application/json
+
+{
+  "email": "swanhtetaungp@gmail.com",
+  "password": "SecurePass123"
+}
+
+
+
+### RERESH
+POST https://localhost:8004/auth/refresh
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VfaWQiOiJPTHdweWZSSGlLdTM1WVRqNGVTNGxSM2x2ZzhhQXVMRSIsImV4cCI6MTc0Njg3NDI3MywiaWF0IjoxNzQ2NjE1MDczLCJ1c2VyX2lkIjoiYjY2MDg4NzgtODdlMy00NzcxLTlkODMtMjIxNjRlMTEwN2ZkIn0.KaaKtght0RFoHLZxUn4WT620fSreY5--MQ5EvFt4fiU
+### LOGOUT
+POST https://localhost:8004/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VfaWQiOiJnZW5lcmF0ZWQtZGV2aWNlLWlkIiwiZXhwIjoxNzQ2NzU1OTUxLCJpYXQiOjE3NDY0OTY3NTEsInVzZXJfaWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAifQ.qCNmVRzBCEyNIYwVehmFMvaD5tuwA8-PqehvmthNdNE
+
+###
+GET https://127.0.0.1:3000/auth/dashboard/9d3b1f39-3af0-44c8-930f-1317442ccc09
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZpY2VfaWQiOiJPTHdweWZSSGlLdTM1WVRqNGVTNGxSM2x2ZzhhQXVMRSIsImV4cCI6MTc0Njg3ODU4MiwiaWF0IjoxNzQ2NjE5MzgyLCJ1c2VyX2lkIjoiMjkxYzZlMzItODFmMy00YThjLWFjNjQtMDFkNzJjZTMxMTQyIn0.kpuqxgcMoIeM_hi0tfd3cLAapnQWNzABzqZ83qGFukg
+
+###
+POST https://localhost:8004/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "swanhtetaungp@gmail.com"
+}
+
+
+###
+POST https://localhost:8082/
