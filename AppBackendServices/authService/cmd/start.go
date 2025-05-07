@@ -73,7 +73,6 @@ func Start(port string, database *gorm.DB) {
 		handlers.ForgotPassword,
 	)
 
-	// Health check endpoint
 	routeConfig.AddRoute(
 		fiber.MethodGet,
 		"/health",
