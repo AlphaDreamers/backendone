@@ -12,6 +12,7 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"go.uber.org/fx"
 	"golang.org/x/crypto/bcrypt"
 	"math/rand"
@@ -292,37 +293,30 @@ func (s *AuthService) emailInfoTemplate(to, code string) []byte {
 	return jsonBytes
 }
 func (s *AuthService) ResetPassword(ctx context.Context, email string) error {
-	// 1. Check if user exists
 	user, err := s.repo.GetByEmail(ctx, email)
 	if err != nil {
 		return ErrUserNotFound
 	}
 
-	// 2. Generate reset token
-	resetToken := s.GenerateToken(32)
+	resetToken := s.GenerateToken(6)
 	key := fmt.Sprintf("password_reset:%s", user.ID.String())
 
-	// 3. Store in Redis with expiration
 	err = s.redisClient.Set(ctx, key, resetToken, emailTokenExpiration).Err()
 	if err != nil {
 		return fmt.Errorf("failed to store reset token: %v", err)
 	}
 
-	// 4. Publish reset email event
+	url := viper.GetString("front-end.redirect.reset-password")
 	s.wg.Add(1)
 	go func() {
 		defer s.wg.Done()
-		emailData := s.passwordResetEmailTemplate(user.Email, resetToken)
-		if err := s.natsConn.Publish("user.password_reset", emailData); err != nil {
-			s.log.WithError(err).Error("failed to publish password reset email")
-		}
+		utils.PasswordRelatedEmail(email, url, resetToken)
 	}()
 
 	return nil
 }
 
 func (s *AuthService) VerifyResetPasswordToken(ctx context.Context, token, email string) error {
-	// 1. Get user by email
 	user, err := s.repo.GetByEmail(ctx, email)
 	if err != nil {
 		return ErrUserNotFound
@@ -351,7 +345,7 @@ func (s *AuthService) ForgotPassword(ctx context.Context, email string) error {
 		return ErrUserNotFound
 	}
 
-	resetToken := s.GenerateToken(32)
+	resetToken := s.GenerateToken(6)
 	key := fmt.Sprintf("forgot_password:%s", user.ID.String())
 
 	err = s.redisClient.Set(ctx, key, resetToken, emailTokenExpiration).Err()
@@ -372,7 +366,6 @@ func (s *AuthService) ForgotPassword(ctx context.Context, email string) error {
 }
 
 func (s *AuthService) VerifyForgotPasswordToken(ctx context.Context, token, email, newPassword string) error {
-	// 1. Get user and validate token
 	user, err := s.repo.GetByEmail(ctx, email)
 	if err != nil {
 		return ErrUserNotFound
@@ -388,14 +381,12 @@ func (s *AuthService) VerifyForgotPasswordToken(ctx context.Context, token, emai
 		return errors.New("invalid forgot password token")
 	}
 
-	// 2. Update password
 	hashedPassword := s.hashPassword(newPassword)
 	success, err := s.repo.UpdatePassword(ctx, email, hashedPassword)
 	if err != nil || !success {
 		return fmt.Errorf("failed to update password: %v", err)
 	}
 
-	// 3. Delete the used token
 	s.redisClient.Del(ctx, key)
 
 	return nil

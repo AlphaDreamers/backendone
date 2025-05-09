@@ -26,3 +26,9 @@ redis:
   addr: "redis:6379"  # Changed from localhost to redis (Docker service name)
   password: ""        # Empty if no password
   db: 0
+
+front-end:
+  redirect:
+    forgot-password: http://localhost:3000/forgot-password
+    reset-password: http://localhost:3000/reset-password
+

@@ -129,11 +129,9 @@ func setupRoutes(app *fiber.App, cfg *GatewayConfig) {
 			},
 			Client: client,
 			ModifyRequest: func(c *fiber.Ctx) error {
-				// Set custom headers
 				for key, value := range service.Headers {
 					c.Request().Header.Set(key, value)
 				}
-				// Set standard forwarding headers
 				c.Request().Header.Set("X-Forwarded-For", c.IP())
 				c.Request().Header.Set("X-Forwarded-Host", c.Hostname())
 				c.Request().Header.Set("X-Forwarded-Proto", c.Protocol())
@@ -143,13 +141,11 @@ func setupRoutes(app *fiber.App, cfg *GatewayConfig) {
 				// You can modify responses here if needed
 				return nil
 			},
-			// Timeout settings
 			Timeout: 10 * time.Second,
 		})
 
 		path := fmt.Sprintf("%s/*", service.Prefix)
 		app.All(path, func(c *fiber.Ctx) error {
-			// Add error handling for the proxy
 			if err := serviceProxy(c); err != nil {
 				log.Printf("Proxy error for %s: %v", path, err)
 				return c.Status(fiber.StatusBadGateway).SendString("Service unavailable")

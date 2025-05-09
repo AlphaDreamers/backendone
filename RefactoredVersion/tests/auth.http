@@ -18,7 +18,7 @@ POST https://localhost:3000/auth/verify-email
 Content-Type: application/json
 
 {
-  "token": "779138",
+  "token": "272997",
   "email": "swanhtetaungp@gmail.com"
 }
 ####
@@ -42,6 +42,24 @@ Content-Type: application/json
   "password": "SecurePass123"
 }
 
+### ForgotPassword
+POST  https://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "swanhtetaungp@gmail.com"
+}
+
+
+### ForgotPassword Reset
+POST  https://localhost:3000/auth/verify-reset-password
+Content-Type: application/json
+
+{
+  "token": "436859",
+  "email": "swanhtetaungp@gmail.com",
+  "new_password": "NewPassw0rd!"
+}
 
 
 ### RERESH
@@ -64,5 +82,7 @@ Content-Type: application/json
 }
 
 
+// Required Header = X-DeviceId : fdasfas
+
 ###
-POST https://localhost:8082/
+POST https://localhost:8082/auth/dashboard/{userId}

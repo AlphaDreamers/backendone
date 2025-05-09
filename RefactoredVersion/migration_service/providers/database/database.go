@@ -3,13 +3,15 @@ package database
 import (
 	"fmt"
 	"github.com/SwanHtetAungPhyo/migration_service/providers/model"
+	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
 )
 
-func NewDB(dsn string) (*gorm.DB, error) {
+func NewDB() (*gorm.DB, error) {
+	dsn := viper.GetString("sup-abase.url")
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
