@@ -4,18 +4,15 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/SwanHtetAungPhyo/authCognito/cmd"
-	"github.com/SwanHtetAungPhyo/authCognito/cmd/middleware"
-	authMo "github.com/SwanHtetAungPhyo/authCognito/internal/handler/auth"
-	authRMo "github.com/SwanHtetAungPhyo/authCognito/internal/repo/auth"
-	authSMo "github.com/SwanHtetAungPhyo/authCognito/internal/service/auth"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/natefinch/lumberjack"
+
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 	"github.com/aws/aws-sdk-go-v2/service/textract"
 	"github.com/gofiber/fiber/v2"
-	"github.com/natefinch/lumberjack"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
@@ -39,22 +36,13 @@ var InitProvideModule = fx.Module("initProvideModule", fx.Provide(
 	NewCognitoClient,
 	NewTextraClient,
 	NewRekognitionClient,
+	NewS3Client,
 ))
 
 func main() {
 	app := fx.New(
 		InitProvideModule,
-		authRMo.RepoModule,
-		authSMo.ServiceLayerModule,
-		authMo.HandlerLayerModule,
-		fx.Provide(
-			cmd.NewAppState,
-		),
-		fx.Invoke(
-			middleware.InitJWKS,
-			cmd.AppLifeCycle),
 	)
-
 	app.Run()
 }
 
@@ -163,4 +151,8 @@ func NewTextraClient(awscfg *aws.Config) *textract.Client {
 }
 func NewRekognitionClient(awscfg *aws.Config) *rekognition.Client {
 	return rekognition.NewFromConfig(*awscfg)
+}
+
+func NewS3Client(awscfg aws.Config) *s3.Client {
+	return s3.NewFromConfig(awscfg)
 }

@@ -2,10 +2,12 @@ package auth
 
 import (
 	"context"
+	"github.com/SwanHtetAungPhyo/authCognito/internal/repo/auth"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 	"github.com/aws/aws-sdk-go-v2/service/textract"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 type AuthConcrete struct {
@@ -16,6 +18,8 @@ type AuthConcrete struct {
 	clientSecret       string
 	textractClient     *textract.Client
 	rekognitiionClient *rekognition.Client
+	repo               *auth.AuthRepositry
+	v                  *viper.Viper
 }
 
 func NewAuthConcrete(
@@ -23,6 +27,8 @@ func NewAuthConcrete(
 	cognitoClient *cognitoidentityprovider.Client,
 	textractClient *textract.Client,
 	rekognitiionClient *rekognition.Client,
+	v *viper.Viper,
+	repo *auth.AuthRepositry,
 ) *AuthConcrete {
 	return &AuthConcrete{
 		log:                log,
@@ -32,5 +38,7 @@ func NewAuthConcrete(
 		clientSecret:       "1ipuga7399127snjbbgletfpr25lk6hleucb5fptn6nvrefn40ri",
 		textractClient:     textractClient,
 		rekognitiionClient: rekognitiionClient,
+		v:                  v,
+		repo:               repo,
 	}
 }

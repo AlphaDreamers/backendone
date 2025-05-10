@@ -1,0 +1,9 @@
+supa-base:
+    project-ref: https://megdqxtbihnniipczkri.supabase.co
+    anon-public: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1lZ2RxeHRiaWhubmlpcGN6a3JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4MzcxOTMsImV4cCI6MjA2MDQxMzE5M30.ER_qa0hyReH2D60bw-uyNCfV2DBmnoUlJm0NJoKcTos
+
+rds:
+    password: Swanhtetaungphyo
+    username: postgres
+    endpoint: database-1.cm9ewocwci8f.us-east-1.rds.amazonaws.com
+    port: 5432

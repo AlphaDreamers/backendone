@@ -22,8 +22,7 @@ func (c2 ConcreteHandler) SignUp(c *fiber.Ctx) error {
 		})
 	}
 	return c.JSON(model.Response{
-		Message: "OK",
-		Data:    req,
+		Message: "Email verification code is send to the email that u used in the sign up ",
 	})
 }
 
@@ -47,13 +46,13 @@ func (c2 ConcreteHandler) SignIn(c *fiber.Ctx) error {
 		HTTPOnly: true,
 		MaxAge:   time.Now().Add(time.Hour * 24 * 365 * 10).Minute(),
 	})
-	c.Cookie(&fiber.Cookie{
-		Name:     "access_token",
-		Value:    *respFromC.AuthenticationResult.AccessToken,
-		Secure:   true,
-		HTTPOnly: true,
-		MaxAge:   time.Now().Add(time.Minute * 30).Minute(),
-	})
+
+	userData.AccessToken = model.AccessToken{
+		AccessToken: *respFromC.AuthenticationResult.AccessToken,
+	}
+	userData.IdTOKEN = model.IdTOKEN{
+		IdToken: *respFromC.AuthenticationResult.IdToken,
+	}
 	return c.JSON(model.Response{
 		Message: "OK",
 		Data:    userData,
@@ -138,7 +137,6 @@ func (h *ConcreteHandler) ResetPasswordConfirm(c *fiber.Ctx) error {
 
 // Logout handler to log the user out
 func (h *ConcreteHandler) Logout(c *fiber.Ctx) error {
-	// Get the access token from the Authorization header or from the request body
 	accessToken := c.Get("Authorization")
 	if accessToken == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -146,7 +144,6 @@ func (h *ConcreteHandler) Logout(c *fiber.Ctx) error {
 		})
 	}
 
-	// Call the Logout function from the Auth service
 	err := h.srv.Logout(accessToken)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -160,6 +157,12 @@ func (h *ConcreteHandler) Logout(c *fiber.Ctx) error {
 }
 
 func (h *ConcreteHandler) KYCVerify(c *fiber.Ctx) error {
+	email := c.Params("email")
+	if email == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Email address is required in the param",
+		})
+	}
 	form, err := c.MultipartForm()
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -173,7 +176,7 @@ func (h *ConcreteHandler) KYCVerify(c *fiber.Ctx) error {
 		})
 	}
 
-	verification, err := h.srv.KYCVerification(files)
+	verification, err := h.srv.KYCVerification(files, email)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(model.Response{
 			Message: err.Error(),
@@ -182,5 +185,11 @@ func (h *ConcreteHandler) KYCVerify(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(model.Response{
 		Message: "KYC verification success",
 		Data:    verification,
+	})
+}
+
+func (h *ConcreteHandler) Me(c *fiber.Ctx) error {
+	return c.JSON(model.Response{
+		Message: "OK",
 	})
 }

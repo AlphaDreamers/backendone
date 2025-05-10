@@ -2,8 +2,7 @@ package cmd
 
 import (
 	"context"
-	"github.com/SwanHtetAungPhyo/authCognito/cmd/middleware"
-	authHandler "github.com/SwanHtetAungPhyo/authCognito/internal/handler/auth"
+	"github.com/SwanHtetAungPhyo/gis/internal/handler"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -15,20 +14,18 @@ type AppState struct {
 	log      *logrus.Logger
 	fiberApp *fiber.App
 	v        *viper.Viper
-	handler  *authHandler.ConcreteHandler
+	handler  *handler.HandlerConcrete
 }
 
 func NewAppState(
 	log *logrus.Logger,
 	fiberApp *fiber.App,
 	v *viper.Viper,
-	handler *authHandler.ConcreteHandler,
 ) *AppState {
 	return &AppState{
 		log:      log,
 		fiberApp: fiberApp,
 		v:        v,
-		handler:  handler,
 	}
 }
 
@@ -49,32 +46,13 @@ func (s *AppState) Start() error {
 }
 
 func (s *AppState) Routes() {
-	s.fiberApp.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"success": true,
-		})
-	})
-	s.fiberApp.Post("/auth/sign-in", s.handler.SignIn)
-	s.fiberApp.Post("/auth/confirm", s.handler.Confirm)
-	s.fiberApp.Post("/auth/resend/:email", s.handler.ResendConfirmation)
-	s.fiberApp.Post("/auth/sign-up", s.handler.SignUp)
-	s.fiberApp.Get("/hello", middleware.JwtMiddleware(), func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"success": true,
-			"data": fiber.Map{
-				"middleware": "work",
-			},
-		})
-	})
-	// Forgot password route
-	s.fiberApp.Post("/auth/forgot-password", s.handler.ForgotPassword)
-
-	// Reset password confirmation route
-	s.fiberApp.Post("/auth/reset-password-confirm", s.handler.ResetPasswordConfirm)
-
-	// Logout route
-	s.fiberApp.Post("/auth/logout", s.handler.Logout)
-	s.fiberApp.Post("/kyc-verify/:email", middleware.JwtMiddleware(), s.handler.KYCVerify)
+	api := s.fiberApp.Group("/api/gig")
+	api.Post("/", s.handler.Create)
+	api.Put("/:id", s.handler.Update)
+	api.Delete("/:id", s.handler.Delete)
+	api.Get("/:id", s.handler.GetById)
+	api.Get("/", s.handler.List)
+	api.Get("/user/:userId", s.handler.GetByUserId)
 }
 func (s *AppState) Stop() error {
 	err := s.fiberApp.Shutdown()

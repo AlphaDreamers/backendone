@@ -1,12 +1,14 @@
 package auth
 
 import (
+	"context"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/google/uuid"
 	"io"
 	"mime/multipart"
 	"strings"
@@ -59,7 +61,26 @@ func (a AuthConcrete) SignUp(req *model.UserSignUpRequest) error {
 			},
 		},
 	}
-
+	modelInDB := &model.User{
+		ID:                uuid.New(),
+		FirstName:         req.FirstName,
+		LastName:          req.LastName,
+		Email:             req.Email,
+		Password:          req.Password,
+		TwoFactorVerified: false,
+		Username:          "",
+		Avatar:            nil,
+		Country:           req.Country,
+		WalletCreated:     false,
+	}
+	err := a.repo.SignUp(modelInDB)
+	if err != nil {
+		a.log.WithFields(logrus.Fields{
+			"email": req.Email,
+			"error": err.Error(),
+		}).Error("Sign up failed")
+		return err
+	}
 	up, err := a.cognitoClient.SignUp(a.ctx, input)
 	if err != nil {
 		a.log.WithFields(logrus.Fields{
@@ -100,7 +121,6 @@ func (a AuthConcrete) SignIn(req *model.UserSignInReq) (*model.UserData, *cognit
 		}).Error("Sign in failed")
 		return nil, nil, fmt.Errorf("sign in failed: %w", err)
 	}
-
 	userdataDecode, err := a.DecodeIdToken(*resp.AuthenticationResult.IdToken)
 	if err != nil {
 		a.log.WithFields(logrus.Fields{
@@ -109,6 +129,11 @@ func (a AuthConcrete) SignIn(req *model.UserSignInReq) (*model.UserData, *cognit
 		}).Error("Failed to decode ID token")
 		return nil, nil, fmt.Errorf("token decode failed: %w", err)
 	}
+
+	//status, err := a.repo.GetKYCVerifiedStatus(email)
+	//if err != nil {
+	//	return nil, nil, err
+	//}
 
 	a.log.WithFields(logrus.Fields{
 		"email": req.Email,
@@ -137,7 +162,12 @@ func (a AuthConcrete) Confirm(req *model.EmailVerificationRequest) error {
 		}).Error("Email confirmation failed")
 		return fmt.Errorf("confirmation failed: %w", err)
 	}
-
+	if err := a.repo.UpdateAccountVerificationStatus(req.Email); err != nil {
+		a.log.WithFields(logrus.Fields{
+			"email": req.Email,
+		}).Error(err.Error())
+		return fmt.Errorf("email verification update in local failed: %w", err)
+	}
 	a.log.WithFields(logrus.Fields{
 		"email": req.Email,
 	}).Info("Email confirmed successfully")
@@ -277,7 +307,7 @@ func (a AuthConcrete) Logout(accessToken string) error {
 	return nil
 }
 
-func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader) (bool, error) {
+func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader, email string) (bool, error) {
 	if len(files) != 2 {
 		a.log.WithField("file_count", len(files)).Error("Invalid number of files for KYC")
 		return false, errors.New("exactly 2 files required (ID and selfie)")
@@ -297,7 +327,6 @@ func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader) (bool, erro
 		return false, fmt.Errorf("failed to read ID file: %w", err)
 	}
 
-	// Process selfie file
 	selfieFile, err := files[1].Open()
 	if err != nil {
 		a.log.WithError(err).Error("Failed to open selfie file")
@@ -311,7 +340,6 @@ func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader) (bool, erro
 		return false, fmt.Errorf("failed to read selfie file: %w", err)
 	}
 
-	// Process ID with Textract
 	_, err = a.TextractClientProcessor(idBytes)
 	if err != nil {
 		a.log.WithError(err).Error("ID analysis failed")
@@ -347,7 +375,12 @@ func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader) (bool, erro
 
 	similarity := compareResult.FaceMatches[0].Similarity
 	a.log.WithField("similarity", *similarity).Info("Face comparison result")
-
+	if *similarity >= 70 {
+		err := a.repo.UpdateTheKYCVerificationStatus(email)
+		if err != nil {
+			a.log.WithError(err).Error("Failed to update KYC verification status")
+		}
+	}
 	return *similarity >= 70, nil
 }
 
@@ -451,4 +484,35 @@ func (a AuthConcrete) CompareFaces(src, target []byte) (*rekognition.CompareFace
 
 	a.log.WithField("matches", len(result.FaceMatches)).Debug("Face comparison completed")
 	return result, nil
+}
+func (a AuthConcrete) RefreshAccessToken(client cognitoidentityprovider.Client, refreshToken string) (*cognitoidentityprovider.InitiateAuthOutput, error) {
+	input := &cognitoidentityprovider.InitiateAuthInput{
+		AuthFlow: types.AuthFlowTypeRefreshTokenAuth,
+		ClientId: aws.String(a.v.GetString("client_id")),
+		AuthParameters: map[string]string{
+			"REFRESH_TOKEN": refreshToken,
+		},
+	}
+
+	if clientSecret := a.v.GetString("client_secret"); clientSecret != "" {
+		secretHash := computeSecretHash(
+			a.v.GetString("client_id"),
+			a.v.GetString("client_secret"),
+			a.v.GetString("username"),
+		)
+		input.AuthParameters["SECRET_HASH"] = secretHash
+	}
+
+	result, err := client.InitiateAuth(context.Background(), input)
+	if err != nil {
+		return nil, fmt.Errorf("failed to refresh token: %w", err)
+	}
+
+	return result, nil
+}
+
+func computeSecretHash(clientID, clientSecret, username string) string {
+	mac := hmac.New(sha256.New, []byte(clientSecret))
+	mac.Write([]byte(username + clientID))
+	return base64.StdEncoding.EncodeToString(mac.Sum(nil))
 }

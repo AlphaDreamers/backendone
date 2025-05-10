@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/MicahParks/keyfunc"
-	"github.com/SwanHtetAungPhyo/authCognito/internal/model"
+	"github.com/SwanHtetAungPhyo/gis/internal/model"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	"log"

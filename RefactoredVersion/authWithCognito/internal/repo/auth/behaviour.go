@@ -6,7 +6,7 @@ import (
 )
 
 var RepoModule = fx.Module("repo_module", fx.Provide(
-	NewAuthRepositry,
+	NewAuthRepository,
 ))
 
 type RepoBehaviour interface {

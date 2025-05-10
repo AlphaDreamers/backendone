@@ -1,0 +1,2979 @@
+{
+	"AnalyzeIDModelVersion": "1.0",
+	"DocumentMetadata": {
+		"Pages": 1
+	},
+	"IdentityDocuments": [
+		{
+			"Blocks": [
+				{
+					"BlockType": "PAGE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": null,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.984626,
+							"Left": 0,
+							"Top": 0.015373987,
+							"Width": 1
+						},
+						"Polygon": [
+							{
+								"X": 0,
+								"Y": 0.02285536
+							},
+							{
+								"X": 1,
+								"Y": 0.015373987
+							},
+							{
+								"X": 0.9970979,
+								"Y": 1
+							},
+							{
+								"X": 0,
+								"Y": 0.951085
+							}
+						]
+					},
+					"Id": "1b450305-47ee-404f-801d-2b70ae1d456a",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"633703d6-95c4-48d8-aee1-74aa315df615",
+								"4cc1265c-1e0a-4af4-9813-b31d71228949",
+								"f733bc59-9390-4790-91f8-ed1cf3392d36",
+								"4fa72032-6290-4bfb-9a38-df91a6aa5686",
+								"1bdf9e76-b507-4b18-81db-9dd76c1424a8",
+								"8456f9c4-68fd-4c2b-baf0-3e7787b6e74a",
+								"d264964b-24a1-4c0b-838d-198cb407458e",
+								"cf9b6bd4-ab90-49aa-b17e-9775510dfe46",
+								"ae3258b4-7d89-4659-9186-71645ad1d671",
+								"84963e88-5a3a-4e4d-b536-dd74f6bb49de",
+								"8ed31dea-3d0f-4380-9d71-ad7f408b530e",
+								"e0628d65-98e1-4223-8f5f-88ba07f220e3",
+								"156fb6cd-d219-485c-84f4-c4a2113ae6a0",
+								"e1e7478a-a564-43ea-989c-176be13e617c",
+								"02820032-3991-4f3e-b88b-08a1382df51e",
+								"fa192710-6a1d-415d-b05d-149ef6e99e2d",
+								"d11b402d-3f37-4f9c-89a4-f1c0dbf2bf46",
+								"ca62e099-3815-4c4c-a2ce-c30d96f48a4a",
+								"76bc1ace-4aea-4cf1-8c17-3f5b2a5cbdb8",
+								"82817ff7-cf3f-474c-ba96-e702db168061",
+								"4d7558ee-e637-41ec-9795-d40917198d7e"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": null,
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.212265,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.061056048,
+							"Left": 0.6806533,
+							"Top": 0.08915262,
+							"Width": 0.25661653
+						},
+						"Polygon": [
+							{
+								"X": 0.68104106,
+								"Y": 0.089963056
+							},
+							{
+								"X": 0.9372698,
+								"Y": 0.08915262
+							},
+							{
+								"X": 0.93695116,
+								"Y": 0.15020867
+							},
+							{
+								"X": 0.6806533,
+								"Y": 0.1501008
+							}
+						]
+					},
+					"Id": "633703d6-95c4-48d8-aee1-74aa315df615",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"9db9acab-48dc-4df4-a6f0-b9f21a9cb330"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 78.3777,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.039785128,
+							"Left": 0.30780387,
+							"Top": 0.12914087,
+							"Width": 0.3380443
+						},
+						"Polygon": [
+							{
+								"X": 0.30812487,
+								"Y": 0.12942116
+							},
+							{
+								"X": 0.64584816,
+								"Y": 0.12914087
+							},
+							{
+								"X": 0.64558494,
+								"Y": 0.168926
+							},
+							{
+								"X": 0.30780387,
+								"Y": 0.16840379
+							}
+						]
+					},
+					"Id": "4cc1265c-1e0a-4af4-9813-b31d71228949",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"827ff22c-d724-4854-b069-6f0f8d3cafeb",
+								"9834e52a-9e0b-4c1f-aa9c-1594c4a32e4f"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Akademia Gorniczo-Hutnicza",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 95.76341,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.027823027,
+							"Left": 0.038171858,
+							"Top": 0.19052674,
+							"Width": 0.20019059
+						},
+						"Polygon": [
+							{
+								"X": 0.038428087,
+								"Y": 0.19052674
+							},
+							{
+								"X": 0.23836245,
+								"Y": 0.19111508
+							},
+							{
+								"X": 0.23812914,
+								"Y": 0.21834977
+							},
+							{
+								"X": 0.038171858,
+								"Y": 0.21742801
+							}
+						]
+					},
+					"Id": "f733bc59-9390-4790-91f8-ed1cf3392d36",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"74048f84-ef3b-4f98-bbb4-ccd0f22615b3"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "RZECZPOSPOLITA",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.52316,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.040114757,
+							"Left": 0.37113756,
+							"Top": 0.18036854,
+							"Width": 0.27424467
+						},
+						"Polygon": [
+							{
+								"X": 0.3714456,
+								"Y": 0.18036854
+							},
+							{
+								"X": 0.6453822,
+								"Y": 0.1809894
+							},
+							{
+								"X": 0.6451209,
+								"Y": 0.22048329
+							},
+							{
+								"X": 0.37113756,
+								"Y": 0.2192161
+							}
+						]
+					},
+					"Id": "4fa72032-6290-4bfb-9a38-df91a6aa5686",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"f6546828-4670-42e6-93af-0f070f11704b",
+								"214926d5-bc35-4e34-96d5-4321ab3d47ed",
+								"9e7ba70b-e521-46e2-9da2-ee7ec922f224"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "im. Stanislawa Staszica",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.72674,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.062044185,
+							"Left": 0.68076485,
+							"Top": 0.15872172,
+							"Width": 0.25422713
+						},
+						"Polygon": [
+							{
+								"X": 0.6811573,
+								"Y": 0.15872172
+							},
+							{
+								"X": 0.934992,
+								"Y": 0.15895896
+							},
+							{
+								"X": 0.93466884,
+								"Y": 0.2207659
+							},
+							{
+								"X": 0.68076485,
+								"Y": 0.21960731
+							}
+						]
+					},
+					"Id": "1bdf9e76-b507-4b18-81db-9dd76c1424a8",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"12838b9b-aef0-4a23-96d6-100d27ea2926"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.839165,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.026428867,
+							"Left": 0.09171964,
+							"Top": 0.22489783,
+							"Width": 0.09051176
+						},
+						"Polygon": [
+							{
+								"X": 0.091958985,
+								"Y": 0.22489783
+							},
+							{
+								"X": 0.1822314,
+								"Y": 0.22535422
+							},
+							{
+								"X": 0.18200196,
+								"Y": 0.25132668
+							},
+							{
+								"X": 0.09171964,
+								"Y": 0.25072622
+							}
+						]
+					},
+					"Id": "8456f9c4-68fd-4c2b-baf0-3e7787b6e74a",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"9403bf90-5e7d-4792-a955-47a9a7fa42d5"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "POLSKA",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.93133,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.037923258,
+							"Left": 0.5066986,
+							"Top": 0.23349963,
+							"Width": 0.13693526
+						},
+						"Polygon": [
+							{
+								"X": 0.506967,
+								"Y": 0.23349963
+							},
+							{
+								"X": 0.6436339,
+								"Y": 0.23424412
+							},
+							{
+								"X": 0.6433877,
+								"Y": 0.2714229
+							},
+							{
+								"X": 0.5066986,
+								"Y": 0.27037475
+							}
+						]
+					},
+					"Id": "d264964b-24a1-4c0b-838d-198cb407458e",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"25c42c4a-a6f4-4841-b5d5-45178de876b2",
+								"bb49a1e5-6f49-4b8b-83f1-45ec581e3d42"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "W Krakowie",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.92669,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.051103476,
+							"Left": 0.67919815,
+							"Top": 0.24783698,
+							"Width": 0.25645107
+						},
+						"Polygon": [
+							{
+								"X": 0.6795126,
+								"Y": 0.24783698
+							},
+							{
+								"X": 0.9356492,
+								"Y": 0.24943678
+							},
+							{
+								"X": 0.93539065,
+								"Y": 0.29894045
+							},
+							{
+								"X": 0.67919815,
+								"Y": 0.29659578
+							}
+						]
+					},
+					"Id": "cf9b6bd4-ab90-49aa-b17e-9775510dfe46",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"d3a87f03-ee8e-4f23-9ae8-66ec6d84efdd",
+								"e456e0a8-5b92-4617-9446-bb900730cde5"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENT CARD",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.43587,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.044324085,
+							"Left": 0.3851079,
+							"Top": 0.4527227,
+							"Width": 0.1289968
+						},
+						"Polygon": [
+							{
+								"X": 0.3854344,
+								"Y": 0.4527227
+							},
+							{
+								"X": 0.5141047,
+								"Y": 0.4551399
+							},
+							{
+								"X": 0.51380146,
+								"Y": 0.49704677
+							},
+							{
+								"X": 0.3851079,
+								"Y": 0.49430445
+							}
+						]
+					},
+					"Id": "ae3258b4-7d89-4659-9186-71645ad1d671",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"506506f9-5679-42b0-84f8-c9d3b7aea978",
+								"d80745a2-e37d-4480-8c13-ce7a019ae966"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Swan Htet",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.78335,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.05518986,
+							"Left": 0.38101423,
+							"Top": 0.52395236,
+							"Width": 0.13524674
+						},
+						"Polygon": [
+							{
+								"X": 0.3814206,
+								"Y": 0.52395236
+							},
+							{
+								"X": 0.516261,
+								"Y": 0.5270689
+							},
+							{
+								"X": 0.5158848,
+								"Y": 0.5791422
+							},
+							{
+								"X": 0.38101423,
+								"Y": 0.57560223
+							}
+						]
+					},
+					"Id": "84963e88-5a3a-4e4d-b536-dd74f6bb49de",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"42cb72e3-3240-40a9-9e77-a38a3d1ea746",
+								"d54b1e42-e9ef-43ee-8706-f8f3187d733a"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Aung Phyo",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 34.39436,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.028794106,
+							"Left": 0.59496903,
+							"Top": 0.5196789,
+							"Width": 0.0475497
+						},
+						"Polygon": [
+							{
+								"X": 0.5951583,
+								"Y": 0.5196789
+							},
+							{
+								"X": 0.64251876,
+								"Y": 0.52074736
+							},
+							{
+								"X": 0.64233524,
+								"Y": 0.548473
+							},
+							{
+								"X": 0.59496903,
+								"Y": 0.5473259
+							}
+						]
+					},
+					"Id": "8ed31dea-3d0f-4380-9d71-ad7f408b530e",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"01d08299-9618-4593-a505-b15862b22541"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0001",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 80.84263,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.028325446,
+							"Left": 0.59384155,
+							"Top": 0.556773,
+							"Width": 0.049146246
+						},
+						"Polygon": [
+							{
+								"X": 0.59402674,
+								"Y": 0.556773
+							},
+							{
+								"X": 0.6429878,
+								"Y": 0.5579865
+							},
+							{
+								"X": 0.64280844,
+								"Y": 0.5850985
+							},
+							{
+								"X": 0.59384155,
+								"Y": 0.58380556
+							}
+						]
+					},
+					"Id": "e0628d65-98e1-4223-8f5f-88ba07f220e3",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"ec583211-2cff-4877-9a05-0af46ce07ae0"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0100",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.420746,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04733176,
+							"Left": 0.035953432,
+							"Top": 0.6473434,
+							"Width": 0.09242067
+						},
+						"Polygon": [
+							{
+								"X": 0.03637398,
+								"Y": 0.6473434
+							},
+							{
+								"X": 0.1283741,
+								"Y": 0.6502188
+							},
+							{
+								"X": 0.12797071,
+								"Y": 0.69467515
+							},
+							{
+								"X": 0.035953432,
+								"Y": 0.6915471
+							}
+						]
+					},
+					"Id": "156fb6cd-d219-485c-84f4-c4a2113ae6a0",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"b5b8c324-fe29-4758-888b-582537496164"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Wydana:",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 97.254875,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04096954,
+							"Left": 0.14105797,
+							"Top": 0.6664757,
+							"Width": 0.117934264
+						},
+						"Polygon": [
+							{
+								"X": 0.14139058,
+								"Y": 0.6664757
+							},
+							{
+								"X": 0.25899222,
+								"Y": 0.670266
+							},
+							{
+								"X": 0.25867814,
+								"Y": 0.70744526
+							},
+							{
+								"X": 0.14105797,
+								"Y": 0.70338696
+							}
+						]
+					},
+					"Id": "e1e7478a-a564-43ea-989c-176be13e617c",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"5d320c25-bb5a-4716-99db-9674d3a5f7c3"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "2022-10-01",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 28.85789,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.03132311,
+							"Left": 0.5954378,
+							"Top": 0.66932875,
+							"Width": 0.046734586
+						},
+						"Polygon": [
+							{
+								"X": 0.59564143,
+								"Y": 0.66932875
+							},
+							{
+								"X": 0.6421724,
+								"Y": 0.67079556
+							},
+							{
+								"X": 0.64197487,
+								"Y": 0.7006518
+							},
+							{
+								"X": 0.5954378,
+								"Y": 0.6991018
+							}
+						]
+					},
+					"Id": "02820032-3991-4f3e-b88b-08a1382df51e",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"83caa426-fdf9-43cb-8762-2ea2f7155d1d"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "lote",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 94.0386,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.039573286,
+							"Left": 0.012904711,
+							"Top": 0.6965916,
+							"Width": 0.11351758
+						},
+						"Polygon": [
+							{
+								"X": 0.013245678,
+								"Y": 0.6965916
+							},
+							{
+								"X": 0.1264223,
+								"Y": 0.70047987
+							},
+							{
+								"X": 0.12609825,
+								"Y": 0.7361649
+							},
+							{
+								"X": 0.012904711,
+								"Y": 0.73202705
+							}
+						]
+					},
+					"Id": "fa192710-6a1d-415d-b05d-149ef6e99e2d",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"a6fcc535-3e3f-4b3a-a8d5-28f7c9fd83a4",
+								"d5ed363d-e59f-4de8-8e60-7cc7c661d3c3"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Nr albumu:",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 57.77503,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.030745698,
+							"Left": 0.5912015,
+							"Top": 0.7089149,
+							"Width": 0.046821393
+						},
+						"Polygon": [
+							{
+								"X": 0.5914009,
+								"Y": 0.7089149
+							},
+							{
+								"X": 0.6380229,
+								"Y": 0.71049553
+							},
+							{
+								"X": 0.63782936,
+								"Y": 0.7396606
+							},
+							{
+								"X": 0.5912015,
+								"Y": 0.7379985
+							}
+						]
+					},
+					"Id": "d11b402d-3f37-4f9c-89a4-f1c0dbf2bf46",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"9ca22931-2bf3-44d8-b1bc-7e52f2942032"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0101",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.200615,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.040054027,
+							"Left": 0.14182495,
+							"Top": 0.72230047,
+							"Width": 0.07853535
+						},
+						"Polygon": [
+							{
+								"X": 0.1421589,
+								"Y": 0.72230047
+							},
+							{
+								"X": 0.2203603,
+								"Y": 0.7250896
+							},
+							{
+								"X": 0.22003867,
+								"Y": 0.76235455
+							},
+							{
+								"X": 0.14182495,
+								"Y": 0.7593863
+							}
+						]
+					},
+					"Id": "ca62e099-3815-4c4c-a2ce-c30d96f48a4a",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"3b0b8c8a-1140-46be-b2a7-ac914208adb2"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "419225",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.2119,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.039320443,
+							"Left": 0.042827208,
+							"Top": 0.75004065,
+							"Width": 0.08202574
+						},
+						"Polygon": [
+							{
+								"X": 0.04316899,
+								"Y": 0.75004065
+							},
+							{
+								"X": 0.12485294,
+								"Y": 0.7531122
+							},
+							{
+								"X": 0.12452358,
+								"Y": 0.78936106
+							},
+							{
+								"X": 0.042827208,
+								"Y": 0.78610647
+							}
+						]
+					},
+					"Id": "76bc1ace-4aea-4cf1-8c17-3f5b2a5cbdb8",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"0106afbc-0386-4e39-aac6-876a76bb2363"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "PESEL:",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.94778,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04272365,
+							"Left": 0.14074041,
+							"Top": 0.7812496,
+							"Width": 0.14379509
+						},
+						"Polygon": [
+							{
+								"X": 0.14107153,
+								"Y": 0.7812496
+							},
+							{
+								"X": 0.2845355,
+								"Y": 0.78688735
+							},
+							{
+								"X": 0.2842269,
+								"Y": 0.8239732
+							},
+							{
+								"X": 0.14074041,
+								"Y": 0.8180096
+							}
+						]
+					},
+					"Id": "82817ff7-cf3f-474c-ba96-e702db168061",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"71495308-bfd6-4175-8ac0-3309e4f7eb72"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "03261000000",
+					"TextType": ""
+				},
+				{
+					"BlockType": "LINE",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.15704,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.050047405,
+							"Left": 0.000606436,
+							"Top": 0.9111719,
+							"Width": 0.6448262
+						},
+						"Polygon": [
+							{
+								"X": 0.00078580884,
+								"Y": 0.9111719
+							},
+							{
+								"X": 0.6454326,
+								"Y": 0.94192797
+							},
+							{
+								"X": 0.64530545,
+								"Y": 0.9612193
+							},
+							{
+								"X": 0.000606436,
+								"Y": 0.9297178
+							}
+						]
+					},
+					"Id": "4d7558ee-e637-41ec-9795-d40917198d7e",
+					"Page": null,
+					"Query": null,
+					"Relationships": [
+						{
+							"Ids": [
+								"96be5bea-2f1f-4a52-af1a-017d2ca7d50b",
+								"cfae3f06-11a9-4000-82e3-65fc9d544219",
+								"b7fa335d-6b03-4343-a51c-c9681fb15164",
+								"f1e2f084-b2ce-4c72-b786-160d74afca68",
+								"7cd26924-2c80-4ab4-bac7-4c3ea0687ab9",
+								"2678eb0c-5c2e-4e23-b7e6-c9232a528f46",
+								"99510770-f696-4405-90fb-831da0813b10",
+								"e16426e7-d268-47cb-af0a-0b73a1df5abc",
+								"b62561bb-e767-41e1-a9d0-64c9fb14df53",
+								"b1837487-2c58-47e4-86cc-b5565d4c2be0"
+							],
+							"Type": "CHILD"
+						}
+					],
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "MACJA STUDENCKA LEGITYMACJA STUDENCKA LEGITYMACJA STUDENCKA LEGITYMACJA STUDENCKA LEGITYMACJA STUDENCKA",
+					"TextType": ""
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.212265,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.061056048,
+							"Left": 0.6806533,
+							"Top": 0.08915262,
+							"Width": 0.25661653
+						},
+						"Polygon": [
+							{
+								"X": 0.68104106,
+								"Y": 0.089963056
+							},
+							{
+								"X": 0.9372698,
+								"Y": 0.08915262
+							},
+							{
+								"X": 0.93695116,
+								"Y": 0.15020867
+							},
+							{
+								"X": 0.6806533,
+								"Y": 0.1501008
+							}
+						]
+					},
+					"Id": "9db9acab-48dc-4df4-a6f0-b9f21a9cb330",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.85195,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.036771756,
+							"Left": 0.30782416,
+							"Top": 0.12932694,
+							"Width": 0.1138429
+						},
+						"Polygon": [
+							{
+								"X": 0.30812487,
+								"Y": 0.12942116
+							},
+							{
+								"X": 0.42166707,
+								"Y": 0.12932694
+							},
+							{
+								"X": 0.42138427,
+								"Y": 0.16609868
+							},
+							{
+								"X": 0.30782416,
+								"Y": 0.16594018
+							}
+						]
+					},
+					"Id": "827ff22c-d724-4854-b069-6f0f8d3cafeb",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Akademia",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 56.90345,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.039185792,
+							"Left": 0.4310582,
+							"Top": 0.12974021,
+							"Width": 0.21478601
+						},
+						"Polygon": [
+							{
+								"X": 0.4313539,
+								"Y": 0.12991054
+							},
+							{
+								"X": 0.6458442,
+								"Y": 0.12974021
+							},
+							{
+								"X": 0.64558494,
+								"Y": 0.168926
+							},
+							{
+								"X": 0.4310582,
+								"Y": 0.16859435
+							}
+						]
+					},
+					"Id": "9834e52a-9e0b-4c1f-aa9c-1594c4a32e4f",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Gorniczo-Hutnicza",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 95.76341,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.027823027,
+							"Left": 0.038171858,
+							"Top": 0.19052674,
+							"Width": 0.20019059
+						},
+						"Polygon": [
+							{
+								"X": 0.038428087,
+								"Y": 0.19052674
+							},
+							{
+								"X": 0.23836245,
+								"Y": 0.19111508
+							},
+							{
+								"X": 0.23812914,
+								"Y": 0.21834977
+							},
+							{
+								"X": 0.038171858,
+								"Y": 0.21742801
+							}
+						]
+					},
+					"Id": "74048f84-ef3b-4f98-bbb4-ccd0f22615b3",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "RZECZPOSPOLITA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.68,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.037087243,
+							"Left": 0.37115273,
+							"Top": 0.18036854,
+							"Width": 0.034108188
+						},
+						"Polygon": [
+							{
+								"X": 0.3714456,
+								"Y": 0.18036854
+							},
+							{
+								"X": 0.40526092,
+								"Y": 0.18044518
+							},
+							{
+								"X": 0.40497345,
+								"Y": 0.21745577
+							},
+							{
+								"X": 0.37115273,
+								"Y": 0.21730329
+							}
+						]
+					},
+					"Id": "f6546828-4670-42e6-93af-0f070f11704b",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "im.",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.0141,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.038542498,
+							"Left": 0.41322786,
+							"Top": 0.18053548,
+							"Width": 0.12664843
+						},
+						"Polygon": [
+							{
+								"X": 0.41352123,
+								"Y": 0.18053548
+							},
+							{
+								"X": 0.5398763,
+								"Y": 0.1808224
+							},
+							{
+								"X": 0.5396038,
+								"Y": 0.21907797
+							},
+							{
+								"X": 0.41322786,
+								"Y": 0.21850044
+							}
+						]
+					},
+					"Id": "214926d5-bc35-4e34-96d5-4321ab3d47ed",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Stanislawa",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 97.8754,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.037328616,
+							"Left": 0.5469114,
+							"Top": 0.18315467,
+							"Width": 0.098454915
+						},
+						"Polygon": [
+							{
+								"X": 0.5471727,
+								"Y": 0.18315467
+							},
+							{
+								"X": 0.6453663,
+								"Y": 0.18339132
+							},
+							{
+								"X": 0.6451209,
+								"Y": 0.22048329
+							},
+							{
+								"X": 0.5469114,
+								"Y": 0.22002906
+							}
+						]
+					},
+					"Id": "9e7ba70b-e521-46e2-9da2-ee7ec922f224",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Staszica",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.72674,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.062044185,
+							"Left": 0.68076485,
+							"Top": 0.15872172,
+							"Width": 0.25422713
+						},
+						"Polygon": [
+							{
+								"X": 0.6811573,
+								"Y": 0.15872172
+							},
+							{
+								"X": 0.934992,
+								"Y": 0.15895896
+							},
+							{
+								"X": 0.93466884,
+								"Y": 0.2207659
+							},
+							{
+								"X": 0.68076485,
+								"Y": 0.21960731
+							}
+						]
+					},
+					"Id": "12838b9b-aef0-4a23-96d6-100d27ea2926",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.839165,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.026428867,
+							"Left": 0.09171964,
+							"Top": 0.22489783,
+							"Width": 0.09051176
+						},
+						"Polygon": [
+							{
+								"X": 0.091958985,
+								"Y": 0.22489783
+							},
+							{
+								"X": 0.1822314,
+								"Y": 0.22535422
+							},
+							{
+								"X": 0.18200196,
+								"Y": 0.25132668
+							},
+							{
+								"X": 0.09171964,
+								"Y": 0.25072622
+							}
+						]
+					},
+					"Id": "9403bf90-5e7d-4792-a955-47a9a7fa42d5",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "POLSKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.12686,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.029358169,
+							"Left": 0.5067036,
+							"Top": 0.24049833,
+							"Width": 0.021952776
+						},
+						"Polygon": [
+							{
+								"X": 0.50691605,
+								"Y": 0.24049833
+							},
+							{
+								"X": 0.52865636,
+								"Y": 0.24062593
+							},
+							{
+								"X": 0.5284467,
+								"Y": 0.2698565
+							},
+							{
+								"X": 0.5067036,
+								"Y": 0.26969066
+							}
+						]
+					},
+					"Id": "25c42c4a-a6f4-4841-b5d5-45178de876b2",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "W",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.7358,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.037765775,
+							"Left": 0.53561246,
+							"Top": 0.23365712,
+							"Width": 0.1080214
+						},
+						"Polygon": [
+							{
+								"X": 0.5358762,
+								"Y": 0.23365712
+							},
+							{
+								"X": 0.6436339,
+								"Y": 0.23424412
+							},
+							{
+								"X": 0.6433877,
+								"Y": 0.2714229
+							},
+							{
+								"X": 0.53561246,
+								"Y": 0.27059647
+							}
+						]
+					},
+					"Id": "bb49a1e5-6f49-4b8b-83f1-45ec581e3d42",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Krakowie",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.9094,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04939905,
+							"Left": 0.6792028,
+							"Top": 0.24783698,
+							"Width": 0.15035896
+						},
+						"Polygon": [
+							{
+								"X": 0.6795126,
+								"Y": 0.24783698
+							},
+							{
+								"X": 0.82956177,
+								"Y": 0.24877417
+							},
+							{
+								"X": 0.829284,
+								"Y": 0.29723603
+							},
+							{
+								"X": 0.6792028,
+								"Y": 0.295869
+							}
+						]
+					},
+					"Id": "d3a87f03-ee8e-4f23-9ae8-66ec6d84efdd",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENT",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.94398,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04942664,
+							"Left": 0.8462469,
+							"Top": 0.24951382,
+							"Width": 0.089398995
+						},
+						"Polygon": [
+							{
+								"X": 0.84652156,
+								"Y": 0.24951382
+							},
+							{
+								"X": 0.9356459,
+								"Y": 0.25007382
+							},
+							{
+								"X": 0.93539065,
+								"Y": 0.29894045
+							},
+							{
+								"X": 0.8462469,
+								"Y": 0.2981246
+							}
+						]
+					},
+					"Id": "e456e0a8-5b92-4617-9446-bb900730cde5",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "CARD",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.96919,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.042518206,
+							"Left": 0.38511196,
+							"Top": 0.4527227,
+							"Width": 0.06853759
+						},
+						"Polygon": [
+							{
+								"X": 0.3854344,
+								"Y": 0.4527227
+							},
+							{
+								"X": 0.45364955,
+								"Y": 0.4540042
+							},
+							{
+								"X": 0.45333922,
+								"Y": 0.4952409
+							},
+							{
+								"X": 0.38511196,
+								"Y": 0.49378917
+							}
+						]
+					},
+					"Id": "506506f9-5679-42b0-84f8-c9d3b7aea978",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Swan",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.90255,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.042219482,
+							"Left": 0.4617674,
+							"Top": 0.4548273,
+							"Width": 0.05233247
+						},
+						"Polygon": [
+							{
+								"X": 0.4620751,
+								"Y": 0.4548273
+							},
+							{
+								"X": 0.5140999,
+								"Y": 0.45580673
+							},
+							{
+								"X": 0.51380146,
+								"Y": 0.49704677
+							},
+							{
+								"X": 0.4617674,
+								"Y": 0.49593797
+							}
+						]
+					},
+					"Id": "d80745a2-e37d-4480-8c13-ce7a019ae966",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Htet",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.70901,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.05227824,
+							"Left": 0.3810224,
+							"Top": 0.52395236,
+							"Width": 0.06408429
+						},
+						"Polygon": [
+							{
+								"X": 0.3814206,
+								"Y": 0.52395236
+							},
+							{
+								"X": 0.4451067,
+								"Y": 0.52542436
+							},
+							{
+								"X": 0.4447224,
+								"Y": 0.57623065
+							},
+							{
+								"X": 0.3810224,
+								"Y": 0.57456267
+							}
+						]
+					},
+					"Id": "42cb72e3-3240-40a9-9e77-a38a3d1ea746",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Aung",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.85768,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.05327322,
+							"Left": 0.45406818,
+							"Top": 0.525869,
+							"Width": 0.06219113
+						},
+						"Polygon": [
+							{
+								"X": 0.45445654,
+								"Y": 0.525869
+							},
+							{
+								"X": 0.5162593,
+								"Y": 0.5272983
+							},
+							{
+								"X": 0.5158848,
+								"Y": 0.5791422
+							},
+							{
+								"X": 0.45406818,
+								"Y": 0.5775197
+							}
+						]
+					},
+					"Id": "d54b1e42-e9ef-43ee-8706-f8f3187d733a",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Phyo",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 34.39436,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.028794106,
+							"Left": 0.59496903,
+							"Top": 0.5196789,
+							"Width": 0.0475497
+						},
+						"Polygon": [
+							{
+								"X": 0.5951583,
+								"Y": 0.5196789
+							},
+							{
+								"X": 0.64251876,
+								"Y": 0.52074736
+							},
+							{
+								"X": 0.64233524,
+								"Y": 0.548473
+							},
+							{
+								"X": 0.59496903,
+								"Y": 0.5473259
+							}
+						]
+					},
+					"Id": "01d08299-9618-4593-a505-b15862b22541",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0001",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 80.84263,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.028325446,
+							"Left": 0.59384155,
+							"Top": 0.556773,
+							"Width": 0.049146246
+						},
+						"Polygon": [
+							{
+								"X": 0.59402674,
+								"Y": 0.556773
+							},
+							{
+								"X": 0.6429878,
+								"Y": 0.5579865
+							},
+							{
+								"X": 0.64280844,
+								"Y": 0.5850985
+							},
+							{
+								"X": 0.59384155,
+								"Y": 0.58380556
+							}
+						]
+					},
+					"Id": "ec583211-2cff-4877-9a05-0af46ce07ae0",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0100",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.420746,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04733176,
+							"Left": 0.035953432,
+							"Top": 0.6473434,
+							"Width": 0.09242067
+						},
+						"Polygon": [
+							{
+								"X": 0.03637398,
+								"Y": 0.6473434
+							},
+							{
+								"X": 0.1283741,
+								"Y": 0.6502188
+							},
+							{
+								"X": 0.12797071,
+								"Y": 0.69467515
+							},
+							{
+								"X": 0.035953432,
+								"Y": 0.6915471
+							}
+						]
+					},
+					"Id": "b5b8c324-fe29-4758-888b-582537496164",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Wydana:",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 97.254875,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04096954,
+							"Left": 0.14105797,
+							"Top": 0.6664757,
+							"Width": 0.117934264
+						},
+						"Polygon": [
+							{
+								"X": 0.14139058,
+								"Y": 0.6664757
+							},
+							{
+								"X": 0.25899222,
+								"Y": 0.670266
+							},
+							{
+								"X": 0.25867814,
+								"Y": 0.70744526
+							},
+							{
+								"X": 0.14105797,
+								"Y": 0.70338696
+							}
+						]
+					},
+					"Id": "5d320c25-bb5a-4716-99db-9674d3a5f7c3",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "2022-10-01",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 28.85789,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.03132311,
+							"Left": 0.5954378,
+							"Top": 0.66932875,
+							"Width": 0.046734586
+						},
+						"Polygon": [
+							{
+								"X": 0.59564143,
+								"Y": 0.66932875
+							},
+							{
+								"X": 0.6421724,
+								"Y": 0.67079556
+							},
+							{
+								"X": 0.64197487,
+								"Y": 0.7006518
+							},
+							{
+								"X": 0.5954378,
+								"Y": 0.6991018
+							}
+						]
+					},
+					"Id": "83caa426-fdf9-43cb-8762-2ea2f7155d1d",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "lote",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 90.1824,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.03515582,
+							"Left": 0.01291624,
+							"Top": 0.6965916,
+							"Width": 0.025504785
+						},
+						"Polygon": [
+							{
+								"X": 0.013245678,
+								"Y": 0.6965916
+							},
+							{
+								"X": 0.038421024,
+								"Y": 0.69745654
+							},
+							{
+								"X": 0.0380952,
+								"Y": 0.73174745
+							},
+							{
+								"X": 0.01291624,
+								"Y": 0.7308289
+							}
+						]
+					},
+					"Id": "a6fcc535-3e3f-4b3a-a8d5-28f7c9fd83a4",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "Nr",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 97.89479,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.037982017,
+							"Left": 0.04364824,
+							"Top": 0.6981829,
+							"Width": 0.08276917
+						},
+						"Polygon": [
+							{
+								"X": 0.043979567,
+								"Y": 0.6981829
+							},
+							{
+								"X": 0.12641741,
+								"Y": 0.7010178
+							},
+							{
+								"X": 0.12609825,
+								"Y": 0.7361649
+							},
+							{
+								"X": 0.04364824,
+								"Y": 0.7331509
+							}
+						]
+					},
+					"Id": "d5ed363d-e59f-4de8-8e60-7cc7c661d3c3",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "albumu:",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 57.77503,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.030745698,
+							"Left": 0.5912015,
+							"Top": 0.7089149,
+							"Width": 0.046821393
+						},
+						"Polygon": [
+							{
+								"X": 0.5914009,
+								"Y": 0.7089149
+							},
+							{
+								"X": 0.6380229,
+								"Y": 0.71049553
+							},
+							{
+								"X": 0.63782936,
+								"Y": 0.7396606
+							},
+							{
+								"X": 0.5912015,
+								"Y": 0.7379985
+							}
+						]
+					},
+					"Id": "9ca22931-2bf3-44d8-b1bc-7e52f2942032",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "0101",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.200615,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.040054027,
+							"Left": 0.14182495,
+							"Top": 0.72230047,
+							"Width": 0.07853535
+						},
+						"Polygon": [
+							{
+								"X": 0.1421589,
+								"Y": 0.72230047
+							},
+							{
+								"X": 0.2203603,
+								"Y": 0.7250896
+							},
+							{
+								"X": 0.22003867,
+								"Y": 0.76235455
+							},
+							{
+								"X": 0.14182495,
+								"Y": 0.7593863
+							}
+						]
+					},
+					"Id": "3b0b8c8a-1140-46be-b2a7-ac914208adb2",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "419225",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.2119,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.039320443,
+							"Left": 0.042827208,
+							"Top": 0.75004065,
+							"Width": 0.08202574
+						},
+						"Polygon": [
+							{
+								"X": 0.04316899,
+								"Y": 0.75004065
+							},
+							{
+								"X": 0.12485294,
+								"Y": 0.7531122
+							},
+							{
+								"X": 0.12452358,
+								"Y": 0.78936106
+							},
+							{
+								"X": 0.042827208,
+								"Y": 0.78610647
+							}
+						]
+					},
+					"Id": "0106afbc-0386-4e39-aac6-876a76bb2363",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "PESEL:",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.94778,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.04272365,
+							"Left": 0.14074041,
+							"Top": 0.7812496,
+							"Width": 0.14379509
+						},
+						"Polygon": [
+							{
+								"X": 0.14107153,
+								"Y": 0.7812496
+							},
+							{
+								"X": 0.2845355,
+								"Y": 0.78688735
+							},
+							{
+								"X": 0.2842269,
+								"Y": 0.8239732
+							},
+							{
+								"X": 0.14074041,
+								"Y": 0.8180096
+							}
+						]
+					},
+					"Id": "71495308-bfd6-4175-8ac0-3309e4f7eb72",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "03261000000",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 89.849174,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.013711973,
+							"Left": 0.00066632876,
+							"Top": 0.9113076,
+							"Width": 0.03093956
+						},
+						"Polygon": [
+							{
+								"X": 0.0007844969,
+								"Y": 0.9113076
+							},
+							{
+								"X": 0.03160589,
+								"Y": 0.9127783
+							},
+							{
+								"X": 0.031489298,
+								"Y": 0.92501956
+							},
+							{
+								"X": 0.00066632876,
+								"Y": 0.92352533
+							}
+						]
+					},
+					"Id": "96be5bea-2f1f-4a52-af1a-017d2ca7d50b",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "MACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.2836,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.015975075,
+							"Left": 0.034069784,
+							"Top": 0.9127659,
+							"Width": 0.056827303
+						},
+						"Polygon": [
+							{
+								"X": 0.034195565,
+								"Y": 0.9127659
+							},
+							{
+								"X": 0.09089709,
+								"Y": 0.91547114
+							},
+							{
+								"X": 0.090774454,
+								"Y": 0.928741
+							},
+							{
+								"X": 0.034069784,
+								"Y": 0.9259891
+							}
+						]
+					},
+					"Id": "cfae3f06-11a9-4000-82e3-65fc9d544219",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.29203,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.016467249,
+							"Left": 0.09795286,
+							"Top": 0.91717887,
+							"Width": 0.06430323
+						},
+						"Polygon": [
+							{
+								"X": 0.09807574,
+								"Y": 0.91717887
+							},
+							{
+								"X": 0.16225609,
+								"Y": 0.9202463
+							},
+							{
+								"X": 0.16213682,
+								"Y": 0.9336461
+							},
+							{
+								"X": 0.09795286,
+								"Y": 0.93052554
+							}
+						]
+					},
+					"Id": "b7fa335d-6b03-4343-a51c-c9681fb15164",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.61435,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.016275415,
+							"Left": 0.16610488,
+							"Top": 0.92099035,
+							"Width": 0.057494737
+						},
+						"Polygon": [
+							{
+								"X": 0.16622463,
+								"Y": 0.92099035
+							},
+							{
+								"X": 0.22359961,
+								"Y": 0.9237345
+							},
+							{
+								"X": 0.22348316,
+								"Y": 0.93726575
+							},
+							{
+								"X": 0.16610488,
+								"Y": 0.9344739
+							}
+						]
+					},
+					"Id": "f1e2f084-b2ce-4c72-b786-160d74afca68",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.82149,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.016494446,
+							"Left": 0.23369256,
+							"Top": 0.9245939,
+							"Width": 0.06581634
+						},
+						"Polygon": [
+							{
+								"X": 0.23380636,
+								"Y": 0.9245939
+							},
+							{
+								"X": 0.2995089,
+								"Y": 0.9277379
+							},
+							{
+								"X": 0.29939884,
+								"Y": 0.9410884
+							},
+							{
+								"X": 0.23369256,
+								"Y": 0.93789077
+							}
+						]
+					},
+					"Id": "7cd26924-2c80-4ab4-bac7-4c3ea0687ab9",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.37435,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.016348423,
+							"Left": 0.30330727,
+							"Top": 0.9280411,
+							"Width": 0.058604054
+						},
+						"Polygon": [
+							{
+								"X": 0.30341834,
+								"Y": 0.9280411
+							},
+							{
+								"X": 0.36191133,
+								"Y": 0.9308405
+							},
+							{
+								"X": 0.36180365,
+								"Y": 0.9443895
+							},
+							{
+								"X": 0.30330727,
+								"Y": 0.94154185
+							}
+						]
+					},
+					"Id": "2678eb0c-5c2e-4e23-b7e6-c9232a528f46",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.124306,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.017308272,
+							"Left": 0.37214416,
+							"Top": 0.93125474,
+							"Width": 0.06751834
+						},
+						"Polygon": [
+							{
+								"X": 0.3722549,
+								"Y": 0.93125474
+							},
+							{
+								"X": 0.43966252,
+								"Y": 0.9344804
+							},
+							{
+								"X": 0.43955582,
+								"Y": 0.948563
+							},
+							{
+								"X": 0.37214416,
+								"Y": 0.9452797
+							}
+						]
+					},
+					"Id": "99510770-f696-4405-90fb-831da0813b10",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.36125,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.017369699,
+							"Left": 0.4427305,
+							"Top": 0.9348528,
+							"Width": 0.059624236
+						},
+						"Polygon": [
+							{
+								"X": 0.44283986,
+								"Y": 0.9348528
+							},
+							{
+								"X": 0.50235474,
+								"Y": 0.9377015
+							},
+							{
+								"X": 0.50224906,
+								"Y": 0.95222247
+							},
+							{
+								"X": 0.4427305,
+								"Y": 0.94932145
+							}
+						]
+					},
+					"Id": "e16426e7-d268-47cb-af0a-0b73a1df5abc",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 98.56571,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.017939012,
+							"Left": 0.51276094,
+							"Top": 0.9388382,
+							"Width": 0.06825909
+						},
+						"Polygon": [
+							{
+								"X": 0.5128665,
+								"Y": 0.9388382
+							},
+							{
+								"X": 0.58102,
+								"Y": 0.9421031
+							},
+							{
+								"X": 0.5809188,
+								"Y": 0.9567772
+							},
+							{
+								"X": 0.51276094,
+								"Y": 0.95345217
+							}
+						]
+					},
+					"Id": "b62561bb-e767-41e1-a9d0-64c9fb14df53",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "LEGITYMACJA",
+					"TextType": "PRINTED"
+				},
+				{
+					"BlockType": "WORD",
+					"ColumnIndex": null,
+					"ColumnSpan": null,
+					"Confidence": 99.28417,
+					"EntityTypes": null,
+					"Geometry": {
+						"BoundingBox": {
+							"Height": 0.018442897,
+							"Left": 0.584265,
+							"Top": 0.94277644,
+							"Width": 0.061142694
+						},
+						"Polygon": [
+							{
+								"X": 0.58437145,
+								"Y": 0.94277644
+							},
+							{
+								"X": 0.64540774,
+								"Y": 0.9457022
+							},
+							{
+								"X": 0.64530545,
+								"Y": 0.9612193
+							},
+							{
+								"X": 0.584265,
+								"Y": 0.95823675
+							}
+						]
+					},
+					"Id": "b1837487-2c58-47e4-86cc-b5565d4c2be0",
+					"Page": 0,
+					"Query": null,
+					"Relationships": null,
+					"RowIndex": null,
+					"RowSpan": null,
+					"SelectionStatus": "",
+					"Text": "STUDENCKA",
+					"TextType": "PRINTED"
+				}
+			],
+			"DocumentIndex": 1,
+			"IdentityDocumentFields": [
+				{
+					"Type": {
+						"Text": "FIRST_NAME",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "AKADEMIA",
+						"Confidence": 95.142334,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "LAST_NAME",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "GORNICZO-HUTNICZA",
+						"Confidence": 92.8252,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "MIDDLE_NAME",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "STASZICA",
+						"Confidence": 90.659676,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "SUFFIX",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.16829,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "CITY_IN_ADDRESS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.17333,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "ZIP_CODE_IN_ADDRESS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.15916,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "STATE_IN_ADDRESS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.16665,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "STATE_NAME",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.16807,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "DOCUMENT_NUMBER",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.19629,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "EXPIRATION_DATE",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.2461,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "DATE_OF_BIRTH",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 97.73705,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "DATE_OF_ISSUE",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.18702,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "ID_TYPE",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "UNKNOWN",
+						"Confidence": 51.275227,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "ENDORSEMENTS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.17767,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "VETERAN",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.17921,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "RESTRICTIONS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.172325,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "CLASS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.17157,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "ADDRESS",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.181984,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "COUNTY",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.17516,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "PLACE_OF_BIRTH",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 99.16712,
+						"NormalizedValue": null
+					}
+				},
+				{
+					"Type": {
+						"Text": "MRZ_CODE",
+						"Confidence": null,
+						"NormalizedValue": null
+					},
+					"ValueDetection": {
+						"Text": "",
+						"Confidence": 97.528114,
+						"NormalizedValue": null
+					}
+				}
+			]
+		}
+	],
+	"ResultMetadata": {}
+}

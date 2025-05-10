@@ -11,4 +11,5 @@ type Behaviour interface {
 	ForgotPassword(c *fiber.Ctx) error
 	ResetPasswordConfirm(c *fiber.Ctx) error
 	KYCVerify(c *fiber.Ctx) error
+	Me(c *fiber.Ctx) error
 }
