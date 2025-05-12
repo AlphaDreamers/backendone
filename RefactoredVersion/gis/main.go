@@ -4,6 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"github.com/SwanHtetAungPhyo/gis/cmd"
+	"github.com/SwanHtetAungPhyo/gis/internal/handler"
+	"github.com/SwanHtetAungPhyo/gis/internal/model"
+	"github.com/SwanHtetAungPhyo/gis/internal/repository"
+	"github.com/SwanHtetAungPhyo/gis/internal/service"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/natefinch/lumberjack"
@@ -37,11 +42,23 @@ var InitProvideModule = fx.Module("initProvideModule", fx.Provide(
 	NewTextraClient,
 	NewRekognitionClient,
 	NewS3Client,
+	//repository.NewRepositoryConcrete,
+	//service.NewServiceConcrete,
+	//handler.NewHandlerConcrete,
 ))
 
 func main() {
 	app := fx.New(
 		InitProvideModule,
+		fx.Provide(
+			repository.NewRepositoryConcrete,
+			service.NewServiceConcrete,
+			handler.NewHandlerConcrete,
+			cmd.NewAppState,
+		),
+		fx.Invoke(
+
+			cmd.AppLifeCycle),
 	)
 	app.Run()
 }
@@ -113,6 +130,17 @@ func ConnectToRDS(v *viper.Viper, log *logrus.Logger) *gorm.DB {
 	return db
 }
 
+func CreateCategory(db *gorm.DB) {
+	if err := db.Create(&model.Category{
+		Label:    "CategoryOne",
+		Slug:     "category",
+		IsActive: true,
+	}).Error; err != nil {
+		panic(err.Error())
+	}
+
+}
+
 func NewFiberApp(v *viper.Viper, log *logrus.Logger) *fiber.App {
 	idleTimeout := v.GetDuration("fiber.idleTimeout")
 	readTimeout := v.GetDuration("fiber.readTimeout")
@@ -153,6 +181,6 @@ func NewRekognitionClient(awscfg *aws.Config) *rekognition.Client {
 	return rekognition.NewFromConfig(*awscfg)
 }
 
-func NewS3Client(awscfg aws.Config) *s3.Client {
-	return s3.NewFromConfig(awscfg)
+func NewS3Client(awscfg *aws.Config) *s3.Client {
+	return s3.NewFromConfig(*awscfg)
 }

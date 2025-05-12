@@ -7,12 +7,16 @@ import (
 	"github.com/SwanHtetAungPhyo/authCognito/cmd"
 	"github.com/SwanHtetAungPhyo/authCognito/cmd/middleware"
 	authMo "github.com/SwanHtetAungPhyo/authCognito/internal/handler/auth"
+	uh "github.com/SwanHtetAungPhyo/authCognito/internal/handler/user"
 	authRMo "github.com/SwanHtetAungPhyo/authCognito/internal/repo/auth"
+	ur "github.com/SwanHtetAungPhyo/authCognito/internal/repo/user"
 	authSMo "github.com/SwanHtetAungPhyo/authCognito/internal/service/auth"
+	us "github.com/SwanHtetAungPhyo/authCognito/internal/service/user"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/textract"
 	"github.com/gofiber/fiber/v2"
 	"github.com/natefinch/lumberjack"
@@ -39,6 +43,7 @@ var InitProvideModule = fx.Module("initProvideModule", fx.Provide(
 	NewCognitoClient,
 	NewTextraClient,
 	NewRekognitionClient,
+	NewS3Client,
 ))
 
 func main() {
@@ -47,6 +52,9 @@ func main() {
 		authRMo.RepoModule,
 		authSMo.ServiceLayerModule,
 		authMo.HandlerLayerModule,
+		ur.UserRepoModule,
+		us.UserServiceModule,
+		uh.UserHandlerModule,
 		fx.Provide(
 			cmd.NewAppState,
 		),
@@ -140,6 +148,7 @@ func NewFiberApp(v *viper.Viper, log *logrus.Logger) *fiber.App {
 		IdleTimeout:           idleTimeout,
 		ReadTimeout:           readTimeout,
 		WriteTimeout:          writeTimeout,
+		BodyLimit:             20 * 1024 * 1024,
 	})
 
 	return app
@@ -163,4 +172,8 @@ func NewTextraClient(awscfg *aws.Config) *textract.Client {
 }
 func NewRekognitionClient(awscfg *aws.Config) *rekognition.Client {
 	return rekognition.NewFromConfig(*awscfg)
+}
+
+func NewS3Client(awscfg *aws.Config) *s3.Client {
+	return s3.NewFromConfig(*awscfg)
 }

@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"github.com/SwanHtetAungPhyo/chat-order/internal/handler/chat"
 	"github.com/SwanHtetAungPhyo/chat-order/internal/handler/placeOrder"
 	"time"
 
@@ -23,6 +24,7 @@ type AppState struct {
 	v            *viper.Viper
 	wsHandler    *ws.WSHandler
 	orderHandler *placeOrder.OrderHandler
+	chatHandler  *chat.ChatRestHanlder
 }
 
 func NewAppState(
@@ -31,9 +33,11 @@ func NewAppState(
 	v *viper.Viper,
 	wsH *ws.WSHandler,
 	orderH *placeOrder.OrderHandler,
+	chatH *chat.ChatRestHanlder,
 ) *AppState {
 	return &AppState{log: log, app: app, v: v, wsHandler: wsH,
-		orderHandler: orderH}
+		orderHandler: orderH,
+		chatHandler:  chatH}
 }
 
 func (a *AppState) routeSetUp() {
@@ -43,7 +47,11 @@ func (a *AppState) routeSetUp() {
 		}
 		return fiber.ErrUpgradeRequired
 	}, websocket.New(a.wsHandler.ChatHandle))
-	a.app.Post("/orders", a.orderHandler.PlaceHandler)
+	orderRest := a.app.Group("/orders")
+	orderRest.Post("/orders", a.orderHandler.PlaceHandler)
+	orderRest.Get("/:userId", a.orderHandler.GetAllOrdersByUserId)
+	orderRest.Get("/:orderId/chat/", a.chatHandler.GetChatRoomByOrderId)
+	a.app.Get("/:userId/chat/", a.chatHandler.GetAllChatRoomByUserId)
 	a.app.Get("/sse/seller/:sellerId", a.orderHandler.NotificationHandler)
 }
 

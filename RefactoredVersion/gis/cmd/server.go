@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"github.com/SwanHtetAungPhyo/gis/cmd/middleware"
 	"github.com/SwanHtetAungPhyo/gis/internal/handler"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
@@ -14,18 +15,20 @@ type AppState struct {
 	log      *logrus.Logger
 	fiberApp *fiber.App
 	v        *viper.Viper
-	handler  *handler.HandlerConcrete
+	handler  *handler.GigHandler
 }
 
 func NewAppState(
 	log *logrus.Logger,
 	fiberApp *fiber.App,
 	v *viper.Viper,
+	handler *handler.GigHandler,
 ) *AppState {
 	return &AppState{
 		log:      log,
 		fiberApp: fiberApp,
 		v:        v,
+		handler:  handler,
 	}
 }
 
@@ -35,8 +38,9 @@ func (s *AppState) Start() error {
 	certPath := pwd + "/cmd" + s.v.GetString("fiber.cert")
 	keyPath := pwd + "/cmd" + s.v.GetString("fiber.key")
 	port := s.v.GetString("fiber.port")
+	s.Routes()
 	go func() {
-		s.Routes()
+
 		err := s.fiberApp.ListenTLS(":"+port, certPath, keyPath)
 		if err != nil {
 			s.log.WithError(err).Fatal("fiber.app failed to start")
@@ -46,13 +50,8 @@ func (s *AppState) Start() error {
 }
 
 func (s *AppState) Routes() {
-	api := s.fiberApp.Group("/api/gig")
-	api.Post("/", s.handler.Create)
-	api.Put("/:id", s.handler.Update)
-	api.Delete("/:id", s.handler.Delete)
-	api.Get("/:id", s.handler.GetById)
-	api.Get("/", s.handler.List)
-	api.Get("/user/:userId", s.handler.GetByUserId)
+	gig := s.fiberApp.Group("/gig")
+	gig.Post("/", middleware.AuthMiddleware(), s.handler.CreateGig)
 }
 func (s *AppState) Stop() error {
 	err := s.fiberApp.Shutdown()

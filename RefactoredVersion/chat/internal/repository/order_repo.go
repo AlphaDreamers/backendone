@@ -147,3 +147,16 @@ func (r OrderRepo) CancelOrder(orderNumber string, packageId uuid.UUID) error {
 	}
 	return nil
 }
+func (r OrderRepo) GetAllOrderByUserId(id uuid.UUID) ([]*model.Order, error) {
+	var orders []*model.Order
+	err := r.gormClient.
+		WithContext(context.TODO()).
+		Model(&model.Order{}).
+		Where("buyer_id = ? OR seller_id = ?", id, id).
+		Find(&orders).Error
+	if err != nil {
+		r.log.Errorf("failed to get order: %v", err.Error())
+		return nil, err
+	}
+	return orders, nil
+}

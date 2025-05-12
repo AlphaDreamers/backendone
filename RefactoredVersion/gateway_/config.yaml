@@ -6,6 +6,10 @@ server:
   prefork: false
   case_sensitive: false
 
+cognito:
+  jwk_url: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_z6jb3eESF/.well-known/jwks.json"
+  issuer_url: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_z6jb3eESF"
+
 logging:
   format: "[${time}] ${ip} ${status} - ${method} ${path} (${latency})\n"
   time_format: "2006-01-02 15:04:05"
@@ -24,7 +28,7 @@ services:
   - name: "chat-service"
     prefix: "/chat"
     host: "localhost"
-    port: 3004
+    port: 8005
     health_path: "/status"
     headers:
       X-Service-Name: "chat-service"
@@ -33,7 +37,7 @@ services:
   - name: "order-service"
     prefix: "/orders"
     host: "localhost"
-    port: 3005
+    port: 8006
     health_path: "/health"
     headers:
       X-Service-Name: "order-service"
@@ -42,7 +46,7 @@ services:
   - name: "service-service"
     prefix: "/service"
     host: "localhost"
-    port: 8082
+    port: 8007
     health_path: "/status"
     headers:
       X-Service-Name: "service-service"
@@ -51,7 +55,7 @@ services:
   - name: "wallet-service"
     prefix: "/wallet"
     host: "localhost"
-    port: 3007
+    port: 8008
     health_path: "/health"
     headers:
       X-Service-Name: "wallet-service"

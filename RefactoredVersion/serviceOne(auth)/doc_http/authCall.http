@@ -1,9 +1,0 @@
-### Login request
-POST https://127.0.0.1:8004/login
-X-DeviceId: YOUR_DEVICE_ID
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "securepassword"
-}

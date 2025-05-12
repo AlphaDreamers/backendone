@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/SwanHtetAungPhyo/chat-order/internal/handler/chat"
 	"io"
 	"os"
 	"path"
@@ -38,6 +39,9 @@ func main() {
 		repository.RepoModule,
 		service.ServiceModule,
 		placeOrder.OrdHandlerModule,
+		fx.Provide(
+			chat.NewChatRestHanlder,
+		),
 		cmd.AppStateModule,
 		fx.Invoke(
 			//StartMigration,

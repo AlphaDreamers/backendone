@@ -21,7 +21,7 @@ fiber:
   strictRouting: true
   serverHeader: "gig"
   appName: "gig-service"
-  port: "3000"
+  port: "8002"
   idleTimeout: "120s"    # Idle timeout for connections
   readTimeout: "10s"     # Read timeout for the connection
   writeTimeout: "10s"    # Write timeout for the connection

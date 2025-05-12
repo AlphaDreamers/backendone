@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC Verification Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="kycForm" class="kyc-form">
+            <h1>KYC Verification</h1>
+
+            <div class="form-group">
+                <label for="idProof">ID Proof (Passport/Driver's License)</label>
+                <div class="file-input-container">
+                    <input type="file" id="idProof" name="files" accept="image/*, .pdf" required>
+                    <div class="file-preview" id="idProofPreview"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="addressProof">Selfie</label>
+                <div class="file-input-container">
+                    <input type="file" id="addressProof" name="files" accept="image/*, .pdf" required>
+                    <div class="file-preview" id="addressProofPreview"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit KYC</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

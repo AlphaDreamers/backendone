@@ -1,0 +1,207 @@
+# Gig Management
+
+### Create Gig
+@categoryId = "DFSKLJFSDJJLSKDFJLFJSDJFLSDJFLSD"
+@tagId1 = "SWNA""
+
+POST https://localhost:8002/api/gigs/
+Content-Type: application/json
+
+{
+  "title": "I will build your Go API",
+  "description": "I’ll deliver a full RESTful API in Go using GORM, complete with authentication, logging, and unit tests.",
+  "categoryId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "sellerId": "884f4321-f4a7-4457-bac1-6c870c636d31",
+  "images": [
+    {
+      "url": "https://example.com/img/main.png",
+      "alt": "Main API overview diagram",
+      "isPrimary": true,
+      "sortOrder": 0
+    }
+  ],
+  "packages": [
+    {
+      "title": "Basic",
+      "description": "Just the core CRUD endpoints and SQLite setup.",
+      "price": 150.00,
+      "deliveryTime": 3,
+      "revisions": 1,
+      "features": [
+        {
+          "title": "CRUD endpoints",
+          "description": "Create, Read, Update, Delete for a single resource",
+          "included": true
+        }
+      ]
+    }
+  ],
+  "isActive": true
+}
+### Update Gig
+PUT https://localhost:8002/api/gigs/a6cf36aa-89ea-4c33-ad49-46576221917b
+Content-Type: application/json
+
+
+{
+    "title": "Premium Logo Design",
+    "description": "Enhanced logo design service with additional features",
+    "categoryId":  "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "isActive": true
+}
+
+### Get Gig Details
+GET https://localhost:8002/api/gig/{{gigId}}
+Authorization: Bearer {{token}}
+
+### List Gigs
+GET https://localhost:8002/api/gig
+Authorization: Bearer {{token}}
+
+### List Gigs by User
+GET https://localhost:8002/api/gig/user/{{userId}}
+Authorization: Bearer {{token}}
+
+### Delete Gig
+DELETE https://localhost:8002/api/gig/{{gigId}}
+Authorization: Bearer {{token}}
+
+
+# Package Management
+
+### Create Package
+POST https://localhost:8002/api/gig/{{gigId}}/packages
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Premium Logo Design",
+    "description": "Enhanced logo design service with additional features",
+    "price": 100.00,
+    "deliveryTime": 5,
+    "revisions": 3,
+    "features": [
+        {
+            "title": "Premium Design",
+            "description": "Enhanced logo design",
+            "included": true
+        }
+    ]
+}
+
+### Update Package
+PUT https://localhost:8002/api/gig/{{gigId}}/packages/{{packageId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Premium+ Logo Design",
+    "price": 150.00,
+    "deliveryTime": 7,
+    "revisions": 5,
+    "features": [
+        {
+            "title": "Premium Design",
+            "included": true
+        }
+    ]
+}
+
+### Delete Package
+DELETE https://localhost:8002/api/gig/{{gigId}}/packages/{{packageId}}
+Authorization: Bearer {{token}}
+
+### List Packages
+GET https://localhost:8002/api/gig/{{gigId}}/packages
+Authorization: Bearer {{token}}
+
+### Create Package Feature
+POST https://localhost:8002/api/gig/{{gigId}}/packages/{{packageId}}/features
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Social Media Optimization",
+    "description": "Optimize logo for social media platforms",
+    "included": true
+}
+
+### Update Package Feature
+PUT https://localhost:8002/api/gig/{{gigId}}/packages/{{packageId}}/features/{{featureId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Social Media Optimization",
+    "included": false
+}
+
+### Delete Package Feature
+DELETE https://localhost:8002/api/gig/{{gigId}}/packages/{{packageId}}/features/{{featureId}}
+Authorization: Bearer {{token}}
+
+
+# Image Management
+
+### Upload Image
+POST https://localhost:8002/api/gig/{{gigId}}/images
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "url": "https://example.com/logo-sample.jpg",
+    "alt": "Sample logo design",
+    "isPrimary": false,
+    "sortOrder": 1
+}
+
+### Set Primary Image
+PUT https://localhost:8002/api/gig/{{gigId}}/images/{{imageId}}/primary
+Authorization: Bearer {{token}}
+
+### Sort Images
+PUT https://localhost:8002/api/gig/{{gigId}}/images/sort
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "imageIds": ["{{imageId1}}", "{{imageId2}}", "{{imageId3}}"]
+}
+
+### Delete Image
+DELETE https://localhost:8002/api/gig/{{gigId}}/images/{{imageId}}
+Authorization: Bearer {{token}}
+
+
+# Tag Management
+
+### Assign Tags
+POST https://localhost:8002/api/gig/{{gigId}}/tags
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "tagIds": ["{{tagId1}}", "{{tagId2}}", "{{tagId3}}"]
+}
+
+### Remove Tag
+DELETE https://localhost:8002/api/gig/{{gigId}}/tags/{{tagId}}
+Authorization: Bearer {{token}}
+
+### List Tags
+GET https://localhost:8002/api/gig/{{gigId}}/tags
+Authorization: Bearer {{token}}
+
+### List Available Tags
+GET https://localhost:8002/api/gig/{{gigId}}/tags/available
+Authorization: Bearer {{token}}
+
+# Note: Replace {{variable}} with actual values before making requests
+# - {{token}}: Your JWT token
+# - {{gigId}}: Gig ID
+# - {{userId}}: User ID
+# - {{categoryId}}: Category ID
+# - {{packageId}}: Package ID
+# - {{featureId}}: Feature ID
+# - {{tagId1}}-{{tagId3}}: Tag IDs
+# - {{imageId1}}-{{imageId3}}: Image IDs

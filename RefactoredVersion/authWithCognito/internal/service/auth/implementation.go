@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
 	"io"
 	"mime/multipart"
@@ -32,6 +33,14 @@ func (a AuthConcrete) SignUp(req *model.UserSignUpRequest) error {
 	}).Info("Starting user sign up")
 
 	userName := req.Email
+
+	userId, err := a.repo.CheckUserExistence(req.Email)
+	if userId != nil && errors.Is(err, errors.New("user exists")) {
+		a.log.WithFields(logrus.Fields{
+			"email": req.Email,
+		}).Debug("User already exists")
+		return errors.New("user already exists, try to login")
+	}
 	hash := a.genSecretHash(userName)
 	input := &cognitoidentityprovider.SignUpInput{
 		ClientId:   aws.String(a.clientId),
@@ -61,26 +70,7 @@ func (a AuthConcrete) SignUp(req *model.UserSignUpRequest) error {
 			},
 		},
 	}
-	modelInDB := &model.User{
-		ID:                uuid.New(),
-		FirstName:         req.FirstName,
-		LastName:          req.LastName,
-		Email:             req.Email,
-		Password:          req.Password,
-		TwoFactorVerified: false,
-		Username:          "",
-		Avatar:            nil,
-		Country:           req.Country,
-		WalletCreated:     false,
-	}
-	err := a.repo.SignUp(modelInDB)
-	if err != nil {
-		a.log.WithFields(logrus.Fields{
-			"email": req.Email,
-			"error": err.Error(),
-		}).Error("Sign up failed")
-		return err
-	}
+
 	up, err := a.cognitoClient.SignUp(a.ctx, input)
 	if err != nil {
 		a.log.WithFields(logrus.Fields{
@@ -89,7 +79,40 @@ func (a AuthConcrete) SignUp(req *model.UserSignUpRequest) error {
 		}).Error("Sign up failed")
 		return fmt.Errorf("sign up failed: %w", err)
 	}
-
+	a.log.WithFields(logrus.Fields{
+		"email": req.Email,
+	}).Infoln("Sign up succeeded", up)
+	modelInDB := &model.User{
+		ID:                uuid.New(),
+		FirstName:         req.FirstName,
+		LastName:          req.LastName,
+		Email:             req.Email,
+		CognitoUsername:   *up.UserSub,
+		TwoFactorVerified: false,
+		Username:          req.Username,
+		Avatar:            nil,
+		Country:           req.Country,
+		WalletCreated:     false,
+	}
+	err = a.repo.SignUp(modelInDB)
+	if err != nil {
+		a.log.WithFields(logrus.Fields{
+			"email": req.Email,
+			"error": err.Error(),
+		}).Error("Sign up failed", err.Error())
+		return err
+	}
+	userBiometric := model.Biometrics{
+		Value:           req.BioMetricHash,
+		CognitoUsername: up.UserSub,
+		UserID:          modelInDB.ID,
+	}
+	err = a.repo.SaveBiometrics(userBiometric)
+	if err != nil {
+		a.log.WithFields(logrus.Fields{
+			"email": req.Email,
+		}).Info("Save biometrics failed")
+	}
 	a.log.WithFields(logrus.Fields{
 		"email": req.Email,
 	}).Info("User sign up successful")
@@ -97,6 +120,22 @@ func (a AuthConcrete) SignUp(req *model.UserSignUpRequest) error {
 	return nil
 }
 
+func (a AuthConcrete) extractCognitoUsername(idToken string) (string, error) {
+	parser := new(jwt.Parser)
+	token, _, err := parser.ParseUnverified(idToken, jwt.MapClaims{})
+	if err != nil {
+		return "", fmt.Errorf("failed to parse token: %w", err)
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok {
+		if username, exists := claims["cognito:username"]; exists {
+			return fmt.Sprintf("%v", username), nil
+		}
+		return "", fmt.Errorf("cognito:username claim not found")
+	}
+
+	return "", fmt.Errorf("invalid token claims")
+}
 func (a AuthConcrete) SignIn(req *model.UserSignInReq) (*model.UserData, *cognitoidentityprovider.InitiateAuthOutput, error) {
 	a.log.WithFields(logrus.Fields{
 		"email": req.Email,
@@ -380,7 +419,12 @@ func (a AuthConcrete) KYCVerification(files []*multipart.FileHeader, email strin
 		if err != nil {
 			a.log.WithError(err).Error("Failed to update KYC verification status")
 		}
+		err = a.repo.UpdateBioMetricsVerification(email)
+		if err != nil {
+			a.log.WithError(err).Error("Failed to update BIO metrics verification status")
+		}
 	}
+
 	return *similarity >= 70, nil
 }
 

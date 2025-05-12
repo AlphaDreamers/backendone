@@ -1,0 +1,144 @@
+{
+  "error": "tls: cannot load TLS key pair from certFile=\"/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/certificates/cert.pem\" and keyFile=\"/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/certificates/key.pem\": open /Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/certificates/cert.pem: no such file or directory",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/server.go:45",
+  "func": "func1",
+  "level": "fatal",
+  "msg": "fiber.app failed to start",
+  "time": "2025-05-10 21:36:58"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:19",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:42:24"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/service/implementation.go:30",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:42:24"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:36",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:49:01"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/service/implementation.go:30",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:49:01"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:36",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:50:34"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/service/implementation.go:30",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:50:34"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:36",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:54:10"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_User_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/service/implementation.go:31",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 21:54:10"
+}
+{
+  "error": "ERROR: relation \"_gig_to_gig_tag\" does not exist (SQLSTATE 42P01)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:305",
+  "func": "AssignTags",
+  "level": "error",
+  "msg": "failed to delete existing tags",
+  "time": "2025-05-10 21:55:36"
+}
+{
+  "error": "ERROR: relation \"_gig_to_gig_tag\" does not exist (SQLSTATE 42P01)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/service/implementation.go:89",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to assign tags",
+  "time": "2025-05-10 21:55:36"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_Category_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:44",
+  "func": "UpdateGig",
+  "level": "error",
+  "msg": "failed to update gig",
+  "time": "2025-05-10 21:59:05"
+}
+{
+  "error": "failed to listen: listen tcp4 :8002: bind: address already in use",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/server.go:45",
+  "func": "func1",
+  "level": "fatal",
+  "msg": "fiber.app failed to start",
+  "time": "2025-05-10 22:12:12"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_Category_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/implementation.go:44",
+  "func": "UpdateGig",
+  "level": "error",
+  "msg": "failed to update gig",
+  "time": "2025-05-10 22:13:07"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_Category_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/handler/implementation.go:81",
+  "func": "Update",
+  "level": "error",
+  "msg": "failed to update gig",
+  "time": "2025-05-10 22:13:07"
+}
+{
+  "error": "failed to listen: listen tcp4 :8002: bind: address already in use",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/server.go:44",
+  "func": "func1",
+  "level": "fatal",
+  "msg": "fiber.app failed to start",
+  "time": "2025-05-10 22:47:35"
+}
+{
+  "error": "failed to listen: listen tcp4 :8002: bind: address already in use",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/cmd/server.go:46",
+  "func": "func1",
+  "level": "fatal",
+  "msg": "fiber.app failed to start",
+  "time": "2025-05-10 23:06:36"
+}
+{
+  "error": "ERROR: insert or update on table \"Gig\" violates foreign key constraint \"fk_Category_gigs\" (SQLSTATE 23503)",
+  "file": "/Users/swanhtet1aungphyo/GolandProjects/backendone/RefactoredVersion/gis/internal/repository/concrete.go:18",
+  "func": "CreateGig",
+  "level": "error",
+  "msg": "failed to create gig",
+  "time": "2025-05-10 23:11:08"
+}

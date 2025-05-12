@@ -19,6 +19,7 @@ fiber:
   prefork: false
   caseSensitive: true
   strictRouting: true
+  allowed-origin: "*"
   serverHeader: "auth-cognito"
   appName: "authWithCognito"
   port: "3000"

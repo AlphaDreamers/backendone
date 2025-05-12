@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"github.com/SwanHtetAungPhyo/chat-order/internal/model"
+	"github.com/SwanHtetAungPhyo/chat-order/internal/model/response"
 	"github.com/SwanHtetAungPhyo/chat-order/internal/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
@@ -129,4 +130,30 @@ func (o *OrderHandler) MasterKey(seller, buyer, serviceId uuid.UUID, orderId str
 	hash := sha256.New()
 	hash.Write([]byte(seller.String() + buyer.String() + serviceId.String() + orderId))
 	return fmt.Sprintf("%x", hash.Sum(nil))
+}
+
+func (o *OrderHandler) GetAllOrdersByUserId(ctx *fiber.Ctx) error {
+	userIdRaw := ctx.Params("userId")
+	if userIdRaw == "" {
+		return ctx.Status(400).JSON(response.Response{
+			Message: "userId is empty in the param",
+		})
+	}
+	userId := uuid.MustParse(userIdRaw)
+	orders, err := o.srv.GetAllOrderByUserId(userId)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.Response{
+			Message: err.Error(),
+		})
+	}
+
+	if len(orders) == 0 {
+		return ctx.Status(fiber.StatusNotFound).JSON(response.Response{
+			Message: "Order not found by userId",
+		})
+	}
+	return ctx.Status(fiber.StatusOK).JSON(response.Response{
+		Message: "Orders retrieved by userId is successful",
+		Data:    orders,
+	})
 }

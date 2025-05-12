@@ -47,10 +47,10 @@ type User struct {
 	FirstName         string     `gorm:"column:firstName;type:text;not null"`
 	LastName          string     `gorm:"column:lastName;type:text;not null"`
 	Email             string     `gorm:"column:email;type:text;not null;uniqueIndex"`
-	Password          string     `gorm:"column:password;type:text;not null"`
+	CognitoUsername   string     `gorm:"column:cognito_user_name;type:uuid;not null"`
 	Verified          bool       `gorm:"column:verified;not null;default:false"`
 	TwoFactorVerified bool       `gorm:"column:twoFactorVerified;not null;default:false"`
-	Username          string     `gorm:"column:username;type:text;not null;uniqueIndex"`
+	Username          string     `gorm:"column:username;type:text;not null;"`
 	Avatar            *string    `gorm:"column:avatar;type:text"`
 	Country           string     `gorm:"column:country;type:text;not null"`
 	WalletCreated     bool       `gorm:"column:walletCreated;not null;default:false"`
@@ -100,13 +100,14 @@ func (UserSkill) TableName() string { return "user_skills" }
 // Biometrics maps to the "Biometrics" table
 
 type Biometrics struct {
-	ID         uuid.UUID `gorm:"column:id;type:uuid;primaryKey;default:gen_random_uuid()"`
-	Type       string    `gorm:"column:type;type:text;not null"`
-	Value      string    `gorm:"column:value;type:text;not null"`
-	IsVerified bool      `gorm:"column:isVerified;not null;default:false"`
-	UserID     uuid.UUID `gorm:"column:userId;type:uuid;not null"`
-	CreatedAt  time.Time `gorm:"column:createdAt;autoCreateTime"`
-	UpdatedAt  time.Time `gorm:"column:updatedAt;autoUpdateTime"`
+	ID              uuid.UUID `gorm:"column:id;type:uuid;primaryKey;default:gen_random_uuid()"`
+	CognitoUsername *string   `gorm:"column:cognito_user_name;type:uuid;not null"`
+	Type            string    `gorm:"column:type;type:text;not null"`
+	Value           string    `gorm:"column:value;type:text;not null"`
+	IsVerified      bool      `gorm:"column:isVerified;not null;default:false"`
+	UserID          uuid.UUID `gorm:"column:userId;type:uuid;not null"`
+	CreatedAt       time.Time `gorm:"column:createdAt;autoCreateTime"`
+	UpdatedAt       time.Time `gorm:"column:updatedAt;autoUpdateTime"`
 
 	User User `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 }

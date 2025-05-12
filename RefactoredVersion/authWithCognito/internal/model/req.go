@@ -11,11 +11,13 @@ package model
 	}
 */
 type UserSignUpRequest struct {
-	FirstName     string `json:"firstName"`
-	LastName      string `json:"lastName"`
-	Email         string `json:"email"`
-	Password      string `json:"password"`
-	Country       string `json:"country"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Country   string `json:"country"`
+
 	BioMetricHash string `json:"bioMetricHash"`
 }
 
