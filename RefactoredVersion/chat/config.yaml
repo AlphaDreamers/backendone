@@ -1,0 +1,37 @@
+aws:
+  cognito:
+    client-id: 7qllcjjcq7p506kq88vkfiu92g
+    user-pool-id: us-east-1_86rLqWz2S
+    secret-hash: pdiECwxTn+tgeXBkCoYQyA==
+    token-signing-key-url: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_86rLqWz2S/.well-known/jwks.json
+    client-secret: 1ipuga7399127snjbbgletfpr25lk6hleucb5fptn6nvrefn40ri
+    jwt-issuer-url: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_86rLqWz2S
+  config:
+    url: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_86rLqWz2S/.well-known/openid-configuration
+  rds:
+    dsn: "host=database-1.cm9ewocwci8f.us-east-1.rds.amazonaws.com user=postgres password=Swanhtetaungphyo dbname=postgres port=5432 sslmode=require"
+    local: "host=localhost user=postgres password=postgres dbname=auth sslmode=disable"
+  dynamodb:
+    tableName: ChatMessages
+  s3:
+    bucketName: my-public-bucket
+
+redis:
+  addr: "localhost:6379"
+  password: ""         # Set password if needed
+  db: 0                # Default Redis DB
+
+fiber:
+  disableStartupMessage: false
+  prefork: false
+  caseSensitive: true
+  strictRouting: true
+  serverHeader: "auth-cognito"
+  appName: "authWithCognito"
+  port: "3000"
+  idleTimeout: "120s"    # Idle timeout for connections
+  readTimeout: "10s"     # Read timeout for the connection
+  writeTimeout: "10s"    # Write timeout for the connection
+  cert: /certificates/cert.pem
+  key: /certificates/key.pem
+

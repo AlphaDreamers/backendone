@@ -1,0 +1,995 @@
+{
+  "message": "✅ chat_room table is ready",
+  "severity": "info",
+  "time": "2025-05-11T02:16:12+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T02:46:11+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T02:48:53+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T02:54:42+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T02:56:08+02:00"
+}
+{
+  "message": "New Order for 93e1863d-48b9-4663-b568-ae63747ad56e , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T02:56:13+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:30:38+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:31:14+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:35:09+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:36:37+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:36:38+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 5de3834e-b854-4d7b-b433-bb807e91f583 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:44+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 5de3834e-b854-4d7b-b433-bb807e91f583 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:44+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:36:49+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 16eb25ec-8089-4418-9e66-a3fb04536c21 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:57+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 16eb25ec-8089-4418-9e66-a3fb04536c21 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:57+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 16eb25ec-8089-4418-9e66-a3fb04536c21 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:57+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4c6e5646-6229-4d6e-808d-791d0602c3ef , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:59+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4c6e5646-6229-4d6e-808d-791d0602c3ef , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:59+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4c6e5646-6229-4d6e-808d-791d0602c3ef , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:36:59+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8e24555e-c08c-413d-af9e-7ee588d37c8b , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:00+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8e24555e-c08c-413d-af9e-7ee588d37c8b , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:00+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8e24555e-c08c-413d-af9e-7ee588d37c8b , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:00+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for ac2f8de9-f47d-4e79-8314-e1265e93d316 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:01+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for ac2f8de9-f47d-4e79-8314-e1265e93d316 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:01+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for ac2f8de9-f47d-4e79-8314-e1265e93d316 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:01+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eeb45693-548e-4ca0-965d-08f956549d94 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:02+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eeb45693-548e-4ca0-965d-08f956549d94 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:02+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eeb45693-548e-4ca0-965d-08f956549d94 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:02+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 02b277d5-622a-425a-9683-35407372d520 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:03+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 02b277d5-622a-425a-9683-35407372d520 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:03+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 02b277d5-622a-425a-9683-35407372d520 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:03+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for a413a017-7c45-4052-8ece-ac25320afc25 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:04+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for a413a017-7c45-4052-8ece-ac25320afc25 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:04+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for a413a017-7c45-4052-8ece-ac25320afc25 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:04+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8c321110-8b19-431d-9d55-ccbc03395bc1 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8c321110-8b19-431d-9d55-ccbc03395bc1 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8c321110-8b19-431d-9d55-ccbc03395bc1 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4cc2db5e-23ca-4beb-8010-e28509ec50b0 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4cc2db5e-23ca-4beb-8010-e28509ec50b0 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 4cc2db5e-23ca-4beb-8010-e28509ec50b0 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:37:05+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:37:06+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:39:59+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:40:00+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:40:01+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 6c1ab7f1-62db-4356-8dcd-5121e89b88e4 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:40:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 6c1ab7f1-62db-4356-8dcd-5121e89b88e4 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:40:05+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 6c1ab7f1-62db-4356-8dcd-5121e89b88e4 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:40:05+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:41:44+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:41:45+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:41:47+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 3dece5c1-9901-40c3-8ad2-e2d3c17529be , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:41:47+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 3dece5c1-9901-40c3-8ad2-e2d3c17529be , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:41:47+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 3dece5c1-9901-40c3-8ad2-e2d3c17529be , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:41:47+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:43:03+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:43:05+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:43:05+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 7d9e90f2-2a0d-4890-978f-1f33e68c4163 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:43:08+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 7d9e90f2-2a0d-4890-978f-1f33e68c4163 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:43:08+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 7d9e90f2-2a0d-4890-978f-1f33e68c4163 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:43:08+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T03:45:03+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 38a64d52-06d1-4b98-b6a8-fe907e76c359 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:03+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:45:05+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T03:45:06+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 1091f075-8628-4bf9-a054-f2aced48e94f , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:10+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 1091f075-8628-4bf9-a054-f2aced48e94f , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:10+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 1091f075-8628-4bf9-a054-f2aced48e94f , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:10+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eff3af93-7cad-450e-b84f-f7246a06e54a , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:13+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eff3af93-7cad-450e-b84f-f7246a06e54a , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:13+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for eff3af93-7cad-450e-b84f-f7246a06e54a , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:13+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 292fecac-0062-4f4b-a8a1-71bd1382b580 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:14+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 292fecac-0062-4f4b-a8a1-71bd1382b580 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:14+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 292fecac-0062-4f4b-a8a1-71bd1382b580 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:14+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for abd9dfba-2ba4-4d59-93a7-93120c635b02 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:15+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for abd9dfba-2ba4-4d59-93a7-93120c635b02 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:15+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for abd9dfba-2ba4-4d59-93a7-93120c635b02 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:15+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for c8153efc-1d24-4353-9385-d68f3427cf56 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:16+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for c8153efc-1d24-4353-9385-d68f3427cf56 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:16+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for c8153efc-1d24-4353-9385-d68f3427cf56 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:16+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 87465a28-dda0-42a1-8460-b9f74ff0a51e , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:17+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 87465a28-dda0-42a1-8460-b9f74ff0a51e , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:17+02:00"
+}
+{
+  "message": "Error flushing buffer:connection closed",
+  "severity": "error",
+  "time": "2025-05-11T03:45:17+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 87465a28-dda0-42a1-8460-b9f74ff0a51e , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:17+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 2fabe274-d7b9-4dea-a7ec-a335e51bcaf5 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:18+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 2fabe274-d7b9-4dea-a7ec-a335e51bcaf5 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:18+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 16bccdae-4288-4f0f-a9bf-c35cf549e061 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:19+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 16bccdae-4288-4f0f-a9bf-c35cf549e061 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:19+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for f9a75a99-2517-487f-8866-7ebc98ff7d67 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:20+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for f9a75a99-2517-487f-8866-7ebc98ff7d67 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:20+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 5ebb3a95-5c53-4fdb-8b45-006e3487877c , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:21+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 5ebb3a95-5c53-4fdb-8b45-006e3487877c , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:21+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 9f80e583-0905-4129-b6b3-7594366b8ccf , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:22+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 9f80e583-0905-4129-b6b3-7594366b8ccf , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:22+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for ca10779e-71e5-494a-af87-ff30768f1a42 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:22+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for ca10779e-71e5-494a-af87-ff30768f1a42 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:22+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for c1bda6d5-8d91-4cc6-8f57-dd2dee002ca6 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:23+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for c1bda6d5-8d91-4cc6-8f57-dd2dee002ca6 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:23+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for a1755d0a-6ae1-495f-9241-276c673bacea , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:24+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for a1755d0a-6ae1-495f-9241-276c673bacea , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:24+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 22fe9c66-8945-4c62-8672-f0dcbede8c32 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:25+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 22fe9c66-8945-4c62-8672-f0dcbede8c32 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:25+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 0b5e690d-1bb9-456c-8483-21730a513c1c , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:28+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 0b5e690d-1bb9-456c-8483-21730a513c1c , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:28+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for d321bd50-eb62-497d-a85a-7947ff166687 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:29+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for d321bd50-eb62-497d-a85a-7947ff166687 , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:29+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8f951a3b-60dd-480f-a880-e785b52be3fa , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:31+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:22222222-2222-2222-2222-222222222222': New Order for 8f951a3b-60dd-480f-a880-e785b52be3fa , Status (PENDING), Buyer (11111111-1111-1111-1111-111111111111)",
+  "severity": "info",
+  "time": "2025-05-11T03:45:31+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:21:20+02:00"
+}
+{
+  "message": "ERROR: column \"buyer_id\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:23:49+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: column \"buyer_id\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:23:49+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:24:48+02:00"
+}
+{
+  "message": "ERROR: column \"buyerid\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:24:50+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: column \"buyerid\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:24:50+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:28:56+02:00"
+}
+{
+  "message": "ERROR: column Order.order_number does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:28:58+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: column Order.order_number does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:28:58+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:30:20+02:00"
+}
+{
+  "message": "ERROR: column \"due_date\" of relation \"Order\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:30:23+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: column \"due_date\" of relation \"Order\" does not exist (SQLSTATE 42703)",
+  "severity": "error",
+  "time": "2025-05-11T12:30:23+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:30:43+02:00"
+}
+{
+  "message": "ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:30:46+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:30:46+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:31:16+02:00"
+}
+{
+  "message": "ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:31:18+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:31:18+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:32:32+02:00"
+}
+{
+  "message": "ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:32:37+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T12:32:37+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:33:43+02:00"
+}
+{
+  "message": "Error creating chat room:ERROR: invalid input syntax for type uuid: \"SN20250511123345-JIZ0SG\" (SQLSTATE 22P02)",
+  "severity": "error",
+  "time": "2025-05-11T12:33:45+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:35:17+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:35:20+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:22222222-2222-2222-2222-222222222222",
+  "severity": "info",
+  "time": "2025-05-11T12:35:32+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:223e4567-e89b-12d3-a456-426614174000",
+  "severity": "info",
+  "time": "2025-05-11T12:35:52+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123558-M8L6S1 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:35:58+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123558-M8L6S1 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:35:58+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:39:09+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:223e4567-e89b-12d3-a456-426614174000",
+  "severity": "info",
+  "time": "2025-05-11T12:39:12+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123919-74USN9 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:19+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123919-74USN9 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:19+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123920-FU8ESK , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:20+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123920-FU8ESK , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:20+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123921-RC0FE0 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:21+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123921-RC0FE0 , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:21+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123922-AJZ2WG , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:22+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123922-AJZ2WG , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:39:22+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T12:42:21+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:23+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:27+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:29+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:30+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:30+02:00"
+}
+{
+  "message": "Subscribed to Redis channel: order_notification:223e4567-e89b-12d3-a456-426614174000",
+  "severity": "info",
+  "time": "2025-05-11T12:42:37+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:40+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:40+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:41+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:41+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:44+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:44+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:45+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:45+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:46+02:00"
+}
+{
+  "message": "Received message from Redis channel 'order_notification:223e4567-e89b-12d3-a456-426614174000': New Order for SN20250511123520-G6KSQA , Status (PENDING), Buyer (123e4567-e89b-12d3-a456-426614174000)",
+  "severity": "info",
+  "time": "2025-05-11T12:42:46+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T13:26:10+02:00"
+}
+{
+  "message": "User 123e4567-e89b-12d3-a456-426614174000 is not currently online in chat room 792565b7-5051-41fc-9852-daaf5dabde2c",
+  "severity": "info",
+  "time": "2025-05-11T13:28:35+02:00"
+}
+{
+  "message": "invalid chat room ID: cannot be nil",
+  "severity": "error",
+  "time": "2025-05-11T13:28:39+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T13:34:45+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T14:49:05+02:00"
+}
+{
+  "message": "message body is empty, skipping",
+  "severity": "warning",
+  "time": "2025-05-11T14:50:28+02:00"
+}
+{
+  "message": "Error connecting to redis, dial tcp [::1]:6379: connect: connection refused",
+  "severity": "fatal",
+  "time": "2025-05-11T20:12:10+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T20:13:24+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T20:14:44+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:123e4567-e89b-12d3-a456-426614174000': New Order for SN20250511201449-0Y1TWM , Status (PENDING), Buyer (550e8400-e29b-41d4-a716-446655440000)",
+  "severity": "info",
+  "time": "2025-05-11T20:14:49+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: R770Q0GM2QD9HKFN6BRHOVOCT7VV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:18:57+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: 7L9TN5IRCUG2363HGFKTBDA8FBVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:08+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: S1JD47GGFIJD85J8IUS1E4KMRRVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:18+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: P3M1KQU1KTO4A21GG67AMBSJ2NVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:23+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: UEE2T7C092TNEEBEMA6NFR6JHJVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:24+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: 960K8PI8LC4TR02KSPBUDTRL7BVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:25+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: UOA88AUCSEGD98DAP1I9R5QNMRVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:25+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: PRSPG5LF8KNPVFN5319CP29IQJVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:26+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: 19ANCQADON28IK4C70OCV3Q0LJVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:26+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: CC2RTL0PRT1FFGSBGU8O32V1BJVV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:26+02:00"
+}
+{
+  "message": "dynamodb put:failed to put message into DynamoDB: operation error DynamoDB: PutItem, https response error StatusCode: 400, RequestID: T1RT3U085227ASKVM3O9KVKUB3VV4KQNSO5AEMVJF66Q9ASUAAJG, ResourceNotFoundException: Requested resource not found",
+  "severity": "error",
+  "time": "2025-05-11T20:19:26+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T20:20:33+02:00"
+}
+{
+  "message": "file upload failed:base64 decode failed: illegal base64 data at input byte 100",
+  "severity": "error",
+  "time": "2025-05-11T20:22:57+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T21:44:57+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:123e4567-e89b-12d3-a456-426614174000': New Order for SN20250511201449-0Y1TWM , Status (PENDING), Buyer (550e8400-e29b-41d4-a716-446655440000)",
+  "severity": "info",
+  "time": "2025-05-11T21:45:04+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T21:46:33+02:00"
+}
+{
+  "message": "Publishing to Redis channel 'order_notification:123e4567-e89b-12d3-a456-426614174000': New Order for SN20250511201449-0Y1TWM , Status (PENDING), Buyer (550e8400-e29b-41d4-a716-446655440000)",
+  "severity": "info",
+  "time": "2025-05-11T21:46:35+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T21:48:15+02:00"
+}
+{
+  "message": "ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T21:48:18+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_Order_package\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T21:48:18+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T21:54:55+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T22:01:51+02:00"
+}
+{
+  "message": "ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_User_orders_as_buyer\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T22:02:01+02:00"
+}
+{
+  "message": "Error in FindOrCreate:ERROR: insert or update on table \"Order\" violates foreign key constraint \"fk_User_orders_as_buyer\" (SQLSTATE 23503)",
+  "severity": "error",
+  "time": "2025-05-11T22:02:01+02:00"
+}
+{
+  "message": "sql: transaction has already been committed or rolled back",
+  "severity": "error",
+  "time": "2025-05-11T22:15:05+02:00"
+}
+{
+  "message": "Connected to redis",
+  "severity": "info",
+  "time": "2025-05-11T22:15:05+02:00"
+}

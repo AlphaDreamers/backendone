@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Notification</title>
+</head>
+<body>
+<h1>Order Notifications</h1>
+<div id="notifications">
+    <!-- New notifications will appear here -->
+</div>
+
+<script>
+    // Replace with the actual seller ID
+    const sellerId = '22222222-2222-2222-2222-222222222222';
+
+    if (typeof(EventSource) !== "undefined") {
+        // Create a new EventSource connection to the SSE endpoint
+        const source = new EventSource(`http://localhost:3000/sse/seller/${sellerId}`);
+
+        // Event listener for receiving messages from the server
+        source.onmessage = function(event) {
+            // Create a new div element to display the notification
+            const notification = document.createElement("div");
+            notification.textContent = event.data; // Set the event data as the text content
+            document.getElementById("notifications").appendChild(notification);
+        };
+
+        source.onerror = function(error) {
+            console.error("Error receiving SSE:", error);
+        };
+    } else {
+        // If the browser doesn't support EventSource, show an error message
+        document.getElementById("notifications").textContent = "Your browser doesn't support SSE.";
+    }
+</script>
+</body>
+</html>
